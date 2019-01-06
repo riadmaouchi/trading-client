@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+  trading-client:
+    container_name: tradingclient
+    build: .
+    ports:
+      - '80'
+    networks:
+      - front
+    depends_on:
+      - reverseproxy
+
+  reverseproxy:
+    build: nginx
+    ports:
+      - '80:80'
+    networks:
+      - front
+
+networks:
+  front:
+    driver: bridge
