@@ -1,0 +1,81 @@
+$body-bg: $gray-dark;
+$body-color: $gray;
+$font-size-base: 0.75rem;
+$font-family-sans-serif: 'Raleway', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+$theme-colors: (
+  'primary': $primary,
+  'danger': $danger,
+  'success': $success,
+  'info': $info,
+  'warning': $warning,
+  'purple': $purple,
+  'pink': $pink
+);
+
+$card-bg: $gray-darker;
+
+body {
+  margin: 0;
+  padding-top: 65px;
+  padding-bottom: 65px;
+}
+
+$breadcrumb-bg: transparent;
+$breadcrumb-active-color: $primary;
+
+//
+// Navbars
+//
+$navbar-dark-active-color: $primary;
+$navbar-dark-color: rgba(255, 255, 255, 0.7);
+$navbar-dark-hover-color: $primary;
+
+.navbar-dark {
+  .navbar-brand {
+    color: $primary;
+  }
+}
+
+.bg-dark {
+  background-color: $gray-darker !important;
+}
+
+.badge-warning {
+  color: $white !important;
+}
+
+.badge-danger {
+  color: $white !important;
+}
+
+.navbar-bg {
+  background-color: $gray-darker;
+}
+
+//
+// Forms
+//
+$input-color: $white;
+$input-bg: #434f5c;
+$input-border-width: 1px;
+$input-border-color: #4c5a67;
+$input-group-addon-color: #98a6ad;
+$input-group-addon-bg: #526170;
+$input-group-addon-border-color: $input-group-addon-bg;
+$input-focus-bg: lighten($input-bg, 4%);
+$input-focus-border-color: $input-border-color;
+$input-focus-box-shadow: none;
+$input-focus-color: $input-color;
+
+//
+// Links
+//
+$link-color: $gray;
+$link-hover-color: $gray;
+
+//
+// Pills
+//
+$nav-pills-link-active-color: $white;
+$nav-pills-link-active-bg: $primary;

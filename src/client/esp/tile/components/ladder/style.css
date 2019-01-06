@@ -1,0 +1,19 @@
+.bigFigures {
+  color: #4ab9db;
+  font-size: 100%;
+  width: 20px;
+}
+
+.priceValue {
+  font-size: 10px;
+}
+
+.quantity {
+  font-size: 10px;
+}
+
+.tenthOfPips {
+  position: relative;
+  top: -5px;
+  font-size: 60%;
+}

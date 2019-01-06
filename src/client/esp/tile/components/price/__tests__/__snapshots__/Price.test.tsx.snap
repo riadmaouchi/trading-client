@@ -1,0 +1,591 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Price should render buy price update 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Price
+    execute={[MockFunction]}
+    executing={false}
+    notional={10000000}
+    price={1.43841}
+    side="buy"
+    symbol="USDGBP"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="card-box"
+      >
+        <div>
+          buy
+        </div>
+        <span>
+          <span>
+            1.43
+          </span>
+          <span>
+            84
+          </span>
+          <span>
+            1
+          </span>
+        </span>
+      </div>,
+      "className": "col-md-4 block",
+      "id": "request-execution",
+      "onClick": [Function],
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div>
+            buy
+          </div>,
+          <span>
+            <span>
+              1.43
+            </span>
+            <span>
+              84
+            </span>
+            <span>
+              1
+            </span>
+          </span>,
+        ],
+        "className": "card-box",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "buy",
+          },
+          "ref": null,
+          "rendered": "buy",
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <span>
+                1.43
+              </span>,
+              <span>
+                84
+              </span>,
+              <span>
+                1
+              </span>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1.43",
+                "className": undefined,
+              },
+              "ref": null,
+              "rendered": "1.43",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "84",
+                "className": undefined,
+              },
+              "ref": null,
+              "rendered": "84",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1",
+                "className": undefined,
+              },
+              "ref": null,
+              "rendered": "1",
+              "type": "span",
+            },
+          ],
+          "type": "span",
+        },
+      ],
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="card-box"
+        >
+          <div>
+            buy
+          </div>
+          <span>
+            <span>
+              1.43
+            </span>
+            <span>
+              84
+            </span>
+            <span>
+              1
+            </span>
+          </span>
+        </div>,
+        "className": "col-md-4 block",
+        "id": "request-execution",
+        "onClick": [Function],
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div>
+              buy
+            </div>,
+            <span>
+              <span>
+                1.43
+              </span>
+              <span>
+                84
+              </span>
+              <span>
+                1
+              </span>
+            </span>,
+          ],
+          "className": "card-box",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "buy",
+            },
+            "ref": null,
+            "rendered": "buy",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <span>
+                  1.43
+                </span>,
+                <span>
+                  84
+                </span>,
+                <span>
+                  1
+                </span>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "1.43",
+                  "className": undefined,
+                },
+                "ref": null,
+                "rendered": "1.43",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "84",
+                  "className": undefined,
+                },
+                "ref": null,
+                "rendered": "84",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "1",
+                  "className": undefined,
+                },
+                "ref": null,
+                "rendered": "1",
+                "type": "span",
+              },
+            ],
+            "type": "span",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;
+
+exports[`Price should render sell price update 1`] = `
+ShallowWrapper {
+  Symbol(enzyme.__root__): [Circular],
+  Symbol(enzyme.__unrendered__): <Price
+    execute={[MockFunction]}
+    executing={false}
+    notional={10000000}
+    price={1.43841}
+    side="sell"
+    symbol="USDGBP"
+  />,
+  Symbol(enzyme.__renderer__): Object {
+    "batchedUpdates": [Function],
+    "getNode": [Function],
+    "render": [Function],
+    "simulateError": [Function],
+    "simulateEvent": [Function],
+    "unmount": [Function],
+  },
+  Symbol(enzyme.__node__): Object {
+    "instance": null,
+    "key": undefined,
+    "nodeType": "host",
+    "props": Object {
+      "children": <div
+        className="card-box"
+      >
+        <div>
+          sell
+        </div>
+        <span>
+          <span>
+            1.43
+          </span>
+          <span>
+            84
+          </span>
+          <span>
+            1
+          </span>
+        </span>
+      </div>,
+      "className": "col-md-4 block",
+      "id": "request-execution",
+      "onClick": [Function],
+    },
+    "ref": null,
+    "rendered": Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": Array [
+          <div>
+            sell
+          </div>,
+          <span>
+            <span>
+              1.43
+            </span>
+            <span>
+              84
+            </span>
+            <span>
+              1
+            </span>
+          </span>,
+        ],
+        "className": "card-box",
+      },
+      "ref": null,
+      "rendered": Array [
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": "sell",
+          },
+          "ref": null,
+          "rendered": "sell",
+          "type": "div",
+        },
+        Object {
+          "instance": null,
+          "key": undefined,
+          "nodeType": "host",
+          "props": Object {
+            "children": Array [
+              <span>
+                1.43
+              </span>,
+              <span>
+                84
+              </span>,
+              <span>
+                1
+              </span>,
+            ],
+          },
+          "ref": null,
+          "rendered": Array [
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1.43",
+                "className": undefined,
+              },
+              "ref": null,
+              "rendered": "1.43",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "84",
+                "className": undefined,
+              },
+              "ref": null,
+              "rendered": "84",
+              "type": "span",
+            },
+            Object {
+              "instance": null,
+              "key": undefined,
+              "nodeType": "host",
+              "props": Object {
+                "children": "1",
+                "className": undefined,
+              },
+              "ref": null,
+              "rendered": "1",
+              "type": "span",
+            },
+          ],
+          "type": "span",
+        },
+      ],
+      "type": "div",
+    },
+    "type": "div",
+  },
+  Symbol(enzyme.__nodes__): Array [
+    Object {
+      "instance": null,
+      "key": undefined,
+      "nodeType": "host",
+      "props": Object {
+        "children": <div
+          className="card-box"
+        >
+          <div>
+            sell
+          </div>
+          <span>
+            <span>
+              1.43
+            </span>
+            <span>
+              84
+            </span>
+            <span>
+              1
+            </span>
+          </span>
+        </div>,
+        "className": "col-md-4 block",
+        "id": "request-execution",
+        "onClick": [Function],
+      },
+      "ref": null,
+      "rendered": Object {
+        "instance": null,
+        "key": undefined,
+        "nodeType": "host",
+        "props": Object {
+          "children": Array [
+            <div>
+              sell
+            </div>,
+            <span>
+              <span>
+                1.43
+              </span>
+              <span>
+                84
+              </span>
+              <span>
+                1
+              </span>
+            </span>,
+          ],
+          "className": "card-box",
+        },
+        "ref": null,
+        "rendered": Array [
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": "sell",
+            },
+            "ref": null,
+            "rendered": "sell",
+            "type": "div",
+          },
+          Object {
+            "instance": null,
+            "key": undefined,
+            "nodeType": "host",
+            "props": Object {
+              "children": Array [
+                <span>
+                  1.43
+                </span>,
+                <span>
+                  84
+                </span>,
+                <span>
+                  1
+                </span>,
+              ],
+            },
+            "ref": null,
+            "rendered": Array [
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "1.43",
+                  "className": undefined,
+                },
+                "ref": null,
+                "rendered": "1.43",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "84",
+                  "className": undefined,
+                },
+                "ref": null,
+                "rendered": "84",
+                "type": "span",
+              },
+              Object {
+                "instance": null,
+                "key": undefined,
+                "nodeType": "host",
+                "props": Object {
+                  "children": "1",
+                  "className": undefined,
+                },
+                "ref": null,
+                "rendered": "1",
+                "type": "span",
+              },
+            ],
+            "type": "span",
+          },
+        ],
+        "type": "div",
+      },
+      "type": "div",
+    },
+  ],
+  Symbol(enzyme.__options__): Object {
+    "adapter": ReactSixteenAdapter {
+      "options": Object {
+        "enableComponentDidUpdateOnSetState": true,
+        "lifecycles": Object {
+          "componentDidUpdate": Object {
+            "onSetState": true,
+          },
+          "getDerivedStateFromProps": true,
+          "getSnapshotBeforeUpdate": true,
+          "setState": Object {
+            "skipsComponentDidUpdateOnNullish": true,
+          },
+        },
+      },
+    },
+  },
+}
+`;

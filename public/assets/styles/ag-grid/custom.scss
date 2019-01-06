@@ -1,0 +1,65 @@
+$icons-path: '../../../node_modules/ag-grid-community/src/styles/icons/';
+$ag-mat-icons-path: '../../../node_modules/ag-grid-community/src/styles/material-icons/';
+
+$icon-color: $gray;
+$foreground-color: $gray;
+$secondary-foreground-color: $gray;
+$disabled-foreground-color: $gray;
+$menu-option-active-color: $gray;
+
+$background-color: $gray-darker;
+
+$panel-background-color: $background-color;
+$tool-panel-background-color: $background-color;
+$card-background-color: $background-color;
+$odd-row-background-color: $background-color;
+
+$header-cell-moving-background-color: $gray-dark;
+
+$range-selection-background-color: $gray-dark;
+$range-selection-highlight-color: $gray-dark;
+
+$value-change-delta-up-color: $success;
+$value-change-delta-down-color: $danger;
+$value-change-value-highlight-background-color: $gray-dark;
+
+@import 'node_modules/ag-grid-community/src/styles/ag-grid';
+@import 'node_modules/ag-grid-community/src/styles/ag-theme-bootstrap';
+
+//Then overwrite the icon-background mixin like such:
+@mixin icon-background($icon) {
+  -webkit-mask: url('#{$icons-path}#{$icon}.svg') no-repeat center;
+  mask: url('#{$icons-path}#{$icon}.svg') no-repeat center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  background-color: $gray;
+  background: $gray;
+  background-size: 14px 14px;
+  display: inline-block;
+}
+
+/* icons are used outside of the grid root (in the ghost) */
+$icons: aggregation arrows asc checkbox-checked-readonly checkbox-checked
+  checkbox-indeterminate-readonly checkbox-indeterminate
+  checkbox-unchecked-readonly checkbox-unchecked column columns contracted copy
+  cut desc expanded eye-slash eye filter group indeterminate left loading menu
+  minus none not-allowed paste pin pivot plus right small-left small-right
+  small-up small-down tick cross tree-open tree-closed tree-indeterminate;
+
+@each $icon in $icons {
+  //replace .ag-theme-bootstrap with target theme.
+  .ag-theme-bootstrap .ag-icon-#{$icon} {
+    @include icon-background('#{$icon}');
+  }
+}
+
+.ag-root ::-webkit-scrollbar {
+  width: 0.8em;
+  height: 0.8em;
+}
+.ag-root ::-webkit-scrollbar-track-piece {
+  background: #3d4853;
+}
+.ag-root ::-webkit-scrollbar-thumb {
+  background: #526170;
+}
