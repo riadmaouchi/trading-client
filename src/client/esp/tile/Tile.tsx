@@ -80,13 +80,8 @@ export class PriceTile extends React.PureComponent<
   handleSave(notional: number) {
     const { tile } = this.props;
     const updatedTile: TileData = {
-      id: tile.id,
-      tenor: tile.tenor,
-      executingBuy: tile.executingBuy,
-      executingSell: tile.executingSell,
-      settlementDate: tile.settlementDate,
-      notional: notional,
-      price: tile.price
+      ...tile,
+      notional: notional
     };
     this.props.editNotional(updatedTile);
   }
@@ -106,68 +101,61 @@ export class PriceTile extends React.PureComponent<
     const { bid, ask, prices } = this.state;
 
     return (
-      <div className="col-sm-4">
-        <div id={tile.price.symbol} className="card m-b-20">
-          <div className="card-body">
-            <h4 className="card-title">{tile.price.symbol}</h4>
-            <div className="container">
-              <div className="row">
-                <Price
-                  symbol={tile.price.symbol}
-                  side="sell"
-                  price={bid}
-                  notional={tile.notional}
-                  execute={this.props.execute}
-                  executing={tile.executingSell}
-                />
-                <Spread bid={bid} ask={ask} />
-                <Price
-                  symbol={tile.price.symbol}
-                  side="buy"
-                  price={ask}
-                  notional={tile.notional}
-                  execute={this.props.execute}
-                  executing={tile.executingBuy}
-                />
-              </div>
+      <div className="container">
+        <div className="row">
+          <Price
+            symbol={tile.price.symbol}
+            side="sell"
+            price={bid}
+            notional={tile.notional}
+            execute={this.props.execute}
+            executing={tile.executingSell}
+          />
+          <Spread bid={bid} ask={ask} />
+          <Price
+            symbol={tile.price.symbol}
+            side="buy"
+            price={ask}
+            notional={tile.notional}
+            execute={this.props.execute}
+            executing={tile.executingBuy}
+          />
+        </div>
 
-              <div className="row">
-                <div className="col-md-6">
-                  <Notional
-                    notional={tile.notional}
-                    symbol={tile.price.symbol}
-                    onSave={this.handleSave}
-                  />
-                </div>
+        <div className="row">
+          <div className="col-md-6">
+            <Notional
+              notional={tile.notional}
+              symbol={tile.price.symbol}
+              onSave={this.handleSave}
+            />
+          </div>
 
-                <div className="col-md-6">
-                  <div className="form-group">
-                    <div className="input-group input-group-sm mb-3">
-                      <input
-                        type="text"
-                        className="form-control form-control-sm"
-                        placeholder="dd/MM/yyyy"
-                        onChange={this.handleOnChange}
-                        onKeyDown={this.handleKeyDown}
-                        onBlur={this.handleOnBlur}
-                        value={this.state.settlementDate
-                          .concat(' (')
-                          .concat(this.state.tenor)
-                          .concat(')')}
-                      />
-                      <div className="input-group-append">
-                        <span className="input-group-text">
-                          <FontAwesomeIcon icon="calendar-alt" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
+          <div className="col-md-6">
+            <div className="form-group">
+              <div className="input-group input-group-sm mb-3">
+                <input
+                  type="text"
+                  className="form-control form-control-sm"
+                  placeholder="dd/MM/yyyy"
+                  onChange={this.handleOnChange}
+                  onKeyDown={this.handleKeyDown}
+                  onBlur={this.handleOnBlur}
+                  value={this.state.settlementDate
+                    .concat(' (')
+                    .concat(this.state.tenor)
+                    .concat(')')}
+                />
+                <div className="input-group-append">
+                  <span className="input-group-text">
+                    <FontAwesomeIcon icon="calendar-alt" />
+                  </span>
                 </div>
               </div>
-              <Ladder key={tile.id} prices={prices} />
             </div>
           </div>
         </div>
+        <Ladder key={tile.id} prices={prices} />
       </div>
     );
   }

@@ -6,4 +6,5 @@ export interface TradeReport {
   notional: number;
   price: number;
   status: string;
+  reason: string;
 }

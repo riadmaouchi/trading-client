@@ -1,40 +1,63 @@
-import { Action, createStore, applyMiddleware, Store } from 'redux';
+import { Action, applyMiddleware, Store, createStore } from 'redux';
 import { createEpicMiddleware, combineEpics } from 'redux-observable';
+import { routerMiddleware } from 'connected-react-router';
 import rootReducer, { RootState } from './combineReducers';
-import { pricingServiceEpic } from './esp/tile/epic/pricingEpic';
-import { executionEpic } from './esp/tile/epic/executionEpic';
-import { tradeBlotterEpic } from './esp/blotter/epic/tradeBlotterEpic';
+import {
+  pricingServiceEpic,
+  pricingConnectionStatusUpdated
+} from './esp/tile/epic/pricingEpic';
+import {
+  tradeBlotterEpic,
+  tradeBlotterConnectionStatusUpdated
+} from './esp/blotter/epic/tradeBlotterEpic';
 import { orderBlotterEpic } from './order/components/blotter/epic/orderBlotterEpic';
 import {
   orderbookServiceEpic,
   onTradeExecuted,
-  onMarketPrice
+  onIndicatorsUpdated,
+  onMarketPrice,
+  orderbookConnectionStatusUpdated
 } from './order/epic/orderbookServiceEpic';
-import { orderEpic } from './order/epic/orderEpic';
+import { orderPlacedEpic } from './order/epic/orderEpic';
+import { espExecutionEpic } from './esp/tile/epic/executionEpic';
 import { GlobalState } from './StoreType';
+import createBrowserHistory from 'history/createBrowserHistory';
 
-export function configureStore(initialState?: RootState): Store<RootState> {
+export const history = createBrowserHistory();
+
+export default function configureStore(
+  initialState?: RootState
+): Store<RootState> {
   const create = window.devToolsExtension
     ? window.devToolsExtension()(createStore)
     : createStore;
 
   const middleware = createEpicMiddleware<Action, Action, GlobalState>();
 
-  const createStoreWithMiddleware = applyMiddleware(logger, middleware)(create);
+  const createStoreWithMiddleware = applyMiddleware(
+    logger,
+    middleware,
+    routerMiddleware(history)
+  )(create);
 
-  const store = createStoreWithMiddleware(rootReducer, initialState) as Store<
-    RootState
-  >;
+  const store = createStoreWithMiddleware(
+    rootReducer(history),
+    initialState
+  ) as Store<RootState>;
 
   const epics = [
     pricingServiceEpic,
-    executionEpic,
+    espExecutionEpic,
     tradeBlotterEpic,
     orderBlotterEpic,
     orderbookServiceEpic,
     onTradeExecuted,
+    onIndicatorsUpdated,
     onMarketPrice,
-    orderEpic
+    orderPlacedEpic,
+    orderbookConnectionStatusUpdated,
+    pricingConnectionStatusUpdated,
+    tradeBlotterConnectionStatusUpdated
   ];
 
   if (module.hot) {

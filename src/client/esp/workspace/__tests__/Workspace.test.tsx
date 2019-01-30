@@ -1,12 +1,13 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { Workspace } from '../WorkspaceContainer';
-import { TileActions } from '../../tile/actions';
+import { Workspace } from '../Workspace';
 import { TileData } from '../../tile/model/tileData';
+import { ConnectionStatus } from '../../../layout/loader/model/serviceStatus';
 
 describe('Workspace', () => {
   it('should create price tiles', () => {
     // Given
+    jest.mock('../../tile', () => 'tile');
     const tiles: TileData[] = [
       {
         id: 1,
@@ -21,7 +22,10 @@ describe('Workspace', () => {
           symbol: 'EURGBP',
           bids: [],
           asks: []
-        }
+        },
+        executing: false,
+        lastExecutionStatus: null,
+        pricingConnectionState: ConnectionStatus.CONNECTED
       },
       {
         id: 2,
@@ -36,7 +40,10 @@ describe('Workspace', () => {
           symbol: 'EURUSD',
           bids: [],
           asks: []
-        }
+        },
+        executing: false,
+        lastExecutionStatus: null,
+        pricingConnectionState: ConnectionStatus.CONNECTED
       }
     ];
 
@@ -44,11 +51,10 @@ describe('Workspace', () => {
     const workspace = mount(
       <Workspace
         tiles={tiles}
-        actions={TileActions}
-        history={null}
-        location={null}
-        children={null}
-        match={null}
+        dismissExecutionNotification={jest.fn()}
+        editNotional={jest.fn()}
+        executeTrade={jest.fn()}
+        tileSubscribe={jest.fn()}
       />
     );
 

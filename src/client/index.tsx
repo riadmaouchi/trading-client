@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { configureStore } from './configureStore';
+import configureStore from './configureStore';
 import 'bootstrap';
 import '../../public/assets/styles/custom.scss';
 import { MainRouter } from './router';
@@ -14,7 +14,12 @@ import {
   faTable,
   faExchangeAlt,
   faArrowDown,
-  faArrowUp
+  faArrowUp,
+  faCircle,
+  faExclamationCircle,
+  faSpinner,
+  faCheckCircle,
+  faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(
@@ -26,7 +31,12 @@ library.add(
   faTable,
   faExchangeAlt,
   faArrowDown,
-  faArrowUp
+  faArrowUp,
+  faCircle,
+  faExclamationCircle,
+  faSpinner,
+  faCheckCircle,
+  faTimesCircle
 );
 
 const store = configureStore();

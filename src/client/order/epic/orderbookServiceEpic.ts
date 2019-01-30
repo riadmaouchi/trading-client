@@ -9,33 +9,40 @@ import { TILE_ACTION_TYPES } from '../actions';
 const {
   updateOrder,
   updateTrade,
+  updateIndicators,
   updateMarketPrice,
   subscribeOrderBook,
   subscribeLastTrades,
-  subscribeToMarketPrice
+  subscribeIndicators,
+  subscribeToMarketPrice,
+  subscribeOrderbookConnectionState,
+  onOrderbookConnectionStatusUpdated
 } = OrderAction;
 type SubscribeToOrderBookAction = ReturnType<typeof subscribeOrderBook>;
 type SubscribeToTradeExecutedAction = ReturnType<typeof subscribeLastTrades>;
+type SubscribeToIndicatorsAction = ReturnType<typeof subscribeIndicators>;
 type SubscribeToMarketPriceAction = ReturnType<typeof subscribeToMarketPrice>;
+type SubscribeOrderbookConnectionStateAction = ReturnType<
+  typeof subscribeOrderbookConnectionState
+>;
 const orderbookService = new OrderbookService();
 
-export const orderbookServiceEpic: ApplicationEpic = (action$, state$) => {
-  return action$.pipe(
+export const orderbookServiceEpic: ApplicationEpic = (action$, state$) =>
+  action$.pipe(
     ofType<Action, SubscribeToOrderBookAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK
     ),
     mergeMap((action: SubscribeToOrderBookAction) =>
       orderbookService.getOrderStream().pipe(
-        bufferTime(1000),
+        bufferTime(250),
         filter(buffer => buffer.length > 0),
         map(updateOrder)
       )
     )
   );
-};
 
-export const onTradeExecuted: ApplicationEpic = (action$, state$) => {
-  return action$.pipe(
+export const onTradeExecuted: ApplicationEpic = (action$, state$) =>
+  action$.pipe(
     ofType<Action, SubscribeToTradeExecutedAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_LAST_TRADES
     ),
@@ -47,10 +54,19 @@ export const onTradeExecuted: ApplicationEpic = (action$, state$) => {
       )
     )
   );
-};
 
-export const onMarketPrice: ApplicationEpic = (action$, state$) => {
-  return action$.pipe(
+export const onIndicatorsUpdated: ApplicationEpic = (action$, state$) =>
+  action$.pipe(
+    ofType<Action, SubscribeToIndicatorsAction>(
+      TILE_ACTION_TYPES.SUBSCRIBE_INDICATORS
+    ),
+    mergeMap((action: SubscribeToIndicatorsAction) =>
+      orderbookService.getIndicatorsStream().pipe(map(updateIndicators))
+    )
+  );
+
+export const onMarketPrice: ApplicationEpic = (action$, state$) =>
+  action$.pipe(
     ofType<Action, SubscribeToTradeExecutedAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_MARKET_PRICE
     ),
@@ -58,4 +74,18 @@ export const onMarketPrice: ApplicationEpic = (action$, state$) => {
       orderbookService.getMarketPrice().pipe(map(updateMarketPrice))
     )
   );
-};
+
+export const orderbookConnectionStatusUpdated: ApplicationEpic = (
+  action$,
+  state$
+) =>
+  action$.pipe(
+    ofType<Action, SubscribeOrderbookConnectionStateAction>(
+      TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE
+    ),
+    mergeMap((action: SubscribeOrderbookConnectionStateAction) =>
+      orderbookService
+        .getConnectionStream()
+        .pipe(map(onOrderbookConnectionStatusUpdated))
+    )
+  );

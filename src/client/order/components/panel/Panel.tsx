@@ -45,7 +45,6 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.tile);
     if (this.props.tile.limit !== prevProps.tile.limit) {
       this.setState({ limit: this.props.tile.limit });
     }
@@ -147,87 +146,61 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
     const { tile } = this.props;
     const { orderType, limit, tenor, settlementDate, amount } = this.state;
     return (
-      <div className="card">
-        <div className="card-body">
-          <h4 className="card-title">PLACE ORDER ({tile.symbol})</h4>
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Settlement</label>
-            <div className="col-sm-8">
-              <div className="input-group input-group-sm mb-3">
-                <input
-                  type="text"
-                  className="form-control form-control-sm"
-                  placeholder="dd/MM/yyyy"
-                  onChange={this.onSettlementDateChange}
-                  onKeyDown={this.onSettlementDateKeyDown}
-                  onBlur={this.onSettlementDateBlur}
-                  value={settlementDate
-                    .concat(' (')
-                    .concat(tenor)
-                    .concat(')')}
-                />
-                <div className="input-group-append">
-                  <span className="input-group-text">
-                    <FontAwesomeIcon icon="calendar-alt" />
-                  </span>
-                </div>
+      <div>
+        <div className="form-group row">
+          <label className="col-sm-4 col-form-label">Settlement</label>
+          <div className="col-sm-8">
+            <div className="input-group input-group-sm mb-3">
+              <input
+                type="text"
+                className="form-control form-control-sm"
+                placeholder="dd/MM/yyyy"
+                onChange={this.onSettlementDateChange}
+                onKeyDown={this.onSettlementDateKeyDown}
+                onBlur={this.onSettlementDateBlur}
+                value={settlementDate
+                  .concat(' (')
+                  .concat(tenor)
+                  .concat(')')}
+              />
+              <div className="input-group-append">
+                <span className="input-group-text">
+                  <FontAwesomeIcon icon="calendar-alt" />
+                </span>
               </div>
             </div>
           </div>
-
-          <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Order Type</label>
-            <div className="col-sm-8">
-              <select
-                className="form-control form-control-sm select2 select2-hidden-accessible"
-                aria-hidden="true"
-                value={orderType}
-                onChange={this.onOrderTypeChange}
-                onKeyDown={this.onOrderTypeKeyDown}
-                onBlur={this.onOrderTypeBlur}
-              >
-                <option value="limit">Limit</option>
-                <option value="market">Market</option>
-              </select>
-            </div>
+        </div>
+        <div className="form-group row">
+          <label className="col-sm-4 col-form-label">Order Type</label>
+          <div className="col-sm-8">
+            <select
+              className="form-control form-control-sm select2 select2-hidden-accessible"
+              aria-hidden="true"
+              value={orderType}
+              onChange={this.onOrderTypeChange}
+              onKeyDown={this.onOrderTypeKeyDown}
+              onBlur={this.onOrderTypeBlur}
+            >
+              <option value="limit">Limit</option>
+              <option value="market">Market</option>
+            </select>
           </div>
-
-          {orderType === 'limit' && (
-            <div className="form-group row">
-              <label className="col-sm-4 col-form-label">Limit Price</label>
-              <div className="col-sm-8">
-                <div className="input-group input-group-sm mb-3">
-                  <input
-                    type="number"
-                    step="0.00001"
-                    min="0"
-                    className="form-control"
-                    value={limit}
-                    onChange={this.onLimitChange}
-                    onKeyDown={this.onLimitKeyDown}
-                    onBlur={this.onLimitBlur}
-                  />
-                  <div className="input-group-append">
-                    <span className="input-group-text">
-                      {tile.symbol.substr(0, 3)}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
+        </div>
+        {orderType === 'limit' && (
           <div className="form-group row">
-            <label className="col-sm-4 col-form-label">Amount</label>
+            <label className="col-sm-4 col-form-label">Limit Price</label>
             <div className="col-sm-8">
               <div className="input-group input-group-sm mb-3">
                 <input
-                  type="text"
+                  type="number"
+                  step="0.00001"
+                  min="0"
                   className="form-control"
-                  value={amount}
-                  onChange={this.onAmountChange}
-                  onKeyDown={this.onAmountKeyDown}
-                  onBlur={this.onAmountBlur}
+                  value={limit}
+                  onChange={this.onLimitChange}
+                  onKeyDown={this.onLimitKeyDown}
+                  onBlur={this.onLimitBlur}
                 />
                 <div className="input-group-append">
                   <span className="input-group-text">
@@ -237,26 +210,45 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
               </div>
             </div>
           </div>
-
-          <div className="row">
-            <div className="col-md-6">
-              <button
-                type="submit"
-                className="btn btn-primary btn-block"
-                onClick={this.submitBuyOrder}
-              >
-                Buy
-              </button>
+        )}
+        <div className="form-group row">
+          <label className="col-sm-4 col-form-label">Amount</label>
+          <div className="col-sm-8">
+            <div className="input-group input-group-sm mb-3">
+              <input
+                type="text"
+                className="form-control"
+                value={amount}
+                onChange={this.onAmountChange}
+                onKeyDown={this.onAmountKeyDown}
+                onBlur={this.onAmountBlur}
+              />
+              <div className="input-group-append">
+                <span className="input-group-text">
+                  {tile.symbol.substr(0, 3)}
+                </span>
+              </div>
             </div>
-            <div className="col-md-6">
-              <button
-                type="submit"
-                className="btn btn-danger btn-block"
-                onClick={this.submitSellOrder}
-              >
-                Sell
-              </button>
-            </div>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-6">
+            <button
+              type="submit"
+              className="btn btn-primary btn-block"
+              onClick={this.submitBuyOrder}
+            >
+              Buy
+            </button>
+          </div>
+          <div className="col-md-6">
+            <button
+              type="submit"
+              className="btn btn-danger btn-block"
+              onClick={this.submitSellOrder}
+            >
+              Sell
+            </button>
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AgGridReact } from 'ag-grid-react';
 import { Order } from '../../model/order';
-
+import HorizontalBarComponent from './HorizontalBarComponent';
 export namespace OrderBook {
   export interface Props {
     side: string;
@@ -22,7 +22,7 @@ export class OrderBook extends React.PureComponent<
   render() {
     return (
       <div
-        style={{ height: '310px', width: '100%' }}
+        style={{ height: '300px', width: '100%' }}
         className="ag-theme-bootstrap"
       >
         <AgGridReact
@@ -54,6 +54,11 @@ export class OrderBook extends React.PureComponent<
     this.props.side === 'buy'
       ? [
           {
+            headerName: '',
+            field: 'size',
+            cellRendererFramework: HorizontalBarComponent
+          },
+          {
             headerName: 'Value',
             valueFormatter: this.numberFormatter,
             cellRenderer: 'agAnimateShowChangeCellRenderer',
@@ -73,6 +78,11 @@ export class OrderBook extends React.PureComponent<
           }
         ]
       : [
+          {
+            headerName: '',
+            field: 'size',
+            cellRendererFramework: HorizontalBarComponent
+          },
           {
             headerName: 'Ask',
             field: 'price',

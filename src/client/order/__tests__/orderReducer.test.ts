@@ -1,6 +1,7 @@
 import { TILE_ACTION_TYPES } from '../actions';
 import order from '../orderReducer';
 import { OrderData } from '../model/orderData';
+import { ConnectionStatus } from '../../layout/loader/model/serviceStatus';
 
 const initialState: OrderData = {
   orderPanelData: {
@@ -13,7 +14,11 @@ const initialState: OrderData = {
   },
   buyOrder: [],
   sellOrder: [],
-  lastTrades: []
+  lastTrades: [],
+  indicators: [],
+  connectionState: ConnectionStatus.DISCONNECTED,
+  lastOrderPlacingStatus: null,
+  placing: false
 };
 
 describe('order book', () => {
@@ -48,7 +53,11 @@ describe('order book', () => {
         }
       ],
       sellOrder: [],
-      lastTrades: []
+      lastTrades: [],
+      indicators: [],
+      connectionState: ConnectionStatus.DISCONNECTED,
+      lastOrderPlacingStatus: null,
+      placing: false
     });
   }),
     it('should add sell order to order book', () => {
@@ -82,7 +91,11 @@ describe('order book', () => {
             side: 'SELL'
           }
         ],
-        lastTrades: []
+        lastTrades: [],
+        indicators: [],
+        connectionState: ConnectionStatus.DISCONNECTED,
+        lastOrderPlacingStatus: null,
+        placing: false
       });
     }),
     it('should update order book', () => {
@@ -98,24 +111,9 @@ describe('order book', () => {
               orderType: 'limit'
             },
             buyOrder: [
-              {
-                symbol: 'EURUSD',
-                size: 4000000,
-                price: 1.87783,
-                side: 'BUY'
-              },
-              {
-                symbol: 'EURUSD',
-                size: 8000000,
-                price: 1.87782,
-                side: 'BUY'
-              },
-              {
-                symbol: 'EURUSD',
-                size: 3000000,
-                price: 1.87781,
-                side: 'BUY'
-              }
+              { symbol: 'EURUSD', size: 4000000, price: 1.87783, side: 'BUY' },
+              { symbol: 'EURUSD', size: 8000000, price: 1.87782, side: 'BUY' },
+              { symbol: 'EURUSD', size: 3000000, price: 1.87781, side: 'BUY' }
             ],
             sellOrder: [
               {
@@ -124,42 +122,21 @@ describe('order book', () => {
                 price: 1.87785,
                 side: 'SELL'
               },
-              {
-                symbol: 'EURUSD',
-                size: 5000000,
-                price: 1.87786,
-                side: 'SELL'
-              },
-              {
-                symbol: 'EURUSD',
-                size: 7000000,
-                price: 1.87787,
-                side: 'SELL'
-              }
+              { symbol: 'EURUSD', size: 5000000, price: 1.87786, side: 'SELL' },
+              { symbol: 'EURUSD', size: 7000000, price: 1.87787, side: 'SELL' }
             ],
-            lastTrades: []
+            lastTrades: [],
+            indicators: [],
+            connectionState: ConnectionStatus.DISCONNECTED,
+            lastOrderPlacingStatus: null,
+            placing: false
           },
           {
             type: TILE_ACTION_TYPES.UPDATE_ORDER,
             payload: [
-              {
-                symbol: 'EURUSD',
-                size: 500000,
-                price: 1.87782,
-                side: 'BUY'
-              },
-              {
-                symbol: 'EURUSD',
-                size: 0,
-                price: 1.87782,
-                side: 'BUY'
-              },
-              {
-                symbol: 'EURUSD',
-                size: 7000000,
-                price: 1.8778,
-                side: 'BUY'
-              },
+              { symbol: 'EURUSD', size: 500000, price: 1.87782, side: 'BUY' },
+              { symbol: 'EURUSD', size: 0, price: 1.87782, side: 'BUY' },
+              { symbol: 'EURUSD', size: 7000000, price: 1.8778, side: 'BUY' },
               {
                 symbol: 'EURUSD',
                 size: 2_000_000,
@@ -218,7 +195,11 @@ describe('order book', () => {
             side: 'SELL'
           }
         ],
-        lastTrades: []
+        lastTrades: [],
+        indicators: [],
+        connectionState: ConnectionStatus.DISCONNECTED,
+        lastOrderPlacingStatus: null,
+        placing: false
       });
     });
 });

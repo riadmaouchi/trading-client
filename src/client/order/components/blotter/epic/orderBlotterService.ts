@@ -18,7 +18,7 @@ export default class PricingService {
         const messageEvent = event as MessageEvent;
         obs.next(JSON.parse(messageEvent.data));
       });
-      this.source.onerror = e => obs.error(e);
+      // this.source.onerror = e => obs.error(e);
     });
     return stream.pipe(
       distinctUntilChanged(),

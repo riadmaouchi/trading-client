@@ -1,4 +1,4 @@
-$icons-path: '../../../node_modules/ag-grid-community/src/styles/icons/';
+$icons-path: '../../../node_modules/ag-grid-community/src/styles/ag-theme-base/icons/';
 $ag-mat-icons-path: '../../../node_modules/ag-grid-community/src/styles/material-icons/';
 
 $icon-color: $gray;
@@ -23,8 +23,10 @@ $value-change-delta-up-color: $success;
 $value-change-delta-down-color: $danger;
 $value-change-value-highlight-background-color: $gray-dark;
 
+$font-size: 0.7rem;
+
 @import 'node_modules/ag-grid-community/src/styles/ag-grid';
-@import 'node_modules/ag-grid-community/src/styles/ag-theme-bootstrap';
+@import 'node_modules/ag-grid-community/src/styles/ag-theme-bootstrap/sass/ag-theme-bootstrap';
 
 //Then overwrite the icon-background mixin like such:
 @mixin icon-background($icon) {

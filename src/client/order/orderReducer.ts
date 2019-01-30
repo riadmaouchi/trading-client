@@ -1,9 +1,10 @@
 import { handleActions, Action } from 'redux-actions';
 import moment from 'moment';
 import { TILE_ACTION_TYPES } from './actions';
-import { OrderData } from './model/orderData';
+import { OrderData, LastOrderPlacingStatus } from './model/orderData';
 import { Order } from './model/order';
 import { LastTrade } from './model/lastTrade';
+import { ConnectionStatus } from '../layout/loader/model/serviceStatus';
 
 const initialState: OrderData = {
   orderPanelData: {
@@ -18,7 +19,11 @@ const initialState: OrderData = {
   },
   buyOrder: [],
   sellOrder: [],
-  lastTrades: []
+  lastTrades: [],
+  indicators: [],
+  connectionState: null,
+  lastOrderPlacingStatus: null,
+  placing: false
 };
 
 export default handleActions<OrderData, any>(
@@ -76,6 +81,26 @@ export default handleActions<OrderData, any>(
         lastTrades: [...state.lastTrades, ...action.payload]
       };
     },
+    [TILE_ACTION_TYPES.SUBSCRIBE_INDICATORS]: (state: OrderData): OrderData =>
+      state,
+    [TILE_ACTION_TYPES.UPDATE_INDICATORS]: (
+      state: OrderData,
+      action: Action<LastTrade>
+    ): OrderData => {
+      return {
+        ...state,
+        indicators: [...state.indicators, action.payload]
+      };
+    },
+    [TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE]: (
+      state: OrderData
+    ): OrderData => state,
+    [TILE_ACTION_TYPES.ORDER_BOOK_CONNECTION_STATUS_UPDATED]: (
+      state: OrderData,
+      action: Action<ConnectionStatus>
+    ): OrderData => {
+      return { ...state, connectionState: action.payload };
+    },
     [TILE_ACTION_TYPES.SUBSCRIBE_MARKET_PRICE]: (state: OrderData): OrderData =>
       state,
     [TILE_ACTION_TYPES.UPDATE_MARKET_PRICE]: (
@@ -91,10 +116,25 @@ export default handleActions<OrderData, any>(
       };
     },
     [TILE_ACTION_TYPES.SUBMIT_ORDER]: (state: OrderData): OrderData => {
-      return state;
+      return { ...state, placing: true };
     },
-    [TILE_ACTION_TYPES.ORDER_PLACED]: (state: OrderData): OrderData => {
-      return state;
+    [TILE_ACTION_TYPES.DISMISS_ORDER_NOTIFICATION]: (
+      state: OrderData
+    ): OrderData => {
+      return {
+        ...state,
+        lastOrderPlacingStatus: null
+      };
+    },
+    [TILE_ACTION_TYPES.ORDER_PLACED]: (
+      state: OrderData,
+      action: Action<LastOrderPlacingStatus>
+    ): OrderData => {
+      return {
+        ...state,
+        lastOrderPlacingStatus: action.payload,
+        placing: false
+      };
     }
   },
   initialState

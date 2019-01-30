@@ -8,9 +8,7 @@ export default handleActions<OrderUpdate[], any>(
   {
     [ORDER_BLOTTER_ACTION_TYPES.ORDER_BLOTTER_SUBSCRIBE]: (
       state: OrderUpdate[]
-    ): OrderUpdate[] => {
-      return state;
-    },
+    ): OrderUpdate[] => state,
     [ORDER_BLOTTER_ACTION_TYPES.ORDER_REPORT_UPDATE]: (
       state: OrderUpdate[],
       action: Action<OrderUpdate[]>

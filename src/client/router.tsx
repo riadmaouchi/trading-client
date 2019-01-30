@@ -1,16 +1,17 @@
 import React, { SFC } from 'react';
 import { DefaultLayout, ErrorPage } from './layout';
-import Workspace from './esp/workspace/WorkspaceContainer';
+import WorkspaceContainer from './esp/workspace/WorkspaceContainer';
 import BlotterContainer from './esp/blotter/BlotterContainer';
 import OrderContainer from './order/OrderContainer';
-import { Router, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { ConnectedRouter } from 'connected-react-router';
 import { Switch } from 'react-router';
-import history from './history';
+import { history } from './configureStore';
 
 const BodyLayout = ({ props }) => {
   return (
     <div>
-      <Workspace {...props} />
+      <WorkspaceContainer {...props} />
       <BlotterContainer {...props} />
     </div>
   );
@@ -18,7 +19,7 @@ const BodyLayout = ({ props }) => {
 
 export const MainRouter: SFC = () => {
   return (
-    <Router history={history}>
+    <ConnectedRouter history={history}>
       <Switch>
         <DefaultLayout
           exact
@@ -40,7 +41,7 @@ export const MainRouter: SFC = () => {
         />
         <DefaultLayout component={ErrorPage} />
       </Switch>
-    </Router>
+    </ConnectedRouter>
   );
 };
 

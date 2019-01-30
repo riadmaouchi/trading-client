@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { connectRouter } from 'connected-react-router';
+import { History } from 'history';
 import tiles from './esp/tile/tileReducer';
 import order from './order/orderReducer';
 import trades from './esp/blotter/tradeBlotterReducer';
@@ -15,9 +17,11 @@ export interface RootState {
   orderUpdates: OrderUpdate[];
 }
 
-export default combineReducers<RootState>({
-  tiles: tiles,
-  order: order,
-  trades: trades,
-  orderUpdates: orderUpdates
-});
+export default (history: History) =>
+  combineReducers({
+    router: connectRouter(history),
+    tiles: tiles,
+    order: order,
+    trades: trades,
+    orderUpdates: orderUpdates
+  });

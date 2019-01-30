@@ -17,6 +17,7 @@ export default class OrderService {
           obs.complete();
         })
         .catch(error => {
+          console.log('error');
           obs.error(error.message);
         });
     });

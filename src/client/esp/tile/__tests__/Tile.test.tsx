@@ -2,6 +2,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { PriceTile } from '../Tile';
 import { TileData } from '../model/tileData';
+import { ConnectionStatus } from '../../../layout/loader/model/serviceStatus';
 
 describe('PriceTile', () => {
   it('should subscribe to price update', () => {
@@ -13,13 +14,10 @@ describe('PriceTile', () => {
       executingBuy: false,
       executingSell: false,
       notional: 1000000,
-      price: {
-        id: 0,
-        time: '',
-        symbol: 'EURGBP',
-        bids: [],
-        asks: []
-      }
+      price: { id: 0, time: '', symbol: 'EURGBP', bids: [], asks: [] },
+      executing: false,
+      lastExecutionStatus: null,
+      pricingConnectionState: ConnectionStatus.CONNECTING
     };
 
     // When
@@ -76,7 +74,10 @@ describe('PriceTile', () => {
           symbol: 'EURGBP',
           bids: [],
           asks: []
-        }
+        },
+        executing: false,
+        lastExecutionStatus: null,
+        pricingConnectionState: ConnectionStatus.CONNECTING
       };
       let priceTile = mount(
         <PriceTile

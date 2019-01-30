@@ -20,11 +20,21 @@ export class Sales extends React.PureComponent<Sales.Props, Sales.State> {
     super(props, context);
   }
 
+  chartComponent = React.createRef<HighchartsReact>();
+
+  componentDidMount() {
+    const container = this.chartComponent.current.container.current;
+    container.style.left = 0;
+    container.style.top = 0;
+    container.style.display = 'block';
+    this.chartComponent.current.chart.reflow();
+  }
+
   render() {
-    const cb = function() {};
     return (
       <HighchartsReact
         highcharts={Highcharts}
+        ref={this.chartComponent}
         constructorType={'stockChart'}
         options={{
           colors: ['#36afc8', '#34d0e9'],
@@ -32,10 +42,18 @@ export class Sales extends React.PureComponent<Sales.Props, Sales.State> {
             {
               type: 'candlestick',
               name: 'Price',
-              data: this.props.prices,
-              tooltip: {
-                valueDecimals: 5
-              }
+              data: this.props.prices
+                .map(trade => [
+                  new Date(trade.time).getTime(),
+                  trade.open,
+                  trade.high,
+                  trade.low,
+                  trade.close,
+                  trade.lastQuantity
+                ])
+                .sort((a, b) => a[0] - b[0]),
+              //.sort((a, b) => a[0] - b[0]),
+              tooltip: { valueDecimals: 5 }
             },
             {
               type: 'column',
@@ -43,59 +61,30 @@ export class Sales extends React.PureComponent<Sales.Props, Sales.State> {
               showInNavigator: true,
               yAxis: 1,
               data: this.props.prices
-                .map(trade => ({
-                  x: trade.x,
-                  y: trade.quantity
-                }))
-                .sort((a, b) => a.x - b.x)
+                .map(trade => [
+                  new Date(trade.time).getTime(),
+                  trade.lastQuantity
+                ])
+                .sort((a, b) => a[0] - b[0])
             }
           ],
-          chart: {
-            events: { load: cb },
-            backgroundColor: '#3d4853',
-            height: '37.5%'
-          },
-
+          chart: { events: { load: () => {} }, backgroundColor: '#3d4853' },
           yAxis: [
             {
               allowDecimals: true,
               lineColor: '#526170',
               gridLineColor: '#526170',
-              labels: {
-                align: 'right',
-                x: -3,
-                style: {
-                  color: '#98a6ad'
-                }
-              },
-              title: {
-                text: 'Price',
-                style: {
-                  color: '#98a6ad'
-                }
-              },
+              labels: { align: 'right', x: -3, style: { color: '#98a6ad' } },
+              title: { text: 'Price', style: { color: '#98a6ad' } },
               height: '60%',
               lineWidth: 2,
-              resize: {
-                enabled: true
-              }
+              resize: { enabled: true }
             },
             {
               lineColor: '#526170',
               gridLineColor: '#526170',
-              labels: {
-                align: 'right',
-                x: -3,
-                style: {
-                  color: '#98a6ad'
-                }
-              },
-              title: {
-                text: 'Volume',
-                style: {
-                  color: '#98a6ad'
-                }
-              },
+              labels: { align: 'right', x: -3, style: { color: '#98a6ad' } },
+              title: { text: 'Volume', style: { color: '#98a6ad' } },
               top: '65%',
               height: '35%',
               offset: 0,
@@ -104,93 +93,50 @@ export class Sales extends React.PureComponent<Sales.Props, Sales.State> {
           ],
           xAxis: {
             gridLineColor: '#526170',
-            labels: {
-              style: {
-                color: '#98a6ad'
-              }
-            },
+            labels: { style: { color: '#98a6ad' } },
             lineColor: '#526170',
             tickColor: '#526170',
             type: 'datetime',
-            title: {
-              style: {
-                color: '#98a6ad'
-              }
-            }
+            title: { style: { color: '#98a6ad' } }
           },
-
-          tooltip: {
-            split: true
-          },
-
+          tooltip: { split: true },
           rangeSelector: {
             inputEnabled: false,
             selected: 2,
             buttons: [
-              {
-                count: 1,
-                type: 'minute',
-                text: '1M'
-              },
-              {
-                count: 5,
-                type: 'minute',
-                text: '5M'
-              },
-              {
-                type: 'all',
-                text: 'All'
-              }
+              { count: 1, type: 'minute', text: '1M' },
+              { count: 5, type: 'minute', text: '5M' },
+              { type: 'all', text: 'All' }
             ],
             buttonTheme: {
               fill: '#3bafda',
               stroke: '#98a6ad',
-              style: {
-                color: 'white'
-              },
+              style: { color: 'white' },
               states: {
                 hover: {
                   fill: '#707073',
                   stroke: '#000000',
-                  style: {
-                    color: '#98a6ad'
-                  }
+                  style: { color: '#98a6ad' }
                 },
                 select: {
                   fill: '#000003',
                   stroke: '#000000',
-                  style: {
-                    color: '#98a6ad'
-                  }
+                  style: { color: '#98a6ad' }
                 }
               }
             },
             inputBoxBorderColor: '#526170',
-            inputStyle: {
-              backgroundColor: '#333',
-              color: '#98a6ad'
-            },
-            labelStyle: {
-              color: '#98a6ad'
-            }
+            inputStyle: { backgroundColor: '#333', color: '#98a6ad' },
+            labelStyle: { color: '#98a6ad' }
           },
           navigation: {
             buttonOptions: {
               symbolStroke: '#36afc8',
-              theme: {
-                fill: '#3d4853'
-              }
+              theme: { fill: '#3d4853' }
             }
           },
-
-          navigator: {
-            enabled: false
-          },
-
-          credits: {
-            enabled: false
-          },
-
+          navigator: { enabled: false },
+          credits: { enabled: false },
           scrollbar: {
             barBackgroundColor: '#3d4853',
             barBorderColor: '#3d4853',
@@ -201,7 +147,6 @@ export class Sales extends React.PureComponent<Sales.Props, Sales.State> {
             trackBackgroundColor: '#3d4853',
             trackBorderColor: '#3d4853'
           },
-
           background2: '#505053',
           dataLabelsColor: '#B0B0B3',
           textColor: '#C0C0C0',

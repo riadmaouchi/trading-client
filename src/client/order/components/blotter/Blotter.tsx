@@ -25,7 +25,7 @@ export class OrderBlotter extends React.PureComponent<
   render() {
     return (
       <div
-        style={{ height: '400px', width: '100%' }}
+        style={{ height: '270px', width: '100%' }}
         className="ag-theme-bootstrap"
       >
         <AgGridReact

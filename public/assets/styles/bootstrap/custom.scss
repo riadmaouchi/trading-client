@@ -1,6 +1,6 @@
 $body-bg: $gray-dark;
 $body-color: $gray;
-$font-size-base: 0.75rem;
+$font-size-base: 0.7rem;
 $font-family-sans-serif: 'Raleway', Roboto, 'Helvetica Neue', Arial, sans-serif;
 
 $theme-colors: (
@@ -23,6 +23,8 @@ body {
 
 $breadcrumb-bg: transparent;
 $breadcrumb-active-color: $primary;
+
+$enable-shadows: true;
 
 //
 // Navbars

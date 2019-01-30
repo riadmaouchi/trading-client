@@ -16,10 +16,7 @@ export default class ExecutionService {
           obs.next(response.data);
           obs.complete();
         })
-        .catch(error => {
-          obs.error(error.message);
-          console.log('error handling => ', error);
-        });
+        .catch(error => obs.error(error.message));
     });
   };
 }

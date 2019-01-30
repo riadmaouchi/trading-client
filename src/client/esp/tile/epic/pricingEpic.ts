@@ -6,11 +6,20 @@ import { ApplicationEpic } from '../../../actionType';
 import PricingService from './pricingService';
 import { TILE_ACTION_TYPES } from '../actions';
 
-const { updatePrice, tileSubscribe } = TileActions;
+const {
+  updatePrice,
+  tileSubscribe,
+  subscribePricingConnectionState,
+  onPricingConnectionStatusUpdated
+} = TileActions;
 type SubscribeToTileAction = ReturnType<typeof tileSubscribe>;
+type SubscribePricingConnectionStateAction = ReturnType<
+  typeof subscribePricingConnectionState
+>;
+
+const pricingService = new PricingService();
 
 export const pricingServiceEpic: ApplicationEpic = (action$, state$) => {
-  const pricingService = new PricingService();
   return action$.pipe(
     ofType<Action, SubscribeToTileAction>(TILE_ACTION_TYPES.TILE_SUBSCRIBE),
     mergeMap((action: SubscribeToTileAction) =>
@@ -18,3 +27,18 @@ export const pricingServiceEpic: ApplicationEpic = (action$, state$) => {
     )
   );
 };
+
+export const pricingConnectionStatusUpdated: ApplicationEpic = (
+  action$,
+  state$
+) =>
+  action$.pipe(
+    ofType<Action, SubscribePricingConnectionStateAction>(
+      TILE_ACTION_TYPES.SUBSCRIBE_PRICING_CONNECTION_STATE
+    ),
+    mergeMap((action: SubscribePricingConnectionStateAction) =>
+      pricingService
+        .getConnectionStream()
+        .pipe(map(onPricingConnectionStatusUpdated))
+    )
+  );

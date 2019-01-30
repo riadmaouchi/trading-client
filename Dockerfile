@@ -11,6 +11,10 @@ RUN cd /app && npm run test && npm run build
 
 FROM nginx:alpine
 
+RUN rm /etc/nginx/conf.d/*
+
+COPY server.conf /etc/nginx/conf.d/
+
 RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=builder /app/dist /usr/share/nginx/html

@@ -69,3 +69,6 @@ dist/
 .vscode
 .DS_Store
 *.iml
+
+# history
+.history

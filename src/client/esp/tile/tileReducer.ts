@@ -1,9 +1,10 @@
 import { handleActions, Action } from 'redux-actions';
 import moment from 'moment';
 import { TILE_ACTION_TYPES } from './actions';
-import { TileData } from './model/tileData';
+import { TileData, LastExecutionStatus } from './model/tileData';
 import { PriceLadder } from './model';
 import { TradeRequest } from './model/tradeRequest';
+import { ConnectionStatus } from '../../layout/loader/model/serviceStatus';
 
 const symbols = ['EURUSD', 'EURGBP', 'EURJPY'];
 
@@ -17,13 +18,10 @@ const initialState: TileData[] = symbols.map((symbol, index) => {
       .add(2, 'days')
       .format('L'),
     notional: 1000000,
-    price: {
-      id: 0,
-      time: '',
-      symbol: symbol,
-      bids: [],
-      asks: []
-    }
+    price: { id: 0, time: '', symbol: symbol, bids: [], asks: [] },
+    lastExecutionStatus: null,
+    executing: false,
+    pricingConnectionState: ConnectionStatus.DISCONNECTED
   };
 });
 
@@ -61,21 +59,50 @@ export default handleActions<TileData[], any>(
           ? {
               ...tile,
               executingBuy: action.payload.side === 'buy',
-              executingSell: action.payload.side === 'sell'
+              executingSell: action.payload.side === 'sell',
+              executing: true
             }
           : tile;
       });
     },
-    [TILE_ACTION_TYPES.TRADE_EXECUTED]: (
+    [TILE_ACTION_TYPES.PRICING_CONNECTION_STATUS_UPDATED]: (
       state: TileData[],
-      action: Action<TradeRequest>
+      action: Action<ConnectionStatus>
     ): TileData[] => {
       return state.map(tile => {
-        return tile.price.symbol === action.payload.symbol
+        return {
+          ...tile,
+          pricingConnectionState: action.payload
+        };
+      });
+    },
+
+    [TILE_ACTION_TYPES.DISMISS_EXECUTION_NOTIFICATION]: (
+      state: TileData[],
+      action: Action<TileData>
+    ): TileData[] => {
+      return state.map(tile => {
+        return tile.price.symbol === action.payload.price.symbol
+          ? {
+              ...tile,
+              lastExecutionStatus: null
+            }
+          : tile;
+      });
+    },
+
+    [TILE_ACTION_TYPES.TRADE_EXECUTED]: (
+      state: TileData[],
+      action: Action<LastExecutionStatus>
+    ): TileData[] => {
+      return state.map(tile => {
+        return tile.price.symbol === action.payload.request.symbol
           ? {
               ...tile,
               executingBuy: false,
-              executingSell: false
+              executingSell: false,
+              lastExecutionStatus: action.payload,
+              executing: false
             }
           : tile;
       });

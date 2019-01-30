@@ -5,76 +5,42 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { RootState } from '../../combineReducers';
-import { PriceTile } from '../tile';
 import { TileData } from '../tile/model/tileData';
-import { Trade } from '../blotter/model/trade';
+import { Workspace } from './Workspace';
 
-export namespace Workspace {
+export namespace WorkspaceContainer {
   export interface Props extends RouteComponentProps<void> {
     tiles: TileData[];
     actions: typeof TileActions;
   }
-
-  export interface State {
-    lastTrade: Trade;
-    selectedPanel: string;
-  }
 }
 
-export class Workspace extends React.PureComponent<
-  Workspace.Props,
-  Workspace.State
+export class WorkspaceContainer extends React.PureComponent<
+  WorkspaceContainer.Props
 > {
-  constructor(props: Workspace.Props, context: any) {
-    super(props, context);
-    this.state = {
-      selectedPanel: 'TradeBlotter',
-      lastTrade: {
-        price: 0,
-        quantity: 0,
-        symbol: '',
-        time: ''
-      }
-    };
+  constructor(props: WorkspaceContainer.Props) {
+    super(props);
   }
 
-  createTile = () => {
-    const { tiles } = this.props;
-    return tiles.reduce((pairs, tile, index) => {
-      if (index % 3 === 0) {
-        pairs.push([]);
-      }
-      pairs[pairs.length - 1].push(tile);
-      return pairs;
-    }, []);
-  };
-
-  createTileElement = () => {
-    const { actions } = this.props;
-    return this.createTile().map((pair, index) => {
-      return (
-        <div key={pair + index} className="row mb-4">
-          {pair.map((tile, i) => {
-            return (
-              <PriceTile
-                key={pair + index + i}
-                tile={tile}
-                editNotional={actions.editNotional}
-                subscribe={actions.tileSubscribe}
-                execute={actions.executeTrade}
-              />
-            );
-          })}
-        </div>
-      );
-    });
-  };
+  componentDidMount() {
+    this.props.actions.subscribePricingConnectionState();
+  }
 
   render() {
     return (
       <div>
         <div className="row">
-          <div className="col-md-12">{this.createTileElement()}</div>
+          <div className="col-md-12">
+            <Workspace
+              tiles={this.props.tiles}
+              dismissExecutionNotification={
+                this.props.actions.dismissExecutionNotification
+              }
+              editNotional={this.props.actions.editNotional}
+              executeTrade={this.props.actions.executeTrade}
+              tileSubscribe={this.props.actions.tileSubscribe}
+            />
+          </div>
         </div>
       </div>
     );
@@ -84,7 +50,7 @@ export class Workspace extends React.PureComponent<
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Workspace);
+)(WorkspaceContainer);
 
 function mapStateToProps(state: RootState) {
   return {
