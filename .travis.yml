@@ -6,7 +6,5 @@ install:
   - npm install
 script:
   - npm test
-after_success:
-  - cat ./coverage/lcov.info | node_modules/.bin/coveralls --verbose
-  - bash <(curl -s https://codecov.io/bash) -F $JOB_PART -X gcov
-  - rm -f .jest-cache/haste-map* .jest-cache/perf-cache*
+after_script:
+  - 'npm install coveralls && cat ./coverage/lcov.info | node node_modules/.bin/coveralls'
