@@ -10,7 +10,7 @@ export default class PricingService {
   private prices: Observable<PriceLadder>;
 
   constructor() {
-    this.source = new EventSource('http://localhost:8085/v1/pricing');
+    this.source = new EventSource(`${process.env.PRICING_API_URL}/pricing`);
 
     this.connections = Observable.create(obs => {
       this.source.onopen = e =>

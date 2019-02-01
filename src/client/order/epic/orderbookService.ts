@@ -19,7 +19,9 @@ export default class OrderbookService {
   private connections: Observable<ConnectionStatus>;
 
   constructor() {
-    this.source = new EventSource('http://localhost:8080/v1/book/EURUSD');
+    this.source = new EventSource(
+      `${process.env.TRADE_EXECUTION_API_URL}/book/EURUSD`
+    );
     this.connections = Observable.create(obs => {
       this.source.onopen = e =>
         obs.next(this.connectionState(this.source.readyState));

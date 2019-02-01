@@ -1,0 +1,9 @@
+.git
+node_modules
+build
+.vscode
+.idea
+.history
+coverage
+dist
+npm-cache

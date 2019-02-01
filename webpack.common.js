@@ -1,26 +1,10 @@
 const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
-  .BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
     app: './src/client/loading.tsx'
   },
-  plugins: [
-    new CleanWebpackPlugin(['dist']),
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      favicon: 'public/favicon.ico'
-    }),
-    new BundleAnalyzerPlugin({
-      analyzerMode: 'disable',
-      generateStatsFile: true,
-      statsOptions: { source: false }
-    })
-  ],
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')

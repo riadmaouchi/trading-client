@@ -10,7 +10,9 @@ export default class TradeBlotterService {
   private tradeReports: Observable<TradeReport>;
 
   constructor() {
-    this.source = new EventSource('http://localhost:8080/v1/execution');
+    this.source = new EventSource(
+      `${process.env.TRADE_EXECUTION_API_URL}/execution`
+    );
 
     this.connections = Observable.create(obs => {
       this.source.onopen = e =>

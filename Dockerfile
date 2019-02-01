@@ -2,12 +2,12 @@ FROM node:alpine as builder
 RUN apk update && apk add --no-cache make git
 
 WORKDIR /app
-ADD package*.json /app/
-RUN cd /app && set progress=false && npm install
+COPY package*.json ./
+RUN set progress=false && npm install
 
-COPY . /app
+COPY . ./
 
-RUN cd /app && npm run test && npm run build
+RUN npm run test && npm run build
 
 FROM nginx:alpine
 

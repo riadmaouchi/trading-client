@@ -9,7 +9,7 @@ import {
 
 export default class PricingService {
   private source: EventSource = new EventSource(
-    'http://localhost:8080/v1/order/blotter'
+    `${process.env.TRADE_EXECUTION_API_URL}/order/blotter`
   );
 
   getOrderUpdateStream = (): Observable<OrderUpdate[]> => {

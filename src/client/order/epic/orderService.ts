@@ -8,7 +8,7 @@ export default class OrderService {
     return Observable.create(obs => {
       axios
         .post(
-          'http://localhost:8080/v1/order/new',
+          `${process.env.TRADE_EXECUTION_API_URL}/order/new`,
           JSON.stringify(submitOrder),
           { timeout: 3000 }
         )

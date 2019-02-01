@@ -8,7 +8,7 @@ export default class ExecutionService {
     return Observable.create(obs => {
       axios
         .post(
-          'http://localhost:8080/v1/execution',
+          `${process.env.TRADE_EXECUTION_API_URL}/execution`,
           JSON.stringify(tradeRequest),
           { timeout: 3000 }
         )
