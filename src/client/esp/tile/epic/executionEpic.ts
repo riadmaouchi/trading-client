@@ -4,7 +4,6 @@ import { ofType, combineEpics } from 'redux-observable';
 import { Action } from 'redux';
 import { TileActions } from '../actions';
 import { ApplicationEpic } from '../../../actionType';
-import ExecutionService from './executionService';
 import { TILE_ACTION_TYPES } from '../actions';
 import { TradeReport } from '../model/tradeReport';
 
@@ -27,12 +26,15 @@ export const onTradeExecuted: ApplicationEpic = (action$, state$) =>
     map(TileActions.dismissExecutionNotification)
   );
 
-export const executionEpic: ApplicationEpic = (action$, state$) => {
-  const executionService = new ExecutionService();
+export const executionEpic: ApplicationEpic = (
+  action$,
+  state$,
+  { executionService }
+) => {
   return action$.pipe(
     ofType<Action, ExecutionAction>(TILE_ACTION_TYPES.EXECUTE_TRADE),
     mergeMap((request: ExecutionAction) =>
-      executionService.tradeRequest(request.payload).pipe(
+      executionService.tradeRequest(request.payload.url, request.payload).pipe(
         map((trade: TradeReport) =>
           tradeExecuted({
             request: request.payload,

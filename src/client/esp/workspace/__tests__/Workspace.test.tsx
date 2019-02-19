@@ -55,6 +55,8 @@ describe('Workspace', () => {
         editNotional={jest.fn()}
         executeTrade={jest.fn()}
         tileSubscribe={jest.fn()}
+        tileUnsubscribe={jest.fn()}
+        subscribePricingConnectionState={jest.fn()}
       />
     );
 

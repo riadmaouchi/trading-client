@@ -14,6 +14,8 @@ export interface TileData {
   lastExecutionStatus?: LastExecutionStatus | null;
   executing: boolean;
   pricingConnectionState: ConnectionStatus;
+  url?: string | null;
+  pricingConnectionUrl?: string | null;
 }
 
 export interface LastExecutionStatus {

@@ -7,7 +7,6 @@ import { RouteComponentProps } from 'react-router';
 import { RootState } from '../../combineReducers';
 import { TileData } from '../tile/model/tileData';
 import { Workspace } from './Workspace';
-
 export namespace WorkspaceContainer {
   export interface Props extends RouteComponentProps<void> {
     tiles: TileData[];
@@ -20,10 +19,6 @@ export class WorkspaceContainer extends React.PureComponent<
 > {
   constructor(props: WorkspaceContainer.Props) {
     super(props);
-  }
-
-  componentDidMount() {
-    this.props.actions.subscribePricingConnectionState();
   }
 
   render() {
@@ -39,6 +34,12 @@ export class WorkspaceContainer extends React.PureComponent<
               editNotional={this.props.actions.editNotional}
               executeTrade={this.props.actions.executeTrade}
               tileSubscribe={this.props.actions.tileSubscribe}
+              tileUnsubscribe={
+                this.props.actions.unsubscribePricingConnectionState
+              }
+              subscribePricingConnectionState={
+                this.props.actions.subscribePricingConnectionState
+              }
             />
           </div>
         </div>

@@ -5,4 +5,5 @@ export interface TradeRequest {
   broker: string;
   side: string;
   quantity: number;
+  url: string;
 }

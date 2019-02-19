@@ -2,30 +2,48 @@ import { handleActions, Action } from 'redux-actions';
 import { TRADE_BLOTTER_ACTION_TYPES } from './actions';
 import { TradeReport } from '../tile/model/tradeReport';
 import { ConnectionStatus } from '../../layout/loader/model/serviceStatus';
+export interface BlotterState {
+  trades: TradeReport[];
+  connectionState: ConnectionStatus;
+  url?: string | null;
+}
 
-const initialState: TradeReport[] = [];
+const initialState: BlotterState = {
+  trades: [],
+  connectionState: null
+};
 
-export default handleActions<TradeReport[], any>(
+export default handleActions<BlotterState, any>(
   {
-    [TRADE_BLOTTER_ACTION_TYPES.TRADE_BLOTTER_SUBSCRIBE]: (
-      state: TradeReport[],
-      action: Action<TradeReport>
-    ): TradeReport[] => {
-      return state;
+    [TRADE_BLOTTER_ACTION_TYPES.SUBSCRIBE_TRADE_BLOTTER_CONNECTION_STATE]: (
+      state: BlotterState,
+      action: Action<string>
+    ): BlotterState => {
+      return { ...state, url: action.payload };
+    },
+    [TRADE_BLOTTER_ACTION_TYPES.TRADE_BLOTTER_CONNECTION_URL_UPDATED]: (
+      state: BlotterState,
+      action: Action<string>
+    ): BlotterState => {
+      return { ...state, url: action.payload };
     },
     [TRADE_BLOTTER_ACTION_TYPES.TRADE_REPORT_UPDATE]: (
-      state: TradeReport[],
+      state: BlotterState,
       action: Action<TradeReport>
-    ): TradeReport[] => {
-      return [...state, action.payload];
+    ): BlotterState => {
+      if (!state.trades.some(e => e.id === action.payload.id)) {
+        return {
+          ...state,
+          trades: [...state.trades, action.payload]
+        };
+      }
+      return state;
     },
     [TRADE_BLOTTER_ACTION_TYPES.TRADE_BLOTTER_CONNECTION_STATUS_UPDATED]: (
-      state: TradeReport[],
+      state: BlotterState,
       action: Action<ConnectionStatus>
-    ): TradeReport[] => {
-      return action.payload === ConnectionStatus.CONNECTED
-        ? state
-        : initialState;
+    ): BlotterState => {
+      return { ...state, connectionState: action.payload };
     }
   },
   initialState

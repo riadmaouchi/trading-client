@@ -13,6 +13,7 @@ describe('Price', () => {
         notional={10000000}
         execute={jest.fn()}
         executing={false}
+        url={''}
       />
     );
 
@@ -35,6 +36,7 @@ describe('Price', () => {
         notional={10000000}
         execute={jest.fn()}
         executing={false}
+        url={''}
       />
     );
 
@@ -58,6 +60,7 @@ describe('Price', () => {
         notional={10000000}
         execute={execute}
         executing={false}
+        url={''}
       />
     );
 
@@ -71,7 +74,8 @@ describe('Price', () => {
       broker: 'WEB',
       price: 1.18302,
       side: 'buy',
-      quantity: 10000000
+      quantity: 10000000,
+      url: ''
     });
   });
 
@@ -85,6 +89,7 @@ describe('Price', () => {
         notional={10000000}
         execute={jest.fn()}
         executing={false}
+        url={''}
       />
     );
 
@@ -105,6 +110,7 @@ describe('Price', () => {
         notional={10000000}
         execute={jest.fn()}
         executing={false}
+        url={''}
       />
     );
 

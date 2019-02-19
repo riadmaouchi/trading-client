@@ -3,17 +3,17 @@ import { connectRouter } from 'connected-react-router';
 import { History } from 'history';
 import tiles from './esp/tile/tileReducer';
 import order from './order/orderReducer';
-import trades from './esp/blotter/tradeBlotterReducer';
 import orderUpdates from './order/components/blotter/orderReducer';
 import { TileData } from './esp/tile/model/tileData';
 import { OrderData } from './order/model/orderData';
-import { TradeReport } from './esp/tile/model/tradeReport';
+import blotter from './esp/blotter/tradeBlotterReducer';
+import { BlotterState } from './esp/blotter/tradeBlotterReducer';
 import { OrderUpdate } from './order/model/orderUpdate';
 
 export interface RootState {
   tiles: TileData[];
   order: OrderData;
-  trades: TradeReport[];
+  blotter: BlotterState;
   orderUpdates: OrderUpdate[];
 }
 
@@ -22,6 +22,6 @@ export default (history: History) =>
     router: connectRouter(history),
     tiles: tiles,
     order: order,
-    trades: trades,
+    blotter: blotter,
     orderUpdates: orderUpdates
   });

@@ -1,9 +1,15 @@
-import { map, mergeMap, bufferTime, filter } from 'rxjs/operators';
+import {
+  map,
+  mergeMap,
+  bufferTime,
+  filter,
+  takeUntil,
+  switchMap
+} from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 import { Action } from 'redux';
 import { OrderAction } from '../actions';
 import { ApplicationEpic } from '../../actionType';
-import OrderbookService from './orderbookService';
 import { TILE_ACTION_TYPES } from '../actions';
 
 const {
@@ -14,78 +20,122 @@ const {
   subscribeOrderBook,
   subscribeLastTrades,
   subscribeIndicators,
-  subscribeToMarketPrice,
   subscribeOrderbookConnectionState,
   onOrderbookConnectionStatusUpdated
 } = OrderAction;
 type SubscribeToOrderBookAction = ReturnType<typeof subscribeOrderBook>;
 type SubscribeToTradeExecutedAction = ReturnType<typeof subscribeLastTrades>;
 type SubscribeToIndicatorsAction = ReturnType<typeof subscribeIndicators>;
-type SubscribeToMarketPriceAction = ReturnType<typeof subscribeToMarketPrice>;
 type SubscribeOrderbookConnectionStateAction = ReturnType<
   typeof subscribeOrderbookConnectionState
 >;
-const orderbookService = new OrderbookService();
 
-export const orderbookServiceEpic: ApplicationEpic = (action$, state$) =>
+export const orderbookServiceEpic: ApplicationEpic = (
+  action$,
+  state$,
+  { orderbookService }
+) =>
   action$.pipe(
     ofType<Action, SubscribeToOrderBookAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK
     ),
-    mergeMap((action: SubscribeToOrderBookAction) =>
+    mergeMap(() =>
       orderbookService.getOrderStream().pipe(
         bufferTime(250),
         filter(buffer => buffer.length > 0),
-        map(updateOrder)
+        map(updateOrder),
+        takeUntil(
+          action$.pipe(
+            ofType(TILE_ACTION_TYPES.UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE)
+          )
+        )
       )
     )
   );
 
-export const onTradeExecuted: ApplicationEpic = (action$, state$) =>
+export const onTradeExecuted: ApplicationEpic = (
+  action$,
+  state$,
+  { orderbookService }
+) =>
   action$.pipe(
     ofType<Action, SubscribeToTradeExecutedAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_LAST_TRADES
     ),
-    mergeMap((action: SubscribeToTradeExecutedAction) =>
+    mergeMap(() =>
       orderbookService.getLastTradeStream().pipe(
-        bufferTime(1000),
+        bufferTime(250),
         filter(buffer => buffer.length > 0),
-        map(updateTrade)
+        map(updateTrade),
+        takeUntil(
+          action$.pipe(
+            ofType(TILE_ACTION_TYPES.UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE)
+          )
+        )
       )
     )
   );
 
-export const onIndicatorsUpdated: ApplicationEpic = (action$, state$) =>
+export const onIndicatorsUpdated: ApplicationEpic = (
+  action$,
+  state$,
+  { orderbookService }
+) =>
   action$.pipe(
     ofType<Action, SubscribeToIndicatorsAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_INDICATORS
     ),
-    mergeMap((action: SubscribeToIndicatorsAction) =>
-      orderbookService.getIndicatorsStream().pipe(map(updateIndicators))
+    mergeMap(() =>
+      orderbookService.getIndicatorsStream().pipe(
+        map(updateIndicators),
+        takeUntil(
+          action$.pipe(
+            ofType(TILE_ACTION_TYPES.UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE)
+          )
+        )
+      )
     )
   );
 
-export const onMarketPrice: ApplicationEpic = (action$, state$) =>
+export const onMarketPrice: ApplicationEpic = (
+  action$,
+  state$,
+  { orderbookService }
+) =>
   action$.pipe(
     ofType<Action, SubscribeToTradeExecutedAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_MARKET_PRICE
     ),
-    mergeMap((action: SubscribeToMarketPriceAction) =>
-      orderbookService.getMarketPrice().pipe(map(updateMarketPrice))
+    mergeMap(() =>
+      orderbookService.getMarketPrice().pipe(
+        map(updateMarketPrice),
+        takeUntil(
+          action$.pipe(
+            ofType(TILE_ACTION_TYPES.UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE)
+          )
+        )
+      )
     )
   );
 
 export const orderbookConnectionStatusUpdated: ApplicationEpic = (
   action$,
-  state$
+  state$,
+  { orderbookService }
 ) =>
   action$.pipe(
     ofType<Action, SubscribeOrderbookConnectionStateAction>(
       TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE
     ),
-    mergeMap((action: SubscribeOrderbookConnectionStateAction) =>
-      orderbookService
-        .getConnectionStream()
-        .pipe(map(onOrderbookConnectionStatusUpdated))
-    )
+    switchMap((action: SubscribeOrderbookConnectionStateAction) => {
+      orderbookService.connect(action.payload);
+      return orderbookService.getConnectionStream().pipe(
+        map(onOrderbookConnectionStatusUpdated),
+        takeUntil(
+          action$.pipe(
+            ofType(TILE_ACTION_TYPES.UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE)
+          )
+        )
+      );
+    })
   );

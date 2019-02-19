@@ -7,16 +7,11 @@ export namespace OrderBook {
     side: string;
     order: Order[];
   }
-
-  export interface State {}
 }
 
-export class OrderBook extends React.PureComponent<
-  OrderBook.Props,
-  OrderBook.State
-> {
-  constructor(props: OrderBook.Props, context: any) {
-    super(props, context);
+export class OrderBook extends React.PureComponent<OrderBook.Props> {
+  constructor(props: OrderBook.Props) {
+    super(props);
   }
 
   render() {

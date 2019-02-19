@@ -17,7 +17,8 @@ describe('PriceTile', () => {
       price: { id: 0, time: '', symbol: 'EURGBP', bids: [], asks: [] },
       executing: false,
       lastExecutionStatus: null,
-      pricingConnectionState: ConnectionStatus.CONNECTING
+      pricingConnectionState: ConnectionStatus.CONNECTING,
+      url: null
     };
 
     // When
@@ -27,6 +28,7 @@ describe('PriceTile', () => {
         editNotional={jest.fn()}
         subscribe={subscribe}
         execute={jest.fn()}
+        unsubscribe={jest.fn()}
       />
     );
 
@@ -85,6 +87,7 @@ describe('PriceTile', () => {
           editNotional={jest.fn()}
           subscribe={jest.fn()}
           execute={jest.fn()}
+          unsubscribe={jest.fn()}
         />
       );
 

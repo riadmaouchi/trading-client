@@ -34,11 +34,6 @@ export const MainRouter: SFC = () => {
           path="/Account"
           component={() => <h1>Account </h1>}
         />
-        <DefaultLayout
-          exact
-          path="/Account/SubAccount"
-          component={() => <h1>SubAccount </h1>}
-        />
         <DefaultLayout component={ErrorPage} />
       </Switch>
     </ConnectedRouter>

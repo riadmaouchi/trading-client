@@ -48,6 +48,18 @@ export default handleActions<OrderData, any>(
     },
     [TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK]: (state: OrderData): OrderData =>
       state,
+    [TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE]: (
+      state: OrderData,
+      action: Action<string>
+    ): OrderData => {
+      return {
+        ...state,
+        orderPanelData: {
+          ...state.orderPanelData,
+          url: action.payload
+        }
+      };
+    },
     [TILE_ACTION_TYPES.UPDATE_ORDER]: (
       state: OrderData,
       action: Action<Order[]>
@@ -117,6 +129,18 @@ export default handleActions<OrderData, any>(
     },
     [TILE_ACTION_TYPES.SUBMIT_ORDER]: (state: OrderData): OrderData => {
       return { ...state, placing: true };
+    },
+    [TILE_ACTION_TYPES.EXECUTION_API_URL_UPDATED]: (
+      state: OrderData,
+      action: Action<string>
+    ): OrderData => {
+      return {
+        ...state,
+        orderPanelData: {
+          ...state.orderPanelData,
+          url: action.payload
+        }
+      };
     },
     [TILE_ACTION_TYPES.DISMISS_ORDER_NOTIFICATION]: (
       state: OrderData

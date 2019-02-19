@@ -65,9 +65,9 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
       price: this.props.tile.limit,
       side: side,
       amount: this.props.tile.notional,
-      type: this.props.tile.orderType
+      type: this.props.tile.orderType,
+      url: this.props.tile.url
     };
-    console.log(submitOrder);
     this.props.submitOrder(submitOrder);
   }
 

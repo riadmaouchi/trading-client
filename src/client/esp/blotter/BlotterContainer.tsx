@@ -5,30 +5,27 @@ import { RootState } from '../../combineReducers';
 import { TradeBlotter } from './tradeBlotter/TradeBlotter';
 import { TradeBlotterAction } from './actions';
 import { bindActionCreators } from 'redux';
-import { TradeReport } from '../tile/model/tradeReport';
 import { Loader } from '../../layout/loader/Loader';
-import { ConnectionStatus } from '../../layout/loader/model/serviceStatus';
+import { BlotterState } from './tradeBlotterReducer';
 
 export namespace BlotterContainer {
   export interface Props extends RouteComponentProps<void> {
-    trades: TradeReport[];
+    blotter: BlotterState;
     actions: typeof TradeBlotterAction;
   }
-
-  export interface State {}
 }
 
 export class BlotterContainer extends React.PureComponent<
-  BlotterContainer.Props,
-  BlotterContainer.State
+  BlotterContainer.Props
 > {
-  constructor(props: BlotterContainer.Props, context: any) {
-    super(props, context);
+  constructor(props: BlotterContainer.Props) {
+    super(props);
   }
 
   componentWillMount() {
-    this.props.actions.subscribeTradeBlotterConnectionState();
-    this.props.actions.tradeBlotterSubscribe();
+    this.props.actions.subscribeTradeBlotterConnectionState(
+      this.props.blotter.url
+    );
   }
 
   render() {
@@ -40,13 +37,16 @@ export class BlotterContainer extends React.PureComponent<
               <div className="card-body">
                 <Loader
                   title={'TRADE BLOTTER'}
-                  status={
-                    this.props.trades.length > 0
-                      ? ConnectionStatus.CONNECTED
-                      : ConnectionStatus.CONNECTING
-                  }
+                  status={this.props.blotter.connectionState}
                   render={() => (
-                    <TradeBlotter tradeReports={this.props.trades} />
+                    <TradeBlotter
+                      tradeReports={this.props.blotter.trades}
+                      subscribe={this.props.actions.tradeBlotterSubscribe}
+                      unsubscribe={
+                        this.props.actions
+                          .unsubscribeTradeBlotterConnectionState
+                      }
+                    />
                   )}
                 />
               </div>
@@ -65,7 +65,7 @@ export default connect(
 
 function mapStateToProps(state: RootState) {
   return {
-    trades: state.trades
+    blotter: state.blotter
   };
 }
 

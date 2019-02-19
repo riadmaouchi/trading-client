@@ -11,18 +11,19 @@ require('highcharts/modules/map')(Highcharts);
 export namespace Sales {
   export interface Props {
     prices: any[];
+    subscribe(): void;
   }
-  export interface State {}
 }
 
-export class Sales extends React.PureComponent<Sales.Props, Sales.State> {
-  constructor(props: Sales.Props, context: any) {
-    super(props, context);
+export class Sales extends React.PureComponent<Sales.Props> {
+  constructor(props: Sales.Props) {
+    super(props);
   }
 
   chartComponent = React.createRef<HighchartsReact>();
 
   componentDidMount() {
+    this.props.subscribe();
     const container = this.chartComponent.current.container.current;
     container.style.left = 0;
     container.style.top = 0;

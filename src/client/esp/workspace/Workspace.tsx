@@ -10,6 +10,8 @@ export namespace Workspace {
     tiles: TileData[];
     editNotional: (tile: TileData) => void;
     tileSubscribe: (tile: TileData) => void;
+    tileUnsubscribe(): void;
+    subscribePricingConnectionState: (url: string) => void;
     executeTrade: (tradeRequest: TradeRequest) => void;
     dismissExecutionNotification: (tile: TileData) => void;
   }
@@ -20,6 +22,12 @@ export class Workspace extends React.PureComponent<Workspace.Props> {
     super(props);
     this.dismissExecutionNotification = this.dismissExecutionNotification.bind(
       this
+    );
+  }
+
+  componentWillMount() {
+    this.props.subscribePricingConnectionState(
+      this.props.tiles[0].pricingConnectionUrl
     );
   }
 
@@ -62,6 +70,7 @@ export class Workspace extends React.PureComponent<Workspace.Props> {
                           tile={tile}
                           editNotional={this.props.editNotional}
                           subscribe={this.props.tileSubscribe}
+                          unsubscribe={this.props.tileUnsubscribe}
                           execute={this.props.executeTrade}
                         />
                       )}

@@ -5,4 +5,5 @@ export interface SubmitOrder {
   side: string;
   amount: number;
   type: string;
+  url: string;
 }

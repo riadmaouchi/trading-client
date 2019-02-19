@@ -27,4 +27,5 @@ export interface OrderPanelData {
   notional: number;
   limit: number;
   orderType: string;
+  url?: string | null;
 }

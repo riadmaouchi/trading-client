@@ -11,6 +11,7 @@ export namespace Price {
     notional: number;
     execute: (tradeRequest: TradeRequest) => void;
     executing: boolean;
+    url: string;
   }
 
   export interface State {
@@ -38,7 +39,8 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
       broker: 'WEB',
       price: this.props.price,
       side: this.props.side,
-      quantity: this.props.notional
+      quantity: this.props.notional,
+      url: this.props.url
     };
     this.props.execute(tradeRequest);
   }

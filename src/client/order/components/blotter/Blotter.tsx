@@ -5,21 +5,23 @@ import { OrderUpdate } from '../../model/orderUpdate';
 export namespace OrderBlotter {
   export interface Props {
     orderUpdates: OrderUpdate[];
+    subscribe: (url: string) => void;
+    unsubscribe(): void;
+    url: string;
   }
-
-  export interface State {}
 }
 
-export class OrderBlotter extends React.PureComponent<
-  OrderBlotter.Props,
-  OrderBlotter.State
-> {
-  constructor(props: OrderBlotter.Props, context: any) {
-    super(props, context);
+export class OrderBlotter extends React.PureComponent<OrderBlotter.Props> {
+  constructor(props: OrderBlotter.Props) {
+    super(props);
   }
 
-  onGridReady(params: any) {
-    params.api.sizeColumnsToFit();
+  componentDidMount() {
+    this.props.subscribe(this.props.url);
+  }
+
+  componentWillUnmount() {
+    this.props.unsubscribe();
   }
 
   render() {
@@ -39,7 +41,7 @@ export class OrderBlotter extends React.PureComponent<
           animateRows={false}
           getRowNodeId={data => data.id}
           suppressHorizontalScroll={true}
-          onGridReady={this.onGridReady}
+          onGridReady={params => params.api.sizeColumnsToFit()}
         />
       </div>
     );
@@ -58,8 +60,16 @@ export class OrderBlotter extends React.PureComponent<
       field: 'broker',
       filter: 'agTextColumnFilter'
     },
-    { headerName: 'Symbol', field: 'symbol', filter: 'agTextColumnFilter' },
-    { headerName: 'Side', field: 'direction', filter: 'agTextColumnFilter' },
+    {
+      headerName: 'Symbol',
+      field: 'symbol',
+      filter: 'agTextColumnFilter'
+    },
+    {
+      headerName: 'Side',
+      field: 'direction',
+      filter: 'agTextColumnFilter'
+    },
     { headerName: 'Limit', field: 'limit', filter: 'number' },
     {
       headerName: 'Fill %',
@@ -91,7 +101,11 @@ export class OrderBlotter extends React.PureComponent<
       field: 'requestedAmount',
       filter: 'number'
     },
-    { headerName: 'Left Amount', field: 'leftAmount', filter: 'number' },
+    {
+      headerName: 'Left Amount',
+      field: 'leftAmount',
+      filter: 'number'
+    },
     { headerName: 'Amount', field: 'amount', filter: 'number' },
 
     {

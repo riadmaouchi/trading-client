@@ -49,7 +49,7 @@ export class Loader extends React.PureComponent<Loader.Props, Loader.State> {
           <div className={style.loaderContent}>
             <ScaleLoader
               width={8}
-              height={70}
+              height={50}
               radius={4}
               color={'#3bafda;'}
               loading={true}

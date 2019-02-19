@@ -14,6 +14,7 @@ export namespace TileItem {
     editNotional: (tile: TileData) => void;
     subscribe: (tile: TileData) => void;
     execute: (tradeRequest: TradeRequest) => void;
+    unsubscribe(): void;
   }
 
   export interface State {
@@ -50,10 +51,15 @@ export class PriceTile extends React.PureComponent<
     this.onMouseOut = this.onMouseOut.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
-  componentWillMount() {
+  componentDidMount() {
     const { tile } = this.props;
     this.props.subscribe(tile);
   }
+
+  componentWillUnmount() {
+    this.props.unsubscribe();
+  }
+
   componentDidUpdate(prevProps) {
     const { tile } = this.props;
     if (tile.price !== prevProps.tile.price) {
@@ -110,6 +116,7 @@ export class PriceTile extends React.PureComponent<
             notional={tile.notional}
             execute={this.props.execute}
             executing={tile.executingSell}
+            url={tile.url}
           />
           <Spread bid={bid} ask={ask} />
           <Price
@@ -119,6 +126,7 @@ export class PriceTile extends React.PureComponent<
             notional={tile.notional}
             execute={this.props.execute}
             executing={tile.executingBuy}
+            url={tile.url}
           />
         </div>
 

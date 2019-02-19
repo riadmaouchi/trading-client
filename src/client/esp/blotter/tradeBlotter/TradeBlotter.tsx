@@ -5,21 +5,22 @@ import { TradeReport } from '../../tile/model/tradeReport';
 export namespace TradeBlotter {
   export interface Props {
     tradeReports: TradeReport[];
+    subscribe(): void;
+    unsubscribe(): void;
   }
-
-  export interface State {}
 }
 
-export class TradeBlotter extends React.PureComponent<
-  TradeBlotter.Props,
-  TradeBlotter.State
-> {
-  constructor(props: TradeBlotter.Props, context: any) {
-    super(props, context);
+export class TradeBlotter extends React.PureComponent<TradeBlotter.Props> {
+  constructor(props: TradeBlotter.Props) {
+    super(props);
   }
 
-  onGridReady(params: any) {
-    params.api.sizeColumnsToFit();
+  componentDidMount() {
+    this.props.subscribe();
+  }
+
+  componentWillUnmount() {
+    this.props.unsubscribe();
   }
 
   render() {
@@ -39,7 +40,7 @@ export class TradeBlotter extends React.PureComponent<
           animateRows={false}
           getRowNodeId={data => data.id}
           suppressHorizontalScroll={true}
-          onGridReady={this.onGridReady}
+          onGridReady={params => params.api.sizeColumnsToFit()}
         />
       </div>
     );
@@ -53,9 +54,17 @@ export class TradeBlotter extends React.PureComponent<
       sort: 'desc'
     },
     { headerName: 'ID', field: 'id', filter: 'number' },
-    { headerName: 'Counterpart', field: 'broker', filter: 'text' },
+    {
+      headerName: 'Counterpart',
+      field: 'broker',
+      filter: 'text'
+    },
     { headerName: 'Symbol', field: 'symbol', filter: 'text' },
-    { headerName: 'Direction', field: 'direction', filter: 'text' },
+    {
+      headerName: 'Direction',
+      field: 'direction',
+      filter: 'text'
+    },
     {
       headerName: 'Status',
       field: 'status',

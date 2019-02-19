@@ -4,7 +4,6 @@ import { ofType, combineEpics } from 'redux-observable';
 import { Action } from 'redux';
 import { OrderAction } from '../actions';
 import { ApplicationEpic } from '../../actionType';
-import OrderService from './orderService';
 import { TILE_ACTION_TYPES } from '../actions';
 import { Order } from '../model/order';
 import { onIndicatorsUpdated } from './orderbookServiceEpic';
@@ -23,12 +22,11 @@ export const onTradeExecuted: ApplicationEpic = (action$, state$) =>
     map(OrderAction.dismissOrderNotification)
   );
 
-export const orderEpic: ApplicationEpic = (action$, state$) => {
-  const orderService = new OrderService();
-  return action$.pipe(
+export const orderEpic: ApplicationEpic = (action$, state$, { orderService }) =>
+  action$.pipe(
     ofType<Action, OrderAction>(TILE_ACTION_TYPES.SUBMIT_ORDER),
     mergeMap((request: OrderAction) =>
-      orderService.submitOrder(request.payload).pipe(
+      orderService.submitOrder(request.payload.url, request.payload).pipe(
         map((order: Order) => {
           return onOrderPlaced({
             request: request.payload,
@@ -48,7 +46,6 @@ export const orderEpic: ApplicationEpic = (action$, state$) => {
       )
     )
   );
-};
 
 export const orderPlacedEpic = combineEpics(
   orderEpic,

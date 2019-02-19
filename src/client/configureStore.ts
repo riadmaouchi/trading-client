@@ -22,17 +22,21 @@ import { orderPlacedEpic } from './order/epic/orderEpic';
 import { espExecutionEpic } from './esp/tile/epic/executionEpic';
 import { GlobalState } from './StoreType';
 import createBrowserHistory from 'history/createBrowserHistory';
+import { ApplicationDependencies } from './applicationServices';
 
 export const history = createBrowserHistory();
 
 export default function configureStore(
+  dependencies: ApplicationDependencies,
   initialState?: RootState
 ): Store<RootState> {
-  const create = window.devToolsExtension
-    ? window.devToolsExtension()(createStore)
+  const create = window.window.__REDUX_DEVTOOLS_EXTENSION__
+    ? window.__REDUX_DEVTOOLS_EXTENSION__()(createStore)
     : createStore;
 
-  const middleware = createEpicMiddleware<Action, Action, GlobalState>();
+  const middleware = createEpicMiddleware<Action, Action, GlobalState>({
+    dependencies
+  });
 
   const createStoreWithMiddleware = applyMiddleware(
     logger,
@@ -67,12 +71,13 @@ export default function configureStore(
     });
   }
   middleware.run(combineEpics(...epics));
+
   return store;
 }
 
 function logger(store: any) {
   return (next: any) => <A extends Action>(action: A) => {
-    //console.log(action);
+    //  console.log(action);
     return next(action);
   };
 }

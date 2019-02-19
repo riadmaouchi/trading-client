@@ -21,7 +21,9 @@ export enum TILE_ACTION_TYPES {
   SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE = 'SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE',
   ORDER_BOOK_CONNECTION_STATUS_UPDATED = 'ORDER_BOOK_CONNECTION_STATUS_UPDATED',
   DISMISS_ORDER_NOTIFICATION = 'DISMISS_ORDER_NOTIFICATION',
-  SUBSCRIBE_INDICATORS = 'SUBSCRIBE_INDICATORS'
+  SUBSCRIBE_INDICATORS = 'SUBSCRIBE_INDICATORS',
+  EXECUTION_API_URL_UPDATED = 'EXECUTION_API_URL_UPDATED',
+  UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE = 'UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE'
 }
 
 export const OrderAction = {
@@ -31,8 +33,11 @@ export const OrderAction = {
   subscribeOrderBook: createAction(TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK),
   subscribeLastTrades: createAction(TILE_ACTION_TYPES.SUBSCRIBE_LAST_TRADES),
   subscribeIndicators: createAction(TILE_ACTION_TYPES.SUBSCRIBE_INDICATORS),
-  subscribeOrderbookConnectionState: createAction(
+  subscribeOrderbookConnectionState: createAction<string>(
     TILE_ACTION_TYPES.SUBSCRIBE_ORDER_BOOK_CONNECTION_STATE
+  ),
+  unsubscribeOrderbookConnectionState: createAction(
+    TILE_ACTION_TYPES.UNSUBSCRIBE_ORDER_BOOK_CONNECTION_STATE
   ),
   updateOrder: createAction<Order[]>(TILE_ACTION_TYPES.UPDATE_ORDER),
   updateTrade: createAction<LastTrade[]>(TILE_ACTION_TYPES.UPDATE_TRADE),
@@ -54,5 +59,8 @@ export const OrderAction = {
   ),
   onOrderbookConnectionStatusUpdated: createAction<ConnectionStatus>(
     TILE_ACTION_TYPES.ORDER_BOOK_CONNECTION_STATUS_UPDATED
+  ),
+  executionApiUrlUpdated: createAction<string>(
+    TILE_ACTION_TYPES.EXECUTION_API_URL_UPDATED
   )
 };

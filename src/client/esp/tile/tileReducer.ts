@@ -17,7 +17,7 @@ const initialState: TileData[] = symbols.map((symbol, index) => {
     settlementDate: moment()
       .add(2, 'days')
       .format('L'),
-    notional: 1000000,
+    notional: 5000000,
     price: { id: 0, time: '', symbol: symbol, bids: [], asks: [] },
     lastExecutionStatus: null,
     executing: false,
@@ -76,6 +76,17 @@ export default handleActions<TileData[], any>(
         };
       });
     },
+    [TILE_ACTION_TYPES.PRICING_CONNECTION_URL_UPDATED]: (
+      state: TileData[],
+      action: Action<string>
+    ): TileData[] => {
+      return state.map(tile => {
+        return {
+          ...tile,
+          pricingConnectionUrl: action.payload
+        };
+      });
+    },
 
     [TILE_ACTION_TYPES.DISMISS_EXECUTION_NOTIFICATION]: (
       state: TileData[],
@@ -88,6 +99,18 @@ export default handleActions<TileData[], any>(
               lastExecutionStatus: null
             }
           : tile;
+      });
+    },
+
+    [TILE_ACTION_TYPES.EXECUTION_API_URL_UPDATED]: (
+      state: TileData[],
+      action: Action<string>
+    ): TileData[] => {
+      return state.map(tile => {
+        return {
+          ...tile,
+          url: action.payload
+        };
       });
     },
 
