@@ -18,7 +18,6 @@ module.exports = env => {
     prev[`process.env.${next}`] = JSON.stringify(fileEnv[next]);
     return prev;
   }, {});
-  envKeys['process.env.NODE_ENV'] = JSON.stringify(process.env.NODE_ENV);
   envKeys['process.env.CONSUL'] = JSON.stringify(process.env.CONSUL);
 
   return {

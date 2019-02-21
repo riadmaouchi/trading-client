@@ -23,16 +23,16 @@ export const pricingServiceEpic: ApplicationEpic = (
 ) =>
   action$.pipe(
     ofType<Action, SubscribeToTileAction>(TILE_ACTION_TYPES.TILE_SUBSCRIBE),
-    mergeMap(() =>
-      pricingService.getPriceStream().pipe(
+    mergeMap((action: SubscribeToTileAction) => {
+      return pricingService.getPriceStream(action.payload.price.symbol).pipe(
         map(updatePrice),
         takeUntil(
           action$.pipe(
             ofType(TILE_ACTION_TYPES.UNSUBSCRIBE_PRICING_CONNECTION_STATE)
           )
         )
-      )
-    )
+      );
+    })
   );
 
 export const pricingConnectionStatusUpdated: ApplicationEpic = (

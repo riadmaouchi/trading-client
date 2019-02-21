@@ -9,4 +9,5 @@ export interface PriceLadder {
   symbol: string;
   bids: Price[];
   asks: Price[];
+  priceStale?: boolean;
 }

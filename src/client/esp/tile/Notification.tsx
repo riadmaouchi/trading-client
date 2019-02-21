@@ -8,6 +8,7 @@ export namespace Notification {
   export interface Props {
     lastExecutionStatus?: LastExecutionStatus | null;
     symbol: string;
+    isPriceStale: boolean;
     dismissNotification: () => void;
   }
 

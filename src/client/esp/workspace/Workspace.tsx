@@ -57,6 +57,9 @@ export class Workspace extends React.PureComponent<Workspace.Props> {
                   <Notification
                     lastExecutionStatus={tile.lastExecutionStatus}
                     symbol={tile.price.symbol}
+                    isPriceStale={
+                      !tile.lastTradeExecutionStatus && tile.price.priceStale
+                    }
                     dismissNotification={() =>
                       this.dismissExecutionNotification(tile)
                     }
