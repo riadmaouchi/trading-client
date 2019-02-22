@@ -16,7 +16,7 @@ export interface Props {
   children: React.ReactNode;
   symbol: string;
   tradeId?: string;
-  dismissNotification: () => void;
+  dismissNotification?: () => void;
 }
 
 const PanelNotification: React.SFC<Props> = ({
@@ -36,16 +36,18 @@ const PanelNotification: React.SFC<Props> = ({
           {tradeId && <h6>Trade ID: {tradeId}</h6>}
           {children}
         </div>
-        <div className="text-center">
-          <button
-            type="button"
-            className="btn btn-danger btn-lg"
-            onClick={dismissNotification}
-          >
-            <FontAwesomeIcon icon="times-circle" />
-            {` `}Close
-          </button>
-        </div>
+        {dismissNotification && (
+          <div className="text-center">
+            <button
+              type="button"
+              className="btn btn-danger btn-lg"
+              onClick={dismissNotification}
+            >
+              <FontAwesomeIcon icon="times-circle" />
+              {` `}Close
+            </button>
+          </div>
+        )}
       </div>
     </TileNotificationStyle>
   );

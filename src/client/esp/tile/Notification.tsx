@@ -26,7 +26,7 @@ export default class Notification extends React.PureComponent<
   }
 
   render() {
-    const { lastExecutionStatus } = this.props;
+    const { lastExecutionStatus, isPriceStale } = this.props;
     return (
       <Transition
         native
@@ -38,6 +38,12 @@ export default class Notification extends React.PureComponent<
         leave={{ opacity: 0, pointerEvents: 'none' }}
       >
         {index => {
+          if (isPriceStale) {
+            return (style: React.CSSProperties) => (
+              <Error symbol={this.props.symbol}>Pricing is unavailable</Error>
+            );
+          }
+
           if (lastExecutionStatus && lastExecutionStatus.hasError) {
             return (style: React.CSSProperties) => (
               <Error

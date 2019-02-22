@@ -16,7 +16,6 @@ export namespace TileItem {
     execute: (tradeRequest: TradeRequest) => void;
     unsubscribe(): void;
   }
-
   export interface State {
     bid: number;
     ask: number;
@@ -26,7 +25,6 @@ export namespace TileItem {
     tenor: string;
   }
 }
-
 export class PriceTile extends React.PureComponent<
   TileItem.Props,
   TileItem.State
@@ -118,7 +116,9 @@ export class PriceTile extends React.PureComponent<
             executing={tile.executingSell}
             url={tile.url}
           />
+
           <Spread bid={bid} ask={ask} />
+
           <Price
             symbol={tile.price.symbol}
             side="buy"

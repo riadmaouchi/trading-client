@@ -44,11 +44,15 @@ export class Spread extends React.PureComponent<Spread.Props, Spread.State> {
     const downStyle =
       direction === 'down' ? visible : (hidden as React.CSSProperties);
     return (
-      <div className="col-md-4">
-        <div className={style.spread}>
-          <div className={style.spreadUp} style={upStyle} />
-          <div className={style.spreadValue}>{spread}</div>
-          <div className={style.spreadDown} style={downStyle} />
+      <div className="card col-md-2">
+        <div className="card-title">
+          <div className={style.spread}>
+            <div className={style.spreadUp} style={upStyle} />
+            <div className={style.spreadValue}>
+              <small>{spread}</small>
+            </div>
+            <div className={style.spreadDown} style={downStyle} />
+          </div>{' '}
         </div>
       </div>
     );

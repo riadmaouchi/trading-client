@@ -72,17 +72,19 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
 
     return (
       <div
-        className="col-md-4 block"
+        className="col-md-5"
         id="request-execution"
         onClick={this.handleOnClick}
       >
-        <div className={classes}>
-          <div>{side}</div>
-          <span>
-            <span className={style.priceValue}>{first}</span>
-            <span className={style.bigFigures}>{bigFigures}</span>
-            <span className={style.tenthOfPips}>{tenthOfPips}</span>
-          </span>
+        <div className={`card ` + classes}>
+          <div className="card-body">
+            <h5 className="card-title">{side}</h5>
+            <span>
+              <span className={style.priceValue}>{first}</span>
+              <span className={style.bigFigures}>{bigFigures}</span>
+              <span className={style.tenthOfPips}>{tenthOfPips}</span>
+            </span>
+          </div>
         </div>
       </div>
     );

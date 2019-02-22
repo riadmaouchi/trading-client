@@ -2,27 +2,11 @@
   cursor: pointer;
   text-transform: uppercase;
   text-align: center;
-  width: 130px;
-  height: 110px;
-  padding-top: 7px;
-  border-bottom-width: 10px;
   border: #3bafda;
-  size: 12px;
 }
 
 .tile:hover.notional {
   color: white;
-}
-
-.oneWayPrice.buy {
-  right: 10px;
-  float: right;
-}
-
-.oneWayPrice.sell {
-  left: 10px;
-  float: left;
-  right: 0;
 }
 
 .oneWayPrice:hover {
@@ -72,14 +56,14 @@
 .bigFigures {
   color: #3bafda;
   font-size: 200%;
-  width: 40px;
+
   display: inline-block;
   size: 12px;
 }
 
 .tenthOfPips {
   position: absolute;
-  top: 40px;
+  top: 50%;
   font-size: 60%;
 }
 .oneWayPrice:hover .bigFigures {

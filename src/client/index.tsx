@@ -93,7 +93,7 @@ const consul = (): void => {
   KVStore.addListener('service/url/server', url => {
     store.dispatch(unsubscribePricingConnectionState());
     store.dispatch(pricingApiUrlUpdated(url));
-    path === '/Workspace' &&
+    (path === '/Workspace' || path === '/') &&
       store.dispatch(subscribePricingConnectionState(url));
   });
 
@@ -103,6 +103,7 @@ const consul = (): void => {
     store.dispatch(unsubscribeTradeBlotterConnectionState());
     store.dispatch(OrderAction.unsubscribeOrderbookConnectionState());
     switch (path) {
+      case '/':
       case '/Workspace':
         store.dispatch(subscribeTradeBlotterConnectionState(url));
         break;
