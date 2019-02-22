@@ -8,6 +8,7 @@ const fs = require('fs');
 const path = require('path');
 
 module.exports = env => {
+/*	
   const currentPath = path.join(__dirname);
   const basePath = currentPath + '/.env';
   const envPath = basePath + '.' + env.ENVIRONMENT;
@@ -18,10 +19,12 @@ module.exports = env => {
     return prev;
   }, {});
   envKeys['process.env.CONSUL'] = JSON.stringify(process.env.CONSUL);
+*/
 
   return {
     plugins: [
-      new webpack.DefinePlugin(envKeys),
+      //new webpack.DefinePlugin(envKeys),
+	  new webpack.DefinePlugin(JSON.stringify(process.env.CONSUL)),
       new CleanWebpackPlugin(['dist']),
       new HtmlWebpackPlugin({
         template: 'public/index.html',
