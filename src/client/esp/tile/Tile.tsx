@@ -5,7 +5,7 @@ import { Price } from './components/price/Price';
 import { Ladder } from './components/ladder/Ladder';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TileData } from './model/tileData';
-import { PriceLadder } from './model/priceTick';
+import { PriceLadder, Movements } from './model/priceTick';
 import { TradeRequest } from './model/tradeRequest';
 
 export namespace TileItem {
@@ -23,6 +23,8 @@ export namespace TileItem {
     prices: PriceLadder;
     settlementDate: string;
     tenor: string;
+    bidMovement: Movements;
+    askMovement: Movements;
   }
 }
 export class PriceTile extends React.PureComponent<
@@ -34,6 +36,8 @@ export class PriceTile extends React.PureComponent<
     this.state = {
       bid: 0,
       ask: 0,
+      bidMovement: Movements.None,
+      askMovement: Movements.None,
       hover: false,
       prices: {
         symbol: '',
@@ -69,7 +73,18 @@ export class PriceTile extends React.PureComponent<
         x => tile.notional <= x.quantity
       );
       const askPrice = mayBeAskPrice === undefined ? 0 : mayBeAskPrice.price;
-      this.setState({ bid: bidPrice, ask: askPrice, prices: tile.price });
+
+      const askMov =
+        mayBeAskPrice === undefined ? Movements.None : mayBeAskPrice.mouvement;
+      const bidMov =
+        mayBeBidPrice === undefined ? Movements.None : mayBeBidPrice.mouvement;
+      this.setState({
+        bid: bidPrice,
+        ask: askPrice,
+        prices: tile.price,
+        bidMovement: bidMov,
+        askMovement: askMov
+      });
     }
   }
 
@@ -102,7 +117,7 @@ export class PriceTile extends React.PureComponent<
 
   render() {
     const { tile } = this.props;
-    const { bid, ask, prices } = this.state;
+    const { bid, ask, prices, bidMovement, askMovement } = this.state;
 
     return (
       <div className="container">
@@ -115,6 +130,7 @@ export class PriceTile extends React.PureComponent<
             execute={this.props.execute}
             executing={tile.executingSell}
             url={tile.url}
+            movement={bidMovement}
           />
 
           <Spread bid={bid} ask={ask} />
@@ -127,6 +143,7 @@ export class PriceTile extends React.PureComponent<
             execute={this.props.execute}
             executing={tile.executingBuy}
             url={tile.url}
+            movement={askMovement}
           />
         </div>
 

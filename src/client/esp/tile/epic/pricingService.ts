@@ -1,7 +1,8 @@
 import { Observable, timer, merge } from 'rxjs';
 import { PriceLadder } from '../model';
-import { share, mapTo, switchMap, filter } from 'rxjs/operators';
+import { share, mapTo, switchMap, filter, scan } from 'rxjs/operators';
 import { ConnectionStatus } from '../../../layout/loader/model/serviceStatus';
+import { Movements, Price } from '../model/priceTick';
 
 export default class PricingService {
   private source: EventSource;
@@ -18,6 +19,21 @@ export default class PricingService {
       });
     }).pipe(
       filter(ladder => ladder.symbol === symbol),
+      scan<PriceLadder>((acc, next) => {
+        next.asks.some((price, index) => {
+          if (index > acc.asks.length) return true;
+          price.mouvement = this.computeMovement(acc.asks[index], price);
+          return false;
+        });
+
+        next.bids.some((price, index) => {
+          if (index > acc.bids.length) return true;
+          price.mouvement = this.computeMovement(acc.bids[index], price);
+          return false;
+        });
+
+        return next;
+      }),
       this.debounce<PriceLadder>(5000, item => {
         return {
           ...item,
@@ -46,4 +62,17 @@ export default class PricingService {
     );
     return merge(source, timeout);
   };
+
+  computeMovement(prevPrice: Price, nexPrice: Price) {
+    const prevPriceMove = prevPrice.mouvement || Movements.None;
+    const lastPrice = prevPrice.price;
+    const nextPrice = nexPrice.price;
+    if (lastPrice < nextPrice) {
+      return Movements.Up;
+    }
+    if (lastPrice > nextPrice) {
+      return Movements.Down;
+    }
+    return prevPriceMove;
+  }
 }

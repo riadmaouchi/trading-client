@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { TradeRequest } from '../../model/tradeRequest';
 import * as style from './style.css';
+import { Movements } from '../../model/priceTick';
 
 export namespace Price {
   export interface Props {
@@ -12,6 +13,7 @@ export namespace Price {
     execute: (tradeRequest: TradeRequest) => void;
     executing: boolean;
     url: string;
+    movement?: string;
   }
 
   export interface State {
@@ -54,11 +56,16 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
     const first = priceStr.substr(0, 4);
     const bigFigures = priceStr.substr(4, 2).padEnd(2, '00');
     const tenthOfPips = priceStr.substr(6) || '0';
-    return { first: first, bigFigures: bigFigures, tenthOfPips: tenthOfPips };
+    return {
+      first: first,
+      bigFigures: bigFigures,
+      tenthOfPips: tenthOfPips,
+      movement: price.movement
+    };
   }
 
   render() {
-    const { side, price, executing } = this.props;
+    const { side, price, executing, movement } = this.props;
     const { first, bigFigures, tenthOfPips } = this.state;
 
     const classes = classNames({
@@ -70,6 +77,20 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
       [style.executing]: executing === true
     });
 
+    const visible = {
+      visibility: 'visible'
+    } as React.CSSProperties;
+
+    const hidden = {
+      visibility: 'hidden'
+    } as React.CSSProperties;
+
+    const upStyle =
+      movement === Movements.Up ? visible : (hidden as React.CSSProperties);
+
+    const downStyle =
+      movement === Movements.Down ? visible : (hidden as React.CSSProperties);
+
     return (
       <div
         className="col-md-5"
@@ -79,11 +100,15 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
         <div className={`card ` + classes}>
           <div className="card-body">
             <h5 className="card-title">{side}</h5>
-            <span>
-              <span className={style.priceValue}>{first}</span>
-              <span className={style.bigFigures}>{bigFigures}</span>
-              <span className={style.tenthOfPips}>{tenthOfPips}</span>
-            </span>
+            <div className={style.spreadUp} style={upStyle} />
+            <div>
+              <span>
+                <span className={style.priceValue}>{first}</span>
+                <span className={style.bigFigures}>{bigFigures}</span>
+                <span className={style.tenthOfPips}>{tenthOfPips}</span>
+              </span>
+            </div>
+            <div className={style.spreadDown} style={downStyle} />
           </div>
         </div>
       </div>
