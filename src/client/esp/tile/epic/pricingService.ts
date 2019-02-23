@@ -21,13 +21,13 @@ export default class PricingService {
       filter(ladder => ladder.symbol === symbol),
       scan<PriceLadder>((acc, next) => {
         next.asks.some((price, index) => {
-          if (index > acc.asks.length) return true;
+          if (index + 1 > acc.asks.length) return true;
           price.mouvement = this.computeMovement(acc.asks[index], price);
           return false;
         });
 
         next.bids.some((price, index) => {
-          if (index > acc.bids.length) return true;
+          if (index + 1 > acc.bids.length) return true;
           price.mouvement = this.computeMovement(acc.bids[index], price);
           return false;
         });
