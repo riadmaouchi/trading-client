@@ -25,7 +25,7 @@ export class WorkspaceContainer extends React.PureComponent<
     return (
       <div>
         <div className="row">
-          <div className="col-md-12">
+          <div className="col-md-12 ">
             <Workspace
               tiles={this.props.tiles}
               dismissExecutionNotification={

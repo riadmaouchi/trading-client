@@ -1,9 +1,8 @@
 import axios from 'axios';
-import Multimap from 'multimap';
 
 export default class KVStore {
-  private static callbacks = new Multimap();
-  private static values = new Map();
+  private static callbacks = [];
+  private static previousValues = new Map();
 
   constructor() {}
 
@@ -16,33 +15,33 @@ export default class KVStore {
 
   private static request = () => {
     axios
-      .get(`${process.env.CONSUL}/v1/kv/service/url?recurse=false`, {
+      .get(`${process.env.CONSUL}/v1/kv/?recurse=false`, {
         timeout: 3000
       })
       .then(response => {
         const data = response.data;
         if (data && Array.isArray(data) && data.length) {
+          const values = new Map();
           data.forEach(item => {
             const key = item.Key;
             item.Value = Buffer.from(item.Value, 'base64').toString();
-            if (KVStore.values.get(key) !== item.Value) {
-              KVStore.values.set(key, item.Value);
-              if (KVStore.callbacks.has(key)) {
-                KVStore.callbacks
-                  .get(key)
-                  .forEach(callback => callback(item.Value));
-              }
+            if (KVStore.previousValues.get(key) !== item.Value) {
+              values.set(key, item.Value);
             }
           });
+
+          values.size &&
+            KVStore.callbacks.forEach(callback => callback(values));
+          values.forEach((v, k) => KVStore.previousValues.set(k, v));
         }
       })
       .catch(error => console.log(error.message));
   };
 
-  static addListener = (key: string, callback: any) => {
-    KVStore.callbacks.set(key, callback);
-    if (KVStore.values.has(key)) {
-      callback(KVStore.values.get(key));
-    }
+  static addListener = (
+    callback: (values: Map<string, string>) => void
+  ): void => {
+    KVStore.callbacks.push(callback);
+    !!KVStore.previousValues && callback(KVStore.previousValues);
   };
 }

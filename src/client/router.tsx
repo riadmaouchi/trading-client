@@ -7,11 +7,14 @@ import { Redirect } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Switch } from 'react-router';
 import { history } from './configureStore';
+import { OverflowScroll } from './layout/styles';
 
 const BodyLayout = ({ props }) => {
   return (
     <div>
-      <WorkspaceContainer {...props} />
+      <OverflowScroll>
+        <WorkspaceContainer {...props} />
+      </OverflowScroll>
       <BlotterContainer {...props} />
     </div>
   );

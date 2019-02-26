@@ -26,9 +26,10 @@ export class Workspace extends React.PureComponent<Workspace.Props> {
   }
 
   componentWillMount() {
-    this.props.subscribePricingConnectionState(
-      this.props.tiles[0].pricingConnectionUrl
-    );
+    this.props.tiles[0] &&
+      this.props.subscribePricingConnectionState(
+        this.props.tiles[0].pricingConnectionUrl
+      );
   }
 
   dismissExecutionNotification(tile: TileData) {

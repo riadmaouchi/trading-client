@@ -1,29 +1,11 @@
 import { handleActions, Action } from 'redux-actions';
-import moment from 'moment';
 import { TILE_ACTION_TYPES } from './actions';
 import { TileData, LastExecutionStatus } from './model/tileData';
 import { PriceLadder } from './model';
 import { TradeRequest } from './model/tradeRequest';
 import { ConnectionStatus } from '../../layout/loader/model/serviceStatus';
 
-const symbols = ['EURUSD', 'EURGBP', 'EURJPY'];
-
-const initialState: TileData[] = symbols.map((symbol, index) => {
-  return {
-    id: ++index,
-    tenor: 'SP',
-    executingBuy: false,
-    executingSell: false,
-    settlementDate: moment()
-      .add(2, 'days')
-      .format('L'),
-    notional: 5000000,
-    price: { id: 0, time: '', symbol: symbol, bids: [], asks: [] },
-    lastExecutionStatus: null,
-    executing: false,
-    pricingConnectionState: ConnectionStatus.DISCONNECTED
-  };
-});
+const initialState = [];
 
 export default handleActions<TileData[], any>(
   {
@@ -36,6 +18,12 @@ export default handleActions<TileData[], any>(
           ? { ...tile, notional: action.payload.notional }
           : tile;
       });
+    },
+    [TILE_ACTION_TYPES.UPDATE_SYMBOLS]: (
+      state: TileData[],
+      action: Action<TileData[]>
+    ): TileData[] => {
+      return [...state, ...action.payload];
     },
     [TILE_ACTION_TYPES.UPDATE_PRICE]: (
       state: TileData[],
