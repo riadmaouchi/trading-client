@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/client/index.tsx",
   "scripts": {
-    "start": "cross-env webpack-dev-server --env.ENVIRONMENT=development --port 3001 --open --config webpack.dev.js",
+    "start": "cross-env webpack-dev-server --port 3001 --open --config webpack.dev.js",
     "start:consul": "CONSUL=http://localhost:8500 npm run start",
-    "build": "cross-env webpack --env.ENVIRONMENT=production --config webpack.prod.js",
+    "build": "cross-env webpack --config webpack.prod.js",
     "build:docker": "CONSUL=http://localhost:8500 npm run build",
     "report": "webpack-bundle-analyzer --port 4200 dist/stats.json",
     "test": "jest"
@@ -95,7 +95,6 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
-    "dotenv": "^6.2.0",
     "highcharts": "^7.0.3",
     "highcharts-react-official": "^2.0.0",
     "history": "^4.7.2",
