@@ -14,6 +14,7 @@ describe('Price', () => {
         execute={jest.fn()}
         executing={false}
         url={''}
+        isStale={false}
       />
     );
 
@@ -37,6 +38,7 @@ describe('Price', () => {
         execute={jest.fn()}
         executing={false}
         url={''}
+        isStale={false}
       />
     );
 
@@ -61,6 +63,7 @@ describe('Price', () => {
         execute={execute}
         executing={false}
         url={''}
+        isStale={false}
       />
     );
 
@@ -90,6 +93,7 @@ describe('Price', () => {
         execute={jest.fn()}
         executing={false}
         url={''}
+        isStale={false}
       />
     );
 
@@ -111,6 +115,29 @@ describe('Price', () => {
         execute={jest.fn()}
         executing={false}
         url={''}
+        isStale={false}
+      />
+    );
+
+    // When
+    price.setProps({ price: 1.43841 });
+
+    // Then
+    expect(price).toMatchSnapshot();
+  });
+
+  it('should stale price', () => {
+    // Given
+    const price = shallow(
+      <Price
+        symbol="USDGBP"
+        price={1.18302}
+        side="sell"
+        notional={10000000}
+        execute={jest.fn()}
+        executing={false}
+        url={''}
+        isStale={true}
       />
     );
 

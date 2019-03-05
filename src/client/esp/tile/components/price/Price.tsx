@@ -3,6 +3,21 @@ import classNames from 'classnames';
 import { TradeRequest } from '../../model/tradeRequest';
 import * as style from './style.css';
 import { Movements } from '../../model/priceTick';
+import styled from 'styled-components';
+
+export const TileStaleStyle = styled.div`
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-radius: 3px;
+  padding: 1.25rem;
+  line-height: 1.5;
+  z-index: 5;
+  opacity: 0.7;
+  pointer-events: none;
+  cursor: not-allowed;
+  background-color: #3d4853;
+`;
 
 export namespace Price {
   export interface Props {
@@ -14,6 +29,7 @@ export namespace Price {
     executing: boolean;
     url: string;
     movement?: string;
+    isStale: boolean;
   }
 
   export interface State {
@@ -65,7 +81,7 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
   }
 
   render() {
-    const { side, price, executing, movement } = this.props;
+    const { side, price, executing, movement, isStale } = this.props;
     const { first, bigFigures, tenthOfPips } = this.state;
 
     const classes = classNames({
@@ -98,6 +114,13 @@ export class Price extends React.PureComponent<Price.Props, Price.State> {
         onClick={this.handleOnClick}
       >
         <div className={`card ` + classes}>
+          {isStale && (
+            <TileStaleStyle>
+              <h5 className="card-title">{side}</h5>
+              <div className="text-white bg-secondary">Stale</div>
+            </TileStaleStyle>
+          )}
+
           <div className="card-body">
             <h5 className="card-title">{side}</h5>
             <div className={style.spreadUp} style={upStyle} />

@@ -25,6 +25,8 @@ export namespace TileItem {
     tenor: string;
     bidMovement: Movements;
     askMovement: Movements;
+    isBidStale: boolean;
+    isAskStale: boolean;
   }
 }
 export class PriceTile extends React.PureComponent<
@@ -46,6 +48,8 @@ export class PriceTile extends React.PureComponent<
         id: 0,
         time: ''
       },
+      isBidStale: true,
+      isAskStale: true,
       settlementDate: props.tile.settlementDate,
       tenor: props.tile.tenor
     };
@@ -64,15 +68,18 @@ export class PriceTile extends React.PureComponent<
 
   componentDidUpdate(prevProps) {
     const { tile } = this.props;
+    const { bid, ask } = this.state;
     if (tile.price !== prevProps.tile.price) {
       const mayBeBidPrice = tile.price.bids.find(
         x => tile.notional <= x.quantity
       );
-      const bidPrice = mayBeBidPrice === undefined ? 0 : mayBeBidPrice.price;
+
+      const bidPrice = mayBeBidPrice === undefined ? bid : mayBeBidPrice.price;
       const mayBeAskPrice = tile.price.asks.find(
         x => tile.notional <= x.quantity
       );
-      const askPrice = mayBeAskPrice === undefined ? 0 : mayBeAskPrice.price;
+
+      const askPrice = mayBeAskPrice === undefined ? ask : mayBeAskPrice.price;
 
       const askMov =
         mayBeAskPrice === undefined ? Movements.None : mayBeAskPrice.mouvement;
@@ -83,7 +90,9 @@ export class PriceTile extends React.PureComponent<
         ask: askPrice,
         prices: tile.price,
         bidMovement: bidMov,
-        askMovement: askMov
+        askMovement: askMov,
+        isBidStale: mayBeBidPrice === undefined,
+        isAskStale: mayBeAskPrice === undefined
       });
     }
   }
@@ -117,7 +126,15 @@ export class PriceTile extends React.PureComponent<
 
   render() {
     const { tile } = this.props;
-    const { bid, ask, prices, bidMovement, askMovement } = this.state;
+    const {
+      bid,
+      ask,
+      prices,
+      bidMovement,
+      askMovement,
+      isAskStale,
+      isBidStale
+    } = this.state;
 
     return (
       <div className="container">
@@ -131,6 +148,7 @@ export class PriceTile extends React.PureComponent<
             executing={tile.executingSell}
             url={tile.url}
             movement={bidMovement}
+            isStale={isBidStale}
           />
 
           <Spread bid={bid} ask={ask} />
@@ -144,6 +162,7 @@ export class PriceTile extends React.PureComponent<
             executing={tile.executingBuy}
             url={tile.url}
             movement={askMovement}
+            isStale={isAskStale}
           />
         </div>
 

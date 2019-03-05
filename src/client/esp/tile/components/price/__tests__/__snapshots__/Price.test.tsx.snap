@@ -3,3 +3,5 @@
 exports[`Price should render buy price update 1`] = `ShallowWrapper {}`;
 
 exports[`Price should render sell price update 1`] = `ShallowWrapper {}`;
+
+exports[`Price should stale price 1`] = `ShallowWrapper {}`;

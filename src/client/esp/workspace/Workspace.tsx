@@ -39,9 +39,7 @@ export class Workspace extends React.PureComponent<Workspace.Props> {
   createTile = () => {
     const { tiles } = this.props;
     return tiles.reduce((pairs, tile, index) => {
-      if (index % 3 === 0) {
-        pairs.push([]);
-      }
+      index % 3 === 0 && pairs.push([]);
       pairs[pairs.length - 1].push(tile);
       return pairs;
     }, []);
