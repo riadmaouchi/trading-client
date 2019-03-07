@@ -1,4 +1,7 @@
 import React from 'react';
+import numeral from 'numeral';
+
+const INPUT_FORMAT = '0,000,000[.]00';
 
 export namespace Notional {
   export interface Props {
@@ -38,7 +41,7 @@ export class Notional extends React.PureComponent<
   handleKeyDown(e) {
     const notional = this.notionalChanged(e);
     if (e.which === 13) {
-      this.props.onSave(notional);
+      this.props.onSave(numeral(notional).value());
     } else if (e.which === 27) {
       this.setState({ notional: this.props.notional });
     }
@@ -46,7 +49,7 @@ export class Notional extends React.PureComponent<
 
   handleOnBlur(e) {
     const notional = this.notionalChanged(e);
-    this.props.onSave(notional);
+    this.props.onSave(numeral(notional).value());
   }
 
   handleOnChange(e) {
@@ -65,7 +68,7 @@ export class Notional extends React.PureComponent<
           <input
             type="text"
             className="form-control"
-            value={notional}
+            value={numeral(notional).format(INPUT_FORMAT)}
             onChange={this.handleOnChange}
             onKeyDown={this.handleKeyDown}
             onBlur={this.handleOnBlur}

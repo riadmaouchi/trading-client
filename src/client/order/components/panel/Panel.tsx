@@ -2,6 +2,9 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { OrderPanelData } from '../../model/orderData';
 import { SubmitOrder } from '../../model/submitOrder';
+import numeral from 'numeral';
+
+const INPUT_FORMAT = '0,000,000[.]00';
 
 export namespace Panel {
   export interface Props {
@@ -121,7 +124,7 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
   onAmountKeyDown(e) {
     const amount = this.notionalChanged(e);
     if (e.which === 13) {
-      this.props.onSave(amount);
+      this.props.onSave(numeral(amount).value());
     } else if (e.which === 27) {
       this.setState({ limit: this.props.tile.notional });
     }
@@ -129,7 +132,7 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
 
   onAmountBlur(e) {
     const amount = this.notionalChanged(e);
-    this.props.onSave(amount);
+    this.props.onSave(numeral(amount).value());
   }
 
   onAmountChange(e) {
@@ -218,7 +221,7 @@ export class Panel extends React.PureComponent<Panel.Props, Panel.State> {
               <input
                 type="text"
                 className="form-control"
-                value={amount}
+                value={numeral(amount).format(INPUT_FORMAT)}
                 onChange={this.onAmountChange}
                 onKeyDown={this.onAmountKeyDown}
                 onBlur={this.onAmountBlur}

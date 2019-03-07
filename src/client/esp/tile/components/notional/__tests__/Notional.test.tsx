@@ -18,7 +18,7 @@ describe('Notional', () => {
     component.find('input').simulate('blur', event);
 
     // Then
-    expect(saveCallback).toBeCalledWith('100');
+    expect(saveCallback).toBeCalledWith(100);
   });
 
   it('should update notional on key down', () => {
@@ -37,7 +37,7 @@ describe('Notional', () => {
     component.find('input').simulate('keydown', event);
 
     // Then
-    expect(saveCallback).toBeCalledWith('100');
+    expect(saveCallback).toBeCalledWith(100);
   });
 
   it('should not update notional on escape', () => {

@@ -31,16 +31,11 @@ export namespace PriceButton {
     movement?: string;
     isStale: boolean;
   }
-
-  export interface State {}
 }
 
-export class PriceButton extends React.PureComponent<
-  PriceButton.Props,
-  PriceButton.State
-> {
-  constructor(props: PriceButton.Props, context: any) {
-    super(props, context);
+export class PriceButton extends React.PureComponent<PriceButton.Props> {
+  constructor(props: PriceButton.Props) {
+    super(props);
     this.handleOnClick = this.handleOnClick.bind(this);
   }
 
