@@ -44,7 +44,7 @@ export class Spread extends React.PureComponent<Spread.Props, Spread.State> {
     const downStyle =
       direction === 'down' ? visible : (hidden as React.CSSProperties);
     return (
-      <div className={style.spread}>
+      <div className="d-inline-block text-center">
         <div className={style.spreadUp} style={upStyle} />
         <div className={style.spreadValue}>
           <small>{spread}</small>
