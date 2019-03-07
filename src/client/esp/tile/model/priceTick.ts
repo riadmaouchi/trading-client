@@ -8,6 +8,7 @@ export interface PriceLadder {
   id: number;
   time: string;
   symbol: string;
+  mid: number;
   bids: Price[];
   asks: Price[];
   priceStale?: boolean;

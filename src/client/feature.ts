@@ -68,7 +68,14 @@ export class ConsulFeature implements Feature {
             .add(2, 'days')
             .format('L'),
           notional: 5000000,
-          price: { id: 0, time: '', symbol: symbol, bids: [], asks: [] },
+          price: {
+            id: 0,
+            time: '',
+            mid: 0,
+            symbol: symbol,
+            bids: [],
+            asks: []
+          },
           lastExecutionStatus: null,
           executing: false,
           pricingConnectionState: ConnectionStatus.DISCONNECTED
@@ -132,7 +139,7 @@ export class DefaultFeature implements Feature {
           .add(2, 'days')
           .format('L'),
         notional: 5000000,
-        price: { id: 0, time: '', symbol: symbol, bids: [], asks: [] },
+        price: { id: 0, time: '', mid: 0, symbol: symbol, bids: [], asks: [] },
         lastExecutionStatus: null,
         executing: false,
         pricingConnectionState: ConnectionStatus.DISCONNECTED

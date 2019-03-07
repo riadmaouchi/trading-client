@@ -14,7 +14,7 @@ describe('PriceTile', () => {
       executingBuy: false,
       executingSell: false,
       notional: 1000000,
-      price: { id: 0, time: '', symbol: 'EURGBP', bids: [], asks: [] },
+      price: { id: 0, time: '', mid: 0, symbol: 'EURGBP', bids: [], asks: [] },
       executing: false,
       lastExecutionStatus: null,
       pricingConnectionState: ConnectionStatus.CONNECTING,
@@ -71,6 +71,7 @@ describe('PriceTile', () => {
         price: {
           id: 0,
           time: '',
+          mid: 0,
           symbol: 'EURGBP',
           bids: [],
           asks: []
@@ -111,6 +112,7 @@ describe('PriceTile', () => {
     // Given
     const price = {
       symbol: 'EURGBP',
+      mid: 0,
       asks: [{ quantity: 1000000, price: 1.23127 }],
       bids: [{ quantity: 1000000, price: 1.23118 }],
       id: 1,
@@ -127,6 +129,7 @@ describe('PriceTile', () => {
       price: {
         id: 0,
         time: '',
+        mid: 0,
         symbol: 'EURGBP',
         asks: [],
         bids: []
@@ -155,6 +158,7 @@ describe('PriceTile', () => {
           id: 0,
           time: '',
           symbol: 'EURGBP',
+          mid: 0,
           asks: [
             { quantity: 1000000, price: 1.23127 },
             { quantity: 5000000, price: 1.26578 }

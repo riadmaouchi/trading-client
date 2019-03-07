@@ -18,6 +18,7 @@ describe('Workspace', () => {
         executingSell: false,
         price: {
           id: 1,
+          mid: 0,
           time: '',
           symbol: 'EURGBP',
           bids: [],
@@ -36,6 +37,7 @@ describe('Workspace', () => {
         executingSell: false,
         price: {
           id: 1,
+          mid: 0,
           time: '',
           symbol: 'EURUSD',
           bids: [],

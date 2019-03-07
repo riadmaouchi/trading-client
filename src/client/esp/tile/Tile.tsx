@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Notional } from './components/notional/Notional';
 import { Spread } from './components/spread/Spread';
-import { Price } from './components/price/Price';
+import { PriceButton } from './components/priceButton/PriceButton';
 import { Ladder } from './components/ladder/Ladder';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TileData } from './model/tileData';
@@ -43,6 +43,7 @@ export class PriceTile extends React.PureComponent<
       hover: false,
       prices: {
         symbol: '',
+        mid: 0,
         bids: [],
         asks: [],
         id: 0,
@@ -139,7 +140,7 @@ export class PriceTile extends React.PureComponent<
     return (
       <div className="container">
         <div className="row">
-          <Price
+          <PriceButton
             symbol={tile.price.symbol}
             side="sell"
             price={bid}
@@ -150,10 +151,14 @@ export class PriceTile extends React.PureComponent<
             movement={bidMovement}
             isStale={isBidStale}
           />
+          <div className="card col-md-2">
+            <div className="card-title">
+              <Spread bid={bid} ask={ask} />
+              <span className="badge badge-secondary">{tile.price.mid}</span>
+            </div>
+          </div>
 
-          <Spread bid={bid} ask={ask} />
-
-          <Price
+          <PriceButton
             symbol={tile.price.symbol}
             side="buy"
             price={ask}
