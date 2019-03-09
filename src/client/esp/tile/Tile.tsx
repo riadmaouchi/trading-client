@@ -2,10 +2,10 @@ import * as React from 'react';
 import { Notional } from './components/notional/Notional';
 import { Spread } from './components/spread/Spread';
 import PriceButton from './components/priceButton/PriceButton';
-import { Ladder } from './components/ladder/Ladder';
+import Ladder from './components/ladder/Ladder';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TileData } from './model/tileData';
-import { PriceLadder, Movements } from './model/priceTick';
+import { Movements } from './model/priceTick';
 import { TradeRequest } from './model/tradeRequest';
 
 export namespace TileItem {
@@ -19,9 +19,6 @@ export namespace TileItem {
   export interface State {
     bid: number;
     ask: number;
-    prices: PriceLadder;
-    settlementDate: string;
-    tenor: string;
     bidMovement: Movements;
     askMovement: Movements;
     isBidStale: boolean;
@@ -39,18 +36,8 @@ export class PriceTile extends React.PureComponent<
       ask: 0,
       bidMovement: Movements.None,
       askMovement: Movements.None,
-      prices: {
-        symbol: '',
-        mid: 0,
-        bids: [],
-        asks: [],
-        id: 0,
-        time: ''
-      },
       isBidStale: true,
-      isAskStale: true,
-      settlementDate: props.tile.settlementDate,
-      tenor: props.tile.tenor
+      isAskStale: true
     };
     this.handleSave = this.handleSave.bind(this);
   }
@@ -86,7 +73,6 @@ export class PriceTile extends React.PureComponent<
       this.setState({
         bid: bidPrice,
         ask: askPrice,
-        prices: tile.price,
         bidMovement: bidMov,
         askMovement: askMov,
         isBidStale: !mayBeBidPrice,
@@ -119,7 +105,6 @@ export class PriceTile extends React.PureComponent<
     const {
       bid,
       ask,
-      prices,
       bidMovement,
       askMovement,
       isAskStale,
@@ -197,9 +182,9 @@ export class PriceTile extends React.PureComponent<
                   onChange={this.handleOnChange}
                   onKeyDown={this.handleKeyDown}
                   onBlur={this.handleOnBlur}
-                  value={this.state.settlementDate
+                  value={tile.settlementDate
                     .concat(' (')
-                    .concat(this.state.tenor)
+                    .concat(tile.tenor)
                     .concat(')')}
                 />
                 <div className="input-group-append">
@@ -211,7 +196,7 @@ export class PriceTile extends React.PureComponent<
             </div>
           </div>
         </div>
-        <Ladder key={tile.id} prices={prices} />
+        <Ladder key={tile.id} bids={tile.price.bids} asks={tile.price.asks} />
       </div>
     );
   }
