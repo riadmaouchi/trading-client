@@ -1,72 +1,31 @@
-.oneWayPrice {
-  cursor: pointer;
-  text-transform: uppercase;
+.directionUp {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 5px 5px 5px;
+  border-color: transparent transparent #53be53 transparent;
+  display: flex;
   text-align: center;
-  border: #3bafda;
+  position: absolute;
+  z-index: 0;
 }
 
-.tile:hover.notional {
-  color: white;
+.directionDown {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 5px 0 5px;
+  border-color: #dc322f transparent transparent transparent;
+  display: flex;
+  text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
-.oneWayPrice:hover {
-  background: none;
-  background-color: #3bafda;
+.visible {
+  visibility: 'visible';
 }
 
-.oneWayPrice.buy:hover {
-  color: #fdf6e3;
-  border: none;
-}
-
-.oneWayPrice.sell:hover {
-  color: #fdf6e3;
-  border: none;
-}
-
-.oneWayPrice.nonTradeable,
-.oneWayPrice.nonTradeable > span > span.bigFigures {
-  color: #aaa;
-}
-
-@keyframes colormein {
-  /* You could think of as "step 1" */
-  0% {
-    background-color: #00b19d;
-    opacity: 1;
-  }
-  50% {
-    background-color: #00b19d;
-    opacity: 0.75;
-  }
-
-  /* You could think of as "step 2" */
-  100% {
-    background-color: #00b19d;
-    opacity: 1;
-  }
-}
-
-.oneWayPrice.nonTradeable:hover {
-  color: #aaa;
-  background-color: #888;
-  cursor: wait;
-}
-
-.oneWayPrice:hover div {
-  color: white;
-}
-
-.oneWayPrice:hover span {
-  color: white;
-}
-
-.oneWayPrice.executing {
-  animation: colormein 1s linear infinite;
-  color: white;
-}
-
-.oneWayPrice.executing:hover {
-  color: white;
-  cursor: wait;
+.hidden {
+  visibility: 'hidden';
 }

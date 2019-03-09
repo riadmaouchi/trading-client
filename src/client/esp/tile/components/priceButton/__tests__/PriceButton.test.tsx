@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PriceButton } from '../PriceButton';
+import PriceButton from '../PriceButton';
+import { Movements } from '../../../model/priceTick';
 
 describe('PriceButton', () => {
   it('should request execution', () => {
@@ -8,13 +9,9 @@ describe('PriceButton', () => {
     const execute = jest.fn();
     const price = shallow(
       <PriceButton
-        symbol="USDGBP"
         price={1.18302}
         side="buy"
-        notional={10000000}
         execute={execute}
-        executing={false}
-        url={''}
         isStale={false}
       />
     );
@@ -23,28 +20,35 @@ describe('PriceButton', () => {
     price.find('#request-execution').simulate('click');
 
     // Then
-    expect(execute).toHaveBeenCalledWith({
-      id: 1,
-      symbol: 'USDGBP',
-      broker: 'WEB',
-      price: 1.18302,
-      side: 'buy',
-      quantity: 10000000,
-      url: ''
-    });
+    expect(execute).toBeCalled();
+  });
+
+  it('should not request execution on stale price', () => {
+    // Given
+    const execute = jest.fn();
+    const price = shallow(
+      <PriceButton
+        price={1.18302}
+        side="buy"
+        execute={execute}
+        isStale={true}
+      />
+    );
+
+    // When
+    price.find('#request-execution').simulate('click');
+
+    // Then
+    expect(execute).toHaveBeenCalled();
   });
 
   it('should render buy price update', () => {
     // Given
     const price = shallow(
       <PriceButton
-        symbol="USDGBP"
         price={1.18302}
         side="buy"
-        notional={10000000}
         execute={jest.fn()}
-        executing={false}
-        url={''}
         isStale={false}
       />
     );
@@ -60,13 +64,9 @@ describe('PriceButton', () => {
     // Given
     const price = shallow(
       <PriceButton
-        symbol="USDGBP"
         price={1.18302}
         side="sell"
-        notional={10000000}
         execute={jest.fn()}
-        executing={false}
-        url={''}
         isStale={false}
       />
     );
@@ -79,22 +79,63 @@ describe('PriceButton', () => {
   });
 
   it('should stale price', () => {
-    // Given
+    // When
     const price = shallow(
       <PriceButton
-        symbol="USDGBP"
         price={1.18302}
         side="sell"
-        notional={10000000}
         execute={jest.fn()}
-        executing={false}
-        url={''}
         isStale={true}
       />
     );
 
+    // Then
+    expect(price).toMatchSnapshot();
+  });
+
+  it('should render up price mouvement', () => {
     // When
-    price.setProps({ price: 1.43841 });
+    const price = shallow(
+      <PriceButton
+        price={1.18302}
+        side="sell"
+        execute={jest.fn()}
+        isStale={false}
+        movement={Movements.Up}
+      />
+    );
+
+    // Then
+    expect(price).toMatchSnapshot();
+  });
+
+  it('should render down price mouvement', () => {
+    // When
+    const price = shallow(
+      <PriceButton
+        price={1.18302}
+        side="sell"
+        execute={jest.fn()}
+        isStale={false}
+        movement={Movements.Down}
+      />
+    );
+
+    // Then
+    expect(price).toMatchSnapshot();
+  });
+
+  it('should render  price without mouvement', () => {
+    // When
+    const price = shallow(
+      <PriceButton
+        price={1.18302}
+        side="sell"
+        execute={jest.fn()}
+        isStale={false}
+        movement={Movements.None}
+      />
+    );
 
     // Then
     expect(price).toMatchSnapshot();

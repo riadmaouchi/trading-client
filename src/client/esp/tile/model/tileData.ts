@@ -9,8 +9,7 @@ export interface TileData {
   settlementDate: string;
   notional: number;
   price: PriceLadder;
-  executingBuy: boolean;
-  executingSell: boolean;
+  precision: number;
   lastExecutionStatus?: LastExecutionStatus | null;
   executing: boolean;
   pricingConnectionState: ConnectionStatus;

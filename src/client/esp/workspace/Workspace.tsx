@@ -52,7 +52,7 @@ export class Workspace extends React.PureComponent<Workspace.Props> {
           {pair.map((tile, i) => {
             return (
               <div key={i} className="col-sm-4">
-                <div className="card m-b-20" id={tile.price.symbol}>
+                <div className="card" id={tile.price.symbol}>
                   <Notification
                     lastExecutionStatus={tile.lastExecutionStatus}
                     symbol={tile.price.symbol}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Notional } from './components/notional/Notional';
 import { Spread } from './components/spread/Spread';
-import { PriceButton } from './components/priceButton/PriceButton';
+import PriceButton from './components/priceButton/PriceButton';
 import { Ladder } from './components/ladder/Ladder';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TileData } from './model/tileData';
@@ -139,33 +139,51 @@ export class PriceTile extends React.PureComponent<
 
     return (
       <div className="container">
-        <div className="row">
+        <div className="row mx-0">
           <PriceButton
-            symbol={tile.price.symbol}
             side="sell"
             price={bid}
-            notional={tile.notional}
-            execute={this.props.execute}
-            executing={tile.executingSell}
-            url={tile.url}
+            execute={() =>
+              this.props.execute({
+                id: 1,
+                symbol: tile.price.symbol,
+                broker: 'WEB',
+                price: bid,
+                side: 'sell',
+                quantity: tile.notional,
+                url: tile.url
+              })
+            }
             movement={bidMovement}
             isStale={isBidStale}
           />
-          <div className="card col-md-2">
-            <div className="card-title">
-              <Spread bid={bid} ask={ask} />
-              <span className="badge badge-secondary">{tile.price.mid}</span>
+          <div className="col-md-2 px-0">
+            <div className="card">
+              <div className="card-header d-flex justify-content-center">
+                <Spread bid={bid} ask={ask} />
+              </div>
+              <div className="card-body d-flex justify-content-center">
+                <small className="d-inline-block text-nowrap text-info">
+                  Mid: {tile.price.mid.toFixed(tile.precision)}
+                </small>
+              </div>
             </div>
           </div>
 
           <PriceButton
-            symbol={tile.price.symbol}
             side="buy"
             price={ask}
-            notional={tile.notional}
-            execute={this.props.execute}
-            executing={tile.executingBuy}
-            url={tile.url}
+            execute={() =>
+              this.props.execute({
+                id: 1,
+                symbol: tile.price.symbol,
+                broker: 'WEB',
+                price: ask,
+                side: 'buy',
+                quantity: tile.notional,
+                url: tile.url
+              })
+            }
             movement={askMovement}
             isStale={isAskStale}
           />

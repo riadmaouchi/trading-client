@@ -1,7 +1,314 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PriceButton should render buy price update 1`] = `ShallowWrapper {}`;
+exports[`PriceButton should render  price without mouvement 1`] = `
+<div
+  className="col-md-5 px-0"
+>
+  <div
+    className="card"
+  >
+    <styled.button
+      disabled={false}
+      id="request-execution"
+      onClick={[Function]}
+    >
+      <div
+        className="card-body d-flex justify-content-center"
+      >
+        <styled.div>
+          <styled.div>
+            <Styled(styled.div)>
+              SELL
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+            </Styled(styled.div)>
+            <Styled(styled.div)>
+              1.18
+            </Styled(styled.div)>
+          </styled.div>
+          <Styled(styled.div)>
+            30
+          </Styled(styled.div)>
+          <Styled(styled.div)>
+            2
+          </Styled(styled.div)>
+        </styled.div>
+      </div>
+    </styled.button>
+  </div>
+</div>
+`;
 
-exports[`PriceButton should render sell price update 1`] = `ShallowWrapper {}`;
+exports[`PriceButton should render buy price update 1`] = `
+<div
+  className="col-md-5 px-0"
+>
+  <div
+    className="card"
+  >
+    <styled.button
+      disabled={false}
+      id="request-execution"
+      onClick={[Function]}
+    >
+      <div
+        className="card-body d-flex justify-content-center"
+      >
+        <styled.div>
+          <styled.div>
+            <Styled(styled.div)>
+              BUY
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+            </Styled(styled.div)>
+            <Styled(styled.div)>
+              1.43
+            </Styled(styled.div)>
+          </styled.div>
+          <Styled(styled.div)>
+            84
+          </Styled(styled.div)>
+          <Styled(styled.div)>
+            1
+          </Styled(styled.div)>
+        </styled.div>
+      </div>
+    </styled.button>
+  </div>
+</div>
+`;
 
-exports[`PriceButton should stale price 1`] = `ShallowWrapper {}`;
+exports[`PriceButton should render down price mouvement 1`] = `
+<div
+  className="col-md-5 px-0"
+>
+  <div
+    className="card"
+  >
+    <styled.button
+      disabled={false}
+      id="request-execution"
+      onClick={[Function]}
+    >
+      <div
+        className="card-body d-flex justify-content-center"
+      >
+        <styled.div>
+          <styled.div>
+            <Styled(styled.div)>
+              SELL
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "visibility": "visible",
+                  }
+                }
+              />
+            </Styled(styled.div)>
+            <Styled(styled.div)>
+              1.18
+            </Styled(styled.div)>
+          </styled.div>
+          <Styled(styled.div)>
+            30
+          </Styled(styled.div)>
+          <Styled(styled.div)>
+            2
+          </Styled(styled.div)>
+        </styled.div>
+      </div>
+    </styled.button>
+  </div>
+</div>
+`;
+
+exports[`PriceButton should render sell price update 1`] = `
+<div
+  className="col-md-5 px-0"
+>
+  <div
+    className="card"
+  >
+    <styled.button
+      disabled={false}
+      id="request-execution"
+      onClick={[Function]}
+    >
+      <div
+        className="card-body d-flex justify-content-center"
+      >
+        <styled.div>
+          <styled.div>
+            <Styled(styled.div)>
+              SELL
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+            </Styled(styled.div)>
+            <Styled(styled.div)>
+              1.43
+            </Styled(styled.div)>
+          </styled.div>
+          <Styled(styled.div)>
+            84
+          </Styled(styled.div)>
+          <Styled(styled.div)>
+            1
+          </Styled(styled.div)>
+        </styled.div>
+      </div>
+    </styled.button>
+  </div>
+</div>
+`;
+
+exports[`PriceButton should render up price mouvement 1`] = `
+<div
+  className="col-md-5 px-0"
+>
+  <div
+    className="card"
+  >
+    <styled.button
+      disabled={false}
+      id="request-execution"
+      onClick={[Function]}
+    >
+      <div
+        className="card-body d-flex justify-content-center"
+      >
+        <styled.div>
+          <styled.div>
+            <Styled(styled.div)>
+              SELL
+              <div
+                style={
+                  Object {
+                    "visibility": "visible",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+            </Styled(styled.div)>
+            <Styled(styled.div)>
+              1.18
+            </Styled(styled.div)>
+          </styled.div>
+          <Styled(styled.div)>
+            30
+          </Styled(styled.div)>
+          <Styled(styled.div)>
+            2
+          </Styled(styled.div)>
+        </styled.div>
+      </div>
+    </styled.button>
+  </div>
+</div>
+`;
+
+exports[`PriceButton should stale price 1`] = `
+<div
+  className="col-md-5 px-0"
+>
+  <div
+    className="card"
+  >
+    <styled.button
+      disabled={true}
+      id="request-execution"
+      onClick={[Function]}
+    >
+      <styled.div>
+        <h6
+          className="card-title text-white bg-secondary"
+        >
+          Stale
+        </h6>
+      </styled.div>
+      <div
+        className="card-body d-flex justify-content-center"
+      >
+        <styled.div>
+          <styled.div>
+            <Styled(styled.div)>
+              SELL
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+              <div
+                style={
+                  Object {
+                    "visibility": "hidden",
+                  }
+                }
+              />
+            </Styled(styled.div)>
+            <Styled(styled.div)>
+              1.18
+            </Styled(styled.div)>
+          </styled.div>
+          <Styled(styled.div)>
+            30
+          </Styled(styled.div)>
+          <Styled(styled.div)>
+            2
+          </Styled(styled.div)>
+        </styled.div>
+      </div>
+    </styled.button>
+  </div>
+</div>
+`;

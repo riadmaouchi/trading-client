@@ -8,8 +8,10 @@ body ::-webkit-scrollbar {
   height: 0.75em;
 }
 body ::-webkit-scrollbar-track-piece {
-  background: #3d4853;
+  background: $gray-dark;
 }
 body ::-webkit-scrollbar-thumb {
+  border-radius: 25px;
   background: #526170;
+  height: 15px;
 }

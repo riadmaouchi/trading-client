@@ -1,5 +1,57 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Spread should display spread down direction 1`] = `ShallowWrapper {}`;
+exports[`Spread should display spread down direction 1`] = `
+<div
+  className="d-inline-block"
+>
+  <div
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  />
+  <div
+    className=" undefined text-center"
+  >
+    <small>
+      0.05
+    </small>
+  </div>
+  <div
+    style={
+      Object {
+        "visibility": "visible",
+      }
+    }
+  />
+</div>
+`;
 
-exports[`Spread should display spread up direction 1`] = `ShallowWrapper {}`;
+exports[`Spread should display spread up direction 1`] = `
+<div
+  className="d-inline-block"
+>
+  <div
+    style={
+      Object {
+        "visibility": "visible",
+      }
+    }
+  />
+  <div
+    className=" undefined text-center"
+  >
+    <small>
+      0.07
+    </small>
+  </div>
+  <div
+    style={
+      Object {
+        "visibility": "hidden",
+      }
+    }
+  />
+</div>
+`;

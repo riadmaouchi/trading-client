@@ -46,8 +46,6 @@ export default handleActions<TileData[], any>(
         return tile.price.symbol === action.payload.symbol
           ? {
               ...tile,
-              executingBuy: action.payload.side === 'buy',
-              executingSell: action.payload.side === 'sell',
               executing: true
             }
           : tile;
@@ -110,8 +108,6 @@ export default handleActions<TileData[], any>(
         return tile.price.symbol === action.payload.request.symbol
           ? {
               ...tile,
-              executingBuy: false,
-              executingSell: false,
               lastExecutionStatus: action.payload,
               executing: false
             }

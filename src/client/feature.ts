@@ -57,13 +57,11 @@ export class ConsulFeature implements Feature {
       });
       let index = 0;
       let initialState: TileData[] = [];
-
       precisions.forEach((precision, symbol) => {
         initialState.push({
           id: ++index,
           tenor: 'SP',
-          executingBuy: false,
-          executingSell: false,
+          precision: parseInt(precision, 10),
           settlementDate: moment()
             .add(2, 'days')
             .format('L'),
@@ -73,6 +71,7 @@ export class ConsulFeature implements Feature {
             time: '',
             mid: 0,
             symbol: symbol,
+
             bids: [],
             asks: []
           },
@@ -81,6 +80,7 @@ export class ConsulFeature implements Feature {
           pricingConnectionState: ConnectionStatus.DISCONNECTED
         });
       });
+
       store.dispatch(updateSymbols(initialState));
       store.dispatch(unsubscribePricingConnectionState());
       pricingUrl && store.dispatch(pricingApiUrlUpdated(pricingUrl));
@@ -127,19 +127,29 @@ export class DefaultFeature implements Feature {
   public execute(store): void {
     const tradeExecutionUrl = `${location.protocol}//${location.hostname}:8080`;
     const pricingUrl = `${location.protocol}//${location.hostname}:8085`;
-    const symbols = ['EURUSD', 'EURGBP', 'EURJPY'];
+    const ccyPairs = [
+      { symbol: 'EURUSD', precision: 5 },
+      { symbol: 'EURGBP', precision: 5 },
+      { symbol: 'EURJPY', precision: 3 }
+    ];
 
-    const initialState: TileData[] = symbols.map((symbol, index) => {
+    const initialState: TileData[] = ccyPairs.map((ccyPair, index) => {
       return {
         id: ++index,
         tenor: 'SP',
-        executingBuy: false,
-        executingSell: false,
+        precision: ccyPair.precision,
         settlementDate: moment()
           .add(2, 'days')
           .format('L'),
         notional: 5000000,
-        price: { id: 0, time: '', mid: 0, symbol: symbol, bids: [], asks: [] },
+        price: {
+          id: 0,
+          time: '',
+          mid: 0,
+          symbol: ccyPair.symbol,
+          bids: [],
+          asks: []
+        },
         lastExecutionStatus: null,
         executing: false,
         pricingConnectionState: ConnectionStatus.DISCONNECTED

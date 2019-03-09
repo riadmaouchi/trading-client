@@ -14,13 +14,13 @@ describe('Workspace', () => {
         tenor: 'SP',
         settlementDate: '28JUN',
         notional: 1000000,
-        executingBuy: false,
-        executingSell: false,
+        precision: 5,
         price: {
           id: 1,
           mid: 0,
           time: '',
           symbol: 'EURGBP',
+
           bids: [],
           asks: []
         },
@@ -33,13 +33,13 @@ describe('Workspace', () => {
         tenor: 'SP',
         settlementDate: '28JUN',
         notional: 1000000,
-        executingBuy: false,
-        executingSell: false,
+        precision: 5,
         price: {
           id: 1,
           mid: 0,
           time: '',
           symbol: 'EURUSD',
+
           bids: [],
           asks: []
         },

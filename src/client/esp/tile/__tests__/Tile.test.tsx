@@ -11,10 +11,17 @@ describe('PriceTile', () => {
       id: 1,
       tenor: 'SP',
       settlementDate: '28JUN',
-      executingBuy: false,
-      executingSell: false,
       notional: 1000000,
-      price: { id: 0, time: '', mid: 0, symbol: 'EURGBP', bids: [], asks: [] },
+      precision: 5,
+      price: {
+        id: 0,
+        time: '',
+        mid: 0,
+        symbol: 'EURGBP',
+
+        bids: [],
+        asks: []
+      },
       executing: false,
       lastExecutionStatus: null,
       pricingConnectionState: ConnectionStatus.CONNECTING,
@@ -49,6 +56,7 @@ describe('PriceTile', () => {
       // Given
       const price = {
         symbol: 'EURGBP',
+        mid: 0,
         asks: [
           { quantity: 1000000, price: 1.23127 },
           { quantity: 5000000, price: 1.26578 }
@@ -65,8 +73,7 @@ describe('PriceTile', () => {
         id: 1,
         tenor: 'SP',
         settlementDate: '28JUN',
-        executingBuy: false,
-        executingSell: false,
+        precision: 5,
         notional: notional,
         price: {
           id: 0,
@@ -97,6 +104,7 @@ describe('PriceTile', () => {
           symbol: 'EURGBP',
           tenor: 'SP',
           settlementDate: '28JUN',
+          precision: 5,
           notional: notional,
           price: price
         }
@@ -123,9 +131,8 @@ describe('PriceTile', () => {
       id: 1,
       tenor: 'SP',
       settlementDate: '28JUN',
-      executingBuy: false,
-      executingSell: false,
       notional: 1000000,
+      precision: 5,
       price: {
         id: 0,
         time: '',
@@ -154,6 +161,7 @@ describe('PriceTile', () => {
         tenor: 'SP',
         settlementDate: '28JUN',
         notional: 5000000,
+        precision: 5,
         price: {
           id: 0,
           time: '',
@@ -178,6 +186,7 @@ describe('PriceTile', () => {
         symbol: 'EURGBP',
         tenor: 'SP',
         settlementDate: '28JUN',
+        precision: 5,
         notional: 5000000,
         price: price
       }
