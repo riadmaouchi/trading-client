@@ -19,7 +19,6 @@ export namespace TileItem {
   export interface State {
     bid: number;
     ask: number;
-    hover: boolean;
     prices: PriceLadder;
     settlementDate: string;
     tenor: string;
@@ -40,7 +39,6 @@ export class PriceTile extends React.PureComponent<
       ask: 0,
       bidMovement: Movements.None,
       askMovement: Movements.None,
-      hover: false,
       prices: {
         symbol: '',
         mid: 0,
@@ -54,8 +52,6 @@ export class PriceTile extends React.PureComponent<
       settlementDate: props.tile.settlementDate,
       tenor: props.tile.tenor
     };
-    this.onMouseOver = this.onMouseOver.bind(this);
-    this.onMouseOut = this.onMouseOut.bind(this);
     this.handleSave = this.handleSave.bind(this);
   }
   componentDidMount() {
@@ -75,35 +71,28 @@ export class PriceTile extends React.PureComponent<
         x => tile.notional <= x.quantity
       );
 
-      const bidPrice = mayBeBidPrice === undefined ? bid : mayBeBidPrice.price;
+      const bidPrice = (mayBeBidPrice && mayBeBidPrice.price) || bid;
+
       const mayBeAskPrice = tile.price.asks.find(
         x => tile.notional <= x.quantity
       );
 
-      const askPrice = mayBeAskPrice === undefined ? ask : mayBeAskPrice.price;
+      const askPrice = (mayBeAskPrice && mayBeAskPrice.price) || ask;
 
       const askMov =
-        mayBeAskPrice === undefined ? Movements.None : mayBeAskPrice.mouvement;
+        (mayBeAskPrice && mayBeAskPrice.mouvement) || Movements.None;
       const bidMov =
-        mayBeBidPrice === undefined ? Movements.None : mayBeBidPrice.mouvement;
+        (mayBeBidPrice && mayBeBidPrice.mouvement) || Movements.None;
       this.setState({
         bid: bidPrice,
         ask: askPrice,
         prices: tile.price,
         bidMovement: bidMov,
         askMovement: askMov,
-        isBidStale: mayBeBidPrice === undefined,
-        isAskStale: mayBeAskPrice === undefined
+        isBidStale: !mayBeBidPrice,
+        isAskStale: !mayBeAskPrice
       });
     }
-  }
-
-  onMouseOver() {
-    this.setState({ hover: true });
-  }
-
-  onMouseOut() {
-    this.setState({ hover: false });
   }
 
   handleSave(notional: number) {
