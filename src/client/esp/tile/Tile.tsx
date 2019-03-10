@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { TileData } from './model/tileData';
 import { Movements } from './model/priceTick';
 import { TradeRequest } from './model/tradeRequest';
+import Execution from './components/execution/Execution';
 
 export namespace TileItem {
   export interface Props {
@@ -134,6 +135,7 @@ export class PriceTile extends React.PureComponent<
           <div className="col-md-2 px-0">
             <div className="card">
               <div className="card-header d-flex justify-content-center">
+                <Execution show={tile.executing} />
                 <Spread bid={bid} ask={ask} />
               </div>
               <div className="card-body d-flex justify-content-center">

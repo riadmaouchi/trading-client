@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Execution should display execution status 1`] = `
+<Transition
+  enter={
+    Object {
+      "opacity": 1,
+    }
+  }
+  from={
+    Object {
+      "opacity": 0,
+    }
+  }
+  items={0}
+  keys={[Function]}
+  leave={
+    Object {
+      "opacity": 0,
+    }
+  }
+  native={true}
+  reset={true}
+  unique={true}
+>
+  <Component />
+</Transition>
+`;
+
+exports[`Execution should not display execution status 1`] = `
+<Transition
+  enter={
+    Object {
+      "opacity": 1,
+    }
+  }
+  from={
+    Object {
+      "opacity": 0,
+    }
+  }
+  items={0}
+  keys={[Function]}
+  leave={
+    Object {
+      "opacity": 0,
+    }
+  }
+  native={true}
+  reset={true}
+  unique={true}
+>
+  <Component />
+</Transition>
+`;
