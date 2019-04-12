@@ -90,16 +90,16 @@ export class ConsulFeature implements Feature {
 
       executionUrl && store.dispatch(executionApiUrlUpdated(executionUrl));
 
-      if (values.has('service/url/server')) {
-        const url = values.get('service/url/server');
+      if (values.has('service/url/SERVER')) {
+        const url = values.get('service/url/SERVER');
         pricingUrl = url;
         store.dispatch(unsubscribePricingConnectionState());
         store.dispatch(pricingApiUrlUpdated(url));
         (path === '/Workspace' || path === '/') &&
           store.dispatch(subscribePricingConnectionState(url));
       }
-      if (values.has('service/url/tradeserver')) {
-        const url = values.get('service/url/tradeserver');
+      if (values.has('service/url/TRADESERVER')) {
+        const url = values.get('service/url/TRADESERVER');
         executionUrl = url;
         store.dispatch(executionApiUrlUpdated(url));
         store.dispatch(subscribeTradeBlotterConnectionUrl(url));
