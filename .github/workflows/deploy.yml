@@ -2,7 +2,7 @@ name: Deployment
 on:
     push:
         branches:
-            - New-Client
+            - NewClient
 jobs:
     deploy:
         runs-on: ubuntu-latest
