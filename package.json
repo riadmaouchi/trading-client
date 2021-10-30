@@ -5,6 +5,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "build:ghpages": "cross-env BASE_URL=/trading-client/ vite build",
         "serve": "vite preview",
         "test": "jest",
         "lint": "eslint --ext .ts,.tsx ./src",
@@ -16,6 +17,7 @@
         "@headlessui/react": "^1.4.1",
         "@heroicons/react": "^1.0.4",
         "axios": "^0.23.0",
+        "cross-env": "^7.0.3",
         "eventsource": "^1.1.0",
         "react": "^17.0.0",
         "react-dom": "^17.0.0",
