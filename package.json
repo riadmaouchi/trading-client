@@ -1,7 +1,7 @@
 {
     "name": "trading-client",
     "version": "1.0.0",
-    "homepage": "/trading-client",
+    "homepage": "https://riadmaouchi.github.io/trading-client/",
     "scripts": {
         "dev": "vite",
         "build": "vite build",
