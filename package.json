@@ -5,7 +5,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "build:ghpages": "cross-env BASE_URL=/trading-client/ vite build",
+        "build:ghpages": "cross-env BASE_URL=/ vite build",
         "serve": "vite preview",
         "test": "jest",
         "lint": "eslint --ext .ts,.tsx ./src",
