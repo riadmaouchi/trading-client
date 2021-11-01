@@ -18,7 +18,11 @@ jobs:
           restore-keys: ${{ runner.os }}-node-
       - run: npm ci # install dependencies
       - run: npm run build --if-present # build the project
-      - run: npm run test # run the tests
+      - run: npm run test -- --coverage # run the tests
+      - name: Upload coverage to Codecov
+      - uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
       # deploy site to netlify using secrets created on repository
       - uses: netlify/actions/cli@master 
         env:
