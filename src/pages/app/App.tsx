@@ -17,7 +17,7 @@ function App() {
             <GlobalStyle />
 
             <div className="App" data-color-theme={themeName}>
-                <RedContainer>Themed components</RedContainer>
+                <RedContainer>Themed components demo</RedContainer>
                 <header className="bg-primary text-secondary">
                     <img src={logo} alt="logo" />
                     <ThemeSwitcher />
