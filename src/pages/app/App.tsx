@@ -20,9 +20,6 @@ function App() {
                 <RedContainer>Themed components</RedContainer>
                 <header className="bg-primary text-secondary">
                     <img src={logo} alt="logo" />
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to reload.
-                    </p>
                     <ThemeSwitcher />
                 </header>
             </div>
