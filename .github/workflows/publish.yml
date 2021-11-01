@@ -13,3 +13,4 @@ jobs:
         name: rmaouchi/rttrading
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: ${{ steps.vars.outputs.sha_short }}
