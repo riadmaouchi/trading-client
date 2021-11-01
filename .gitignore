@@ -3,3 +3,6 @@ node_modules
 dist
 dist-ssr
 *.local
+.history
+coverage
+node\\npm-cache
