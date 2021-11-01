@@ -1,4 +1,4 @@
-name: Auto Deploy
+name: Build & Deploy App
 on:
   push:
     branches: [NewClient] # run on pushes to master

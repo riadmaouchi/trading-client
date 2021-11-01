@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+    rt-trading:
+        container_name: rt-trading
+        build: .
+        ports:
+            - 80:80
+        networks:
+            - front
+
+networks:
+    front:
+        driver: bridge
+        external: true
