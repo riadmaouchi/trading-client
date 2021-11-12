@@ -4,6 +4,7 @@
     "homepage": "https://riadmaouchi.github.io/trading-client/",
     "scripts": {
         "dev": "vite",
+        "dev:mock": "cross-env VITE_MOCK_MODE=true vite",
         "build": "vite build",
         "build:ghpages": "cross-env BASE_URL=/ vite build",
         "serve": "vite preview",
@@ -18,6 +19,7 @@
     "dependencies": {
         "@headlessui/react": "^1.4.1",
         "@heroicons/react": "^1.0.4",
+        "@storybook/addon-docs": "^6.3.12",
         "axios": "^0.23.0",
         "cross-env": "^7.0.3",
         "eventsource": "^1.1.0",
@@ -26,10 +28,12 @@
         "react-redux": "^7.2.5",
         "react-router-dom": "^5.3.0",
         "redux": "^4.1.1",
+        "redux-devtools-extension": "^2.13.9",
         "redux-observable": "^2.0.0",
+        "reselect": "^4.1.2",
         "rxjs": "^7.4.0",
         "styled-components": "^5.3.3",
-        "winston": "^3.3.3"
+        "vite-plugin-package-version": "^1.0.2"
     },
     "devDependencies": {
         "@babel/core": "^7.15.8",

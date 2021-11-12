@@ -1,4 +1,3 @@
-import { logger } from '@/logger'
 import { BehaviorSubject, Observable, Observer, Subscription } from 'rxjs'
 import { filter, map, share } from 'rxjs/operators'
 import { HttpClient } from './httpClient'
@@ -157,7 +156,7 @@ export class SseTransport implements Transport {
                 this.changeState(ConnectionState.Open)
             }
             this.eventSource.onerror = (evt: any) => {
-                logger.debug('Error:', evt)
+                console.debug('Error:', evt)
                 this.close()
                 this.changeState(ConnectionState.Closed)
             }
@@ -174,7 +173,7 @@ export class SseTransport implements Transport {
                     : this.retryPolicy.nextRetryDelayInMilliseconds()
 
                 this.stop()
-                logger.debug(
+                console.debug(
                     `Connection is expired. Will reconnect in ${randomReconnectionInterval}ms`
                 )
                 this.reconnectionTimeout = setTimeout(() => {

@@ -1,32 +1,32 @@
 name: Build & Deploy App
 on:
-  push:
-    branches: [NewClient] # run on pushes to master
+    push:
+        branches: [NewClient] # run on pushes to master
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2 # setup the repository in the runner
-      - name: Setup Node.js # setup Node.js in the runner
-        uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-      - uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - run: npm ci # install dependencies
-      - run: npm run build --if-present # build the project
-      - run: npm run test -- --coverage # run the tests
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-      # deploy site to netlify using secrets created on repository
-      - uses: netlify/actions/cli@master 
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=dist --prod
+    build-and-test:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2 # setup the repository in the runner
+            - name: Setup Node.js # setup Node.js in the runner
+              uses: actions/setup-node@v1
+              with:
+                  node-version: '12'
+            - uses: actions/cache@v2
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: ${{ runner.os }}-node-
+            - run: npm ci # install dependencies
+            - run: npm run build --if-present # build the project
+            - run: npm run test -- --coverage # run the tests
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                  token: ${{ secrets.CODECOV_TOKEN }}
+            # deploy site to netlify using secrets created on repository
+            - uses: netlify/actions/cli@master
+              env:
+                  NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+                  NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+              with:
+                  args: deploy --dir=dist --prod

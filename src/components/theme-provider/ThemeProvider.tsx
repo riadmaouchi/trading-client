@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState, createContext } from 'react'
+import { useContext, useEffect, useState, createContext } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import * as tailwind from './theme'
 
 console.log(tailwind.theme.extend)
 const theme = tailwind.theme.extend
-console.log(theme)
 
 export enum ThemeName {
     Light = 'light',

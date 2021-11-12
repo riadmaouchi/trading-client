@@ -1,4 +1,5 @@
 import { defineConfig, Plugin } from 'vite'
+import loadVersion from 'vite-plugin-package-version'
 import react from '@vitejs/plugin-react'
 import macrosPlugin from 'vite-plugin-babel-macros'
 import { readdirSync } from 'fs'
@@ -15,9 +16,10 @@ function mockApiPlugin(): Plugin {
             const file = path.parse(source)
             const files = readdirSync('.' + file.dir)
 
-            if (!files.includes(`${file.name}.service.mock.ts`)) return null
+            if (!files.includes(`${file.name}.mock.ts`)) return null
 
-            const mockPath = `${file.dir}/${file.name}.service.mock.ts`
+            const mockPath = `${file.dir}/${file.name}.mock.ts`
+            console.log('mockPath', mockPath)
             return this.resolve(mockPath, importer)
         },
     }
@@ -25,7 +27,12 @@ function mockApiPlugin(): Plugin {
 // https://vitejs.dev/config/
 const setConfig = ({ mode }) => {
     const isDev = mode === 'development'
-    const plugins = [mockApiPlugin(), react(), macrosPlugin()]
+
+    const plugins = [react(), macrosPlugin(), loadVersion()]
+    console.log('process.env.VITE_MOCK_MODE', process.env.VITE_MOCK_MODE)
+    if (process.env.VITE_MOCK_MODE) {
+        plugins.unshift(mockApiPlugin())
+    }
     return defineConfig({
         base: process.env.BASE_URL || '/',
         plugins: plugins,
@@ -35,6 +42,7 @@ const setConfig = ({ mode }) => {
         build: {
             sourcemap: true,
         },
+
         resolve: {
             alias: [
                 {

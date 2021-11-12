@@ -33,12 +33,10 @@ const Header: React.FC<Props> = ({ header, mobile, routes = [] }) => {
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
                                     <div className="flex items-center flex-no-shrink text-white mr-6">
-                                        <div className="text-neutral font-semibold text-xl tracking-tight">
-                                            <Logo className="fill-current h-8 w-8 mr-2 text-primaryAlt" />
-                                            <span className="font-semibold text-xl tracking-tight">
-                                                RT Trading
-                                            </span>
-                                        </div>
+                                        <Logo className="fill-current h-8 w-8 mr-2 text-primaryAlt" />
+                                        <span className="text-neutral font-semibold text-xl tracking-tight">
+                                            RT Trading
+                                        </span>
                                     </div>
                                 </div>
 
@@ -94,7 +92,7 @@ const Header: React.FC<Props> = ({ header, mobile, routes = [] }) => {
                                                             >
                                                                 {() => (
                                                                     <NavLink
-                                                                        className="text-neutral transition-colors duration-200 hover:bg-primaryAlt block px-4 py-2 text-sm"
+                                                                        className="text-neutral transition-colors duration-200 hover:bg-neutralAlt block px-4 py-2 text-sm"
                                                                         key={
                                                                             item
                                                                         }
