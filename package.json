@@ -6,6 +6,7 @@
         "dev": "vite",
         "dev:mock": "cross-env VITE_MOCK_MODE=true vite",
         "build": "vite build",
+        "build:mock": "cross-env VITE_MOCK_MODE=true vite build",
         "build:ghpages": "cross-env BASE_URL=/ vite build",
         "serve": "vite preview",
         "test": "jest",
