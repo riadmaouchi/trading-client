@@ -9,7 +9,8 @@ import { MockEvent, EventSource } from 'mocksse'
 import { fakeData as fakeAssets } from '@/api/command/asset.mock'
 import { fakeData as fakeService } from '@/api/command/service.mock'
 
-const defaultUrl = window.location.origin + '/v1/sse'
+const defaultUrl =
+    window.location.origin + ':' + window.location.port + '/v1/sse'
 
 console.log('mock defaultUrl', defaultUrl)
 
