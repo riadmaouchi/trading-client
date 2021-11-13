@@ -42,10 +42,6 @@ const setConfig = ({ mode }) => {
         build: {
             sourcemap: true,
         },
-        define: {
-            'process.env.BUILD_NUMBER': `"${process.env.BUILD_NUMBER}"`,
-        },
-
         resolve: {
             alias: [
                 {

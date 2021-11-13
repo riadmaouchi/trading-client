@@ -10,13 +10,18 @@ export const createStore = async () => {
     const httpClient: HttpClient = new AxiosHttpClient()
     transport = new SseTransport(httpClient, host)
 
-    console.log('process.env', process.env)
-    console.log('meta.env', import.meta.env)
-    console.log('build number', process.env.BUILD_NUMBER)
+    console.log('build env', import.meta.env)
+    console.log('build number', import.meta.env.VITE_BUILD_NUMBER)
 
     if (import.meta.env.VITE_MOCK_MODE === 'transport') {
         await import('../mocks/mockSseTransport')
-            .then((module) => (transport = new module.MockSseTransport(host)))
+            .then(
+                (module) =>
+                    (transport = new module.MockSseTransport(
+                        window.location.hostname,
+                        parseInt(window.location.port)
+                    ))
+            )
             .catch((err) => console.error(err))
     } else if (import.meta.env.VITE_MOCK_MODE === 'api') {
         await import('../api/transport/defaultTransport')
