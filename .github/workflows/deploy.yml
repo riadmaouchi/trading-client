@@ -34,7 +34,9 @@ jobs:
               env:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-                  VITE_MOCK_MODE: transport
-                  VITE_BUILD_NUMBER: ${{ steps.buildnumber.outputs.build_number }}
               with:
                   args: deploy --dir=dist --prod
+                  envkey_VITE_MOCK_MODE: transport
+                  envkey_VITE_BUILD_NUMBER: ${{ steps.buildnumber.outputs.build_number }}
+                  envkey_MOCK_MODE: transport
+                  envkey_BUILD_NUMBER: ${{ steps.buildnumber.outputs.build_number }}
