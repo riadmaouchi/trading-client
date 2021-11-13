@@ -11,8 +11,8 @@ export const createStore = async () => {
     transport = new SseTransport(httpClient, host)
 
     console.log('process.env', process.env)
-    console.log('import.meta.env', import.meta.env)
-    console.log('build number', process.env.VITE_BUILD_NUMBER)
+    console.log('meta.env', import.meta.env)
+    console.log('build number', process.env.BUILD_NUMBER)
 
     if (import.meta.env.VITE_MOCK_MODE === 'transport') {
         await import('../mocks/mockSseTransport')
