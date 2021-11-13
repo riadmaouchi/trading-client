@@ -23,7 +23,7 @@ jobs:
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: ${{ runner.os }}-node-
             - run: npm ci # install dependencies
-            - run: npm run build --if-present # build the project
+            - run: npm run build:mock --if-present # build the project
             - run: npm run test -- --coverage # run the tests
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
@@ -36,7 +36,3 @@ jobs:
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
               with:
                   args: deploy --dir=dist --prod
-                  envkey_VITE_MOCK_MODE: transport
-                  envkey_VITE_BUILD_NUMBER: ${{ steps.buildnumber.outputs.build_number }}
-                  envkey_MOCK_MODE: transport
-                  envkey_BUILD_NUMBER: ${{ steps.buildnumber.outputs.build_number }}
