@@ -11,6 +11,8 @@ import { fakeData as fakeService } from '@/api/command/service.mock'
 
 const defaultUrl = window.location.origin + '/v1/sse'
 
+console.log('mock defaultUrl', defaultUrl)
+
 new MockEvent({
     url: defaultUrl,
     responses: [
@@ -101,6 +103,7 @@ export class MockSseTransport implements Transport {
 
     constructor(url: string, port?: number) {
         this.config = new TransportConfig(url, port)
+        console.log('mock transportConfig', this.config.url)
         this.onclose = null
     }
 
