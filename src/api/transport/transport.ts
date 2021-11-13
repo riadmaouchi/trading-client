@@ -26,8 +26,8 @@ export interface ConnectionInfo {
 
 export default class TransportConfig {
     public url: string
-    public messageTimeout: number = 28 * 1000
-    public maxDelay: number = 30 * 1000
+    public messageTimeout: number = 30 * 1000
+    public maxDelay: number = 10 * 1000
     public keepAliveCheckInterval: number = 2 * 1000
     public startingDelay: number = 60 * 1000
 

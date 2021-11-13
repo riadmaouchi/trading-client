@@ -29,8 +29,8 @@ const setConfig = ({ mode }) => {
     const isDev = mode === 'development'
 
     const plugins = [react(), macrosPlugin(), loadVersion()]
-    console.log('process.env.VITE_MOCK_MODE', process.env.VITE_MOCK_MODE)
-    if (process.env.VITE_MOCK_MODE) {
+    console.log('build number', process.env.BUILD_NUMBER)
+    if (process.env.VITE_MOCK_MODE === 'api') {
         plugins.unshift(mockApiPlugin())
     }
     return defineConfig({
@@ -41,6 +41,9 @@ const setConfig = ({ mode }) => {
         },
         build: {
             sourcemap: true,
+        },
+        define: {
+            'process.env.BUILD_NUMBER': `"${process.env.BUILD_NUMBER}"`,
         },
 
         resolve: {

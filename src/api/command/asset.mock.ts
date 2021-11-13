@@ -6,7 +6,7 @@ export const mapAssets = (transport: Transport) => {
     return of(fakeData).pipe(delay(1_000))
 }
 
-const fakeData: Record<string, CurrencyPair> = {
+export const fakeData: Record<string, CurrencyPair> = {
     EURUSD: {
         symbol: 'EURUSD',
         ratePrecision: 5,

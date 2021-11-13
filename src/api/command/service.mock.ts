@@ -19,7 +19,7 @@ export const mapServices = (transport: Transport, heartBeatTimeout: number) => {
     )
 }
 
-const fakeData: Service[] = [
+export const fakeData: Service[] = [
     {
         type: 'reference',
         id: '1',
