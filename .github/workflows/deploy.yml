@@ -22,10 +22,16 @@ jobs:
                   path: ~/.npm
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: ${{ runner.os }}-node-
+            - name: Declare some variables
+              id: vars
+              shell: bash
+              run: |
+                  echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+                  echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
             - run: npm ci # install dependencies
               env:
                   VITE_BUILD_VERSION: ${{ github.sha }}
-            - run: VITE_BUILD_VERSION=${{git rev-parse --short github.sha }} VITE_BUILD_NUMBER=$BUILD_NUMBER npm run build:mock --if-present # build the project
+            - run: VITE_BUILD_VERSION=${{steps.vars.outputs.sha_short }} VITE_BUILD_NUMBER=$BUILD_NUMBER npm run build:mock --if-present # build the project
             - run: npm run test -- --coverage # run the tests
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
