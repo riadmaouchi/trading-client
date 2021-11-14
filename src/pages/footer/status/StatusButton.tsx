@@ -51,7 +51,7 @@ export const StatusButton: React.FC<Props> = ({
                             }
                             className={`
                 ${open ? '' : 'text-opacity-90'}
-                w-1/2 md:w-full group px-3 py-2 rounded-md inline-flex items-center hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
+                w-full group px-3 py-2 rounded-md inline-flex items-center hover:text-opacity-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75`}
                         >
                             {appStatus == ServiceStates.Connected ? (
                                 <StatusOnlineIcon
@@ -114,6 +114,7 @@ export const StatusButton: React.FC<Props> = ({
                                         <a
                                             href={api}
                                             target="_blank"
+                                            rel="noreferrer"
                                             className="flow-root px-2 py-2 transition duration-150 ease-in-out rounded-md hover:bg-neutralAlt focus:outline-none focus-visible:ring focus-visible:ring-neutralAlt focus-visible:ring-opacity-50"
                                         >
                                             <span className="text-sm font-medium text-cyan-500">
