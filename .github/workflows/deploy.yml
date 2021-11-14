@@ -37,5 +37,7 @@ jobs:
               env:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+                  VITE_BUILD_VERSION: ${{ github.sha }}
+                  ENVIRONMENT: ${{ steps.vars.outputs.ENVIRONMENT }}
               with:
                   args: deploy --dir=dist --prod
