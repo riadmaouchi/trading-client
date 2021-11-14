@@ -25,9 +25,7 @@ jobs:
             - run: npm ci # install dependencies
               env:
                   VITE_BUILD_VERSION: ${{ github.sha }}
-                  ENVIRONMENT: ${{ steps.vars.outputs.ENVIRONMENT }}
-                  GITHUB_SHA: ${{ steps.vars.outputs.github_short_sha }}
-            - run: npm run build:mock --if-present # build the project
+            - run: VITE_BUILD_VERSION=${{ github.sha }} npm run build:mock --if-present # build the project
             - run: npm run test -- --coverage # run the tests
             - name: Upload coverage to Codecov
               uses: codecov/codecov-action@v1
@@ -39,7 +37,5 @@ jobs:
                   NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
                   NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
                   VITE_BUILD_VERSION: ${{ github.sha }}
-                  ENVIRONMENT: ${{ steps.vars.outputs.ENVIRONMENT }}
-                  GITHUB_SHA: ${{ steps.vars.outputs.github_short_sha }}
               with:
-                  args: deploy --dir=dist --prod --message "Deployed from GitHub Action sha $GITHUB_SHA ref ${{ steps.vars.outputs.short_ref }}"
+                  args: deploy --dir=dist --prod
