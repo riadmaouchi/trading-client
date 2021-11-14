@@ -23,6 +23,9 @@ jobs:
                   key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
                   restore-keys: ${{ runner.os }}-node-
             - run: npm ci # install dependencies
+              env:
+                  VITE_BUILD_VERSION: ${{ github.sha }}
+                  ENVIRONMENT: ${{ steps.vars.outputs.ENVIRONMENT }}
             - run: npm run build:mock --if-present # build the project
             - run: npm run test -- --coverage # run the tests
             - name: Upload coverage to Codecov
