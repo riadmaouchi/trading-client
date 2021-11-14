@@ -13,6 +13,13 @@ interface Props {
 
 const StyledLayout: React.FC<Props> = ({ body, header, mobile }) => {
     const { themeName } = useTheme()
+    const version = [
+        import.meta.env.PACKAGE_VERSION,
+        import.meta.env.VITE_BUILD_VERSION,
+        import.meta.env.VITE_BUILD_NUMBER,
+    ]
+        .filter(Boolean)
+        .join('-')
     return (
         <div
             data-color-theme={themeName}
@@ -27,10 +34,7 @@ const StyledLayout: React.FC<Props> = ({ body, header, mobile }) => {
                     <Content body={body} />
                 </main>
                 <footer className="py-6">
-                    <Footer
-                        version={import.meta.env.PACKAGE_VERSION}
-                        footer={<StatusContainer />}
-                    />{' '}
+                    <Footer version={version} footer={<StatusContainer />} />{' '}
                 </footer>
             </div>
         </div>
