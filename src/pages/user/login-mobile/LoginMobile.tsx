@@ -18,7 +18,7 @@ const LoginMobile = ({ account }: Props) => (
                     />
                 </div>
                 <div className="ml-3">
-                    <div className="text-base font-medium leading-none text-white">
+                    <div className="text-base font-medium leading-none">
                         {account.firstName} {account.lastName}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
