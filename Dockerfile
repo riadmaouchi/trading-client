@@ -4,7 +4,7 @@ WORKDIR /app
 COPY . ./
 
 RUN npm install
-RUN npm run build:mock
+RUN npm run build:staging
 
 FROM nginx:1.20.1-alpine
 

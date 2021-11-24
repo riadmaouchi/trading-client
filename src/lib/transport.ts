@@ -144,9 +144,7 @@ export class SseTransport implements Transport {
         if (import.meta.env.MODE === 'staging') {
             await import('../mocks/sseMock')
                 .then((module) => {
-                    this.eventSource = new module.FakeEventSource(
-                        this.config.url + '/v1/sse'
-                    )
+                    this.eventSource = new module.FakeEventSource(module.url)
 
                     this.eventSource.onopen = () => {
                         console.debug('onopen:')

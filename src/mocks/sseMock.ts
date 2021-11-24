@@ -7,7 +7,7 @@ import { getPrice } from '@/api/mock'
 
 const port =
     window.location.protocol === 'https:' && !window.location.port ? 443 : 8080
-const defaultUrl =
+export const url =
     window.location.protocol +
     '//' +
     window.location.hostname +
@@ -15,10 +15,10 @@ const defaultUrl =
     port +
     '/v1/sse'
 
-console.log('mock defaultUrl', defaultUrl)
+console.log('mock defaultUrl', url)
 
 new MockEvent({
-    url: defaultUrl,
+    url,
     responses: [
         {
             id: Date.now(),
@@ -39,7 +39,7 @@ new MockEvent({
 })
 
 new MockEvent({
-    url: defaultUrl,
+    url,
     setInterval: 1000,
     response: (mockEvent: any) => {
         setInterval(() => {
@@ -60,7 +60,7 @@ new MockEvent({
 })
 
 new MockEvent({
-    url: defaultUrl,
+    url,
     setInterval: Math.random() * 1000,
     response: (mockEvent: any) => {
         Object.keys(fakeReferenceData).forEach((symbol) => {
