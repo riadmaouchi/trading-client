@@ -43,7 +43,6 @@ const ControlledStack = ({ items }: { items: Tile[] }) => {
                     column: 4,
                     animate: true,
                     row: 2,
-                    maxRow: 2,
                     disableResize: true,
                 },
                 '.controlled'
