@@ -1,21 +1,37 @@
 import { StrictMode, Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
 
-import './styles/tailwind.css'
-import { ThemeProvider } from '@/components/theme-provider'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { Provider } from 'react-redux'
-import { createStore } from '@/store/store'
+
+import './assets/css/tailwind.css'
+import { ThemeProvider } from '@/components/theme-provider'
+
+import { epicMiddleware, rootEpic, store } from '@/state/store'
 import StyledLayout from '@/pages/layout'
 import LoginContainer from '@/pages/user/login'
 import LoginMobileContainer from '@/pages/user/login-mobile'
 import { createGlobalStyle } from 'styled-components'
 
+import { connect } from './state/connectionStatus/reducers'
+import { userSelected } from './state/user/reducers'
+import { API, client } from './api'
+
 const RatesRouter = lazy(() => import('./pages/rates'))
 
 async function init() {
-    const store = await createStore()
-    ReactDOM.render(
+    client.connect().then(() => {
+        epicMiddleware.run(rootEpic)
+        store.dispatch(connect())
+        store.dispatch(userSelected(API.login()))
+        ReactDOM.render(renderApp(), document.getElementById('root'))
+    })
+}
+
+init()
+
+function renderApp() {
+    return (
         <StrictMode>
             <ThemeProvider>
                 <GlobalStyle />
@@ -37,11 +53,9 @@ async function init() {
                     </Suspense>
                 </BrowserRouter>
             </ThemeProvider>
-        </StrictMode>,
-        document.getElementById('root')
+        </StrictMode>
     )
 }
-init()
 
 const GlobalStyle = createGlobalStyle`
 

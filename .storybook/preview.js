@@ -1,4 +1,4 @@
-import '../src/styles/tailwind.css'
+import '../src/assets/css/tailwind.css'
 import GlobalStyle from '../src/pages/app/styles'
 import { addDecorator } from '@storybook/react'
 import { ThemeProvider } from '@/components/theme-provider'

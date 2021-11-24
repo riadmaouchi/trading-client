@@ -1,28 +1,28 @@
-import { Account } from '@/api'
+import { User } from '@/api'
 
 interface Props {
-    account?: Account
+    user?: User
 }
 
-const LoginMobile = ({ account }: Props) => (
+const LoginMobile = ({ user }: Props) => (
     <React.Fragment>
-        {!account ? (
+        {!user ? (
             <div></div>
         ) : (
             <div className="flex items-center px-5">
                 <div className="flex-shrink-0">
                     <img
                         className="h-10 w-10 rounded-full"
-                        src={account.avatar}
+                        src={user.avatar}
                         alt=""
                     />
                 </div>
                 <div className="ml-3">
                     <div className="text-base font-medium leading-none">
-                        {account.firstName} {account.lastName}
+                        {user.firstName} {user.lastName}
                     </div>
                     <div className="text-sm font-medium leading-none text-gray-400">
-                        {account.code}
+                        {user.code}
                     </div>
                 </div>
             </div>

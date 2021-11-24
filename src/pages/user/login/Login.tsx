@@ -1,15 +1,15 @@
-import { Account } from '@/api'
+import { User } from '@/api'
 
 interface Props {
-    account?: Account
+    user?: User
 }
 
-const Login = ({ account }: Props) => (
+const Login = ({ user }: Props) => (
     <React.Fragment>
-        {!account ? (
+        {!user ? (
             <div></div>
         ) : (
-            <img className="h-8 w-8 rounded-full" src={account.avatar} alt="" />
+            <img className="h-8 w-8 rounded-full" src={user.avatar} alt="" />
         )}
     </React.Fragment>
 )

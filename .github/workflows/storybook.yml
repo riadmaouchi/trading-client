@@ -1,16 +1,16 @@
 name: Build & Deploy Storybook
 on:
-  push:
-    branches:
-      - NewClient
+    push:
+        branches:
+            - NewClient
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Install and Build 🔧
-        run: |
-          npm install
-          npm run deploy-storybook -- --ci
-        env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - name: Install and Build 🔧
+              run: |
+                  npm install
+                  npm run deploy-storybook -- --ci
+              env:
+                  GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}

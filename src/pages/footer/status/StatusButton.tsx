@@ -7,19 +7,18 @@ import {
 } from '@heroicons/react/solid'
 import React, { useState } from 'react'
 import { usePopper } from 'react-popper'
-import { ServiceGroup, ServiceStates } from '@/api/session/service'
-import { ConnectionInfo } from '@/api/session/connection'
+import { Connection, ServiceGroup, ServiceStates } from '@/api'
 
 interface Props {
-    connectionStatus: ConnectionInfo
-    services: ServiceGroup[]
+    connectionStatus: Connection
+    systemStatus: ServiceGroup[]
 }
 
-const getStatus = (services: ServiceGroup[]) => {
-    if (services.every((s) => s.state === ServiceStates.Connected)) {
+const getStatus = (systemStatus: ServiceGroup[]) => {
+    if (systemStatus.every((s) => s.state === ServiceStates.Connected)) {
         return ServiceStates.Connected
     }
-    if (services.some((s) => s.state === ServiceStates.Connecting)) {
+    if (systemStatus.some((s) => s.state === ServiceStates.Connecting)) {
         return ServiceStates.Connecting
     }
     return ServiceStates.Disconnected
@@ -27,7 +26,7 @@ const getStatus = (services: ServiceGroup[]) => {
 
 export const StatusButton: React.FC<Props> = ({
     connectionStatus: { url },
-    services,
+    systemStatus,
 }) => {
     const [referenceElement, setReferenceElement] =
         useState<HTMLButtonElement | null>()
@@ -37,7 +36,7 @@ export const StatusButton: React.FC<Props> = ({
         placement: 'top',
     })
 
-    const appStatus = getStatus(services)
+    const appStatus = getStatus(systemStatus)
 
     const api = `${url}/v1/sse`
     return (
@@ -80,7 +79,7 @@ export const StatusButton: React.FC<Props> = ({
                         >
                             <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                                 <div className="relative grid gap-cy-2 bg-secondary text-neutral p-7">
-                                    {services.map((service, id) => (
+                                    {systemStatus.map((service, id) => (
                                         <div
                                             key={id}
                                             className="flex items-center transition duration-150 ease-in-out rounded-lg hover:bg-neutralAlt focus:outline-none focus-visible:ring focus-visible:bg-neutralAlt focus-visible:ring-opacity-50"

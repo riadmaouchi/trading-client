@@ -1,8 +1,9 @@
-import { GlobalState } from '@/store'
+import { RootState } from '@/state/store'
 import { createSelector } from 'reselect'
 
-const getServices = ({ session }: GlobalState) => session.services
+const getSystemStatus = ({ systemStatus }: RootState) => systemStatus
 
-export const selectServices = createSelector([getServices], (serviceStatus) =>
-    Object.values(serviceStatus)
+export const selectSystemStatus = createSelector(
+    [getSystemStatus],
+    (systemStatus) => Object.values(systemStatus)
 )

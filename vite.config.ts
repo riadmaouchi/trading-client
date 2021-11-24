@@ -19,18 +19,15 @@ function mockApiPlugin(): Plugin {
             if (!files.includes(`${file.name}.mock.ts`)) return null
 
             const mockPath = `${file.dir}/${file.name}.mock.ts`
-            console.log('mockPath', mockPath)
             return this.resolve(mockPath, importer)
         },
     }
 }
-// https://vitejs.dev/config/
-const setConfig = ({ mode }) => {
-    const isDev = mode === 'development'
 
+const setConfig = ({ mode }) => {
     const plugins = [react(), macrosPlugin(), loadVersion()]
-    console.log('build number', process.env.BUILD_NUMBER)
-    if (process.env.VITE_MOCK_MODE === 'api') {
+
+    if (mode === 'mock') {
         plugins.unshift(mockApiPlugin())
     }
     return defineConfig({
@@ -47,6 +44,22 @@ const setConfig = ({ mode }) => {
                 {
                     find: '@',
                     replacement: '/src',
+                },
+                {
+                    find: 'jquery',
+                    replacement: 'gridstack/dist/jq/jquery.js',
+                },
+                {
+                    find: 'jquery-ui',
+                    replacement: 'gridstack/dist/jq/jquery-ui.js',
+                },
+                {
+                    find: 'jquery.ui',
+                    replacement: 'gridstack/dist/jq/jquery-ui.js',
+                },
+                {
+                    find: 'jquery.ui.touch-punch',
+                    replacement: 'gridstack/dist/jq/jquery.ui.touch-punch.js',
                 },
             ],
         },

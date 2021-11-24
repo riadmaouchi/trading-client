@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 
 import { StatusButton } from './StatusButton'
-import { selectServices } from './selectors'
-import { GlobalState } from '@/store'
+import { selectSystemStatus } from './selectors'
+import { RootState } from '@/state/store'
 
-const mapStateToProps = (state: GlobalState) => {
+const mapStateToProps = (state: RootState) => {
     return {
-        connectionStatus: state.session.connection,
-        services: selectServices(state),
+        connectionStatus: state.connectionStatus,
+        systemStatus: selectSystemStatus(state),
     }
 }
 

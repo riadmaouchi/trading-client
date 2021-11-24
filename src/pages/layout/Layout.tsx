@@ -3,6 +3,10 @@ import Header from '../header/Header'
 import { useTheme } from '@/components/theme-provider'
 import Footer from '../footer/Footer'
 import StatusContainer from '../footer/status/StatusContainer'
+import { useEffect } from 'react'
+
+import { useDispatch } from 'react-redux'
+import { subscribe } from '@/state/pricing/reducers'
 
 interface Props {
     header?: React.ReactChild
@@ -12,6 +16,12 @@ interface Props {
 }
 
 const StyledLayout: React.FC<Props> = ({ body, header, mobile }) => {
+    const dispatch = useDispatch()
+    useEffect(() => {
+        // console.log('dispatch')
+        dispatch(subscribe('EURUSD'))
+    })
+
     const { themeName } = useTheme()
     const version = [
         import.meta.env.PACKAGE_VERSION,

@@ -1,16 +1,16 @@
 name: Publish Docker
 on:
-  push:
-    branches: [NewClient] # run on pushes to master
+    push:
+        branches: [NewClient] # run on pushes to master
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: rmaouchi/rttrading
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: ${{ steps.vars.outputs.sha_short }}
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@master
+            - name: Publish to Registry
+              uses: elgohr/Publish-Docker-Github-Action@master
+              with:
+                  name: rmaouchi/rttrading
+                  username: ${{ secrets.DOCKER_USERNAME }}
+                  password: ${{ secrets.DOCKER_PASSWORD }}
+                  tags: ${{ steps.vars.outputs.sha_short }}
