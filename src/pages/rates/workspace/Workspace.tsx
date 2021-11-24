@@ -42,7 +42,6 @@ const ControlledStack = ({ items }: { items: Tile[] }) => {
                     float: false,
                     column: 4,
                     animate: true,
-                    row: 2,
                     disableResize: true,
                 },
                 '.controlled'
