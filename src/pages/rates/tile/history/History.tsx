@@ -41,28 +41,6 @@ const HistoryChart: React.FC<Props> = ({
             priceFormat: { type: 'price', precision: 5, minMove: 0.00001 },
         })
 
-        areaSeries.current.setData(
-            priceHistory.map((p) => {
-                return {
-                    time: Math.floor(p.time / 1000),
-                    value: p.mid,
-                }
-            })
-        )
-        document.getElementById(`chart-${id}`)!.style.position = 'relative'
-    }, [])
-
-    useEffect(() => {
-        const p = last(priceHistory)
-        if (p) {
-            areaSeries.current.update({
-                time: Math.floor(p.time / 1000),
-                value: p.mid,
-            })
-        }
-    }, [priceHistory])
-
-    useEffect(() => {
         const options = {
             width,
             height,
@@ -118,8 +96,27 @@ const HistoryChart: React.FC<Props> = ({
         }
 
         chart.current.applyOptions(options)
+
+        /* areaSeries.current.setData(
+            priceHistory.map((p) => {
+                return {
+                    time: Math.floor(p.time / 1000),
+                    value: p.mid,
+                }
+            })
+        )*/
         document.getElementById(`chart-${id}`)!.style.position = 'relative'
-    }, [height, id, themeContext, width])
+    }, [])
+
+    useEffect(() => {
+        const p = last(priceHistory)
+        if (p) {
+            areaSeries.current.update({
+                time: Math.floor(p.time / 1000),
+                value: p.mid,
+            })
+        }
+    }, [priceHistory])
 
     return (
         <StyledHistory>
