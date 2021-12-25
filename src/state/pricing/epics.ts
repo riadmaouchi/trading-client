@@ -1,26 +1,32 @@
-import { Action } from 'redux'
 import { ofType } from 'redux-observable'
 import { MonoTypeOperatorFunction, merge, Observable } from 'rxjs'
 import { filter, map, mergeMap, takeUntil } from 'rxjs/operators'
 import { disconnect } from '../connectionStatus/reducers'
 import { unsubscribe, subscribe, updatePrice } from './reducers'
-import { API } from '@/api'
+import { PayloadAction } from '@reduxjs/toolkit'
+import { RootEpic } from '../store'
 
-export const pricingServiceEpic = (action$: Observable<Action>) =>
+export const pricingEpic: RootEpic = (
+    action$: Observable<PayloadAction<string>>,
+    state$,
+    { api }
+) =>
     action$.pipe(
         ofType(subscribe.type),
-        mergeMap((action) =>
-            API.subcribePrice(action.payload).pipe(
-                map(updatePrice),
-                takePriceUpdatesUntil(action$, action.payload)
-            )
+        mergeMap((action: PayloadAction<string>) =>
+            api
+                .subcribePrice(action.payload)
+                .pipe(
+                    map(updatePrice),
+                    takePriceUpdatesUntil(action$, action.payload)
+                )
         )
     )
 
 const takePriceUpdatesUntil = (
-    action$: Observable<Action>,
+    action$: Observable<PayloadAction<string>>,
     currencyPair: string
-): MonoTypeOperatorFunction<Action> =>
+): MonoTypeOperatorFunction<PayloadAction<string>> =>
     takeUntil(
         merge(
             action$.pipe(ofType(disconnect.type)),

@@ -11,18 +11,13 @@ export const connectionStatusReducer = createSlice({
     initialState,
     reducers: {
         connect: (state) => state,
-        disconnect: (state) => {
-            state = {
+        disconnect: () => {
+            return {
                 status: ConnectionStatus.SessionExpired,
                 url: '',
             }
-            return state
         },
-        updateStatus: (state, action) => {
-            console.log(action.payload)
-            state = action.payload
-            return state
-        },
+        updateStatus: (_state, action) => action.payload,
     },
 })
 

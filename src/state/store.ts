@@ -1,5 +1,5 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { combineEpics, createEpicMiddleware } from 'redux-observable'
+import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
+import { createEpicMiddleware, Epic } from 'redux-observable'
 import { disconnectAfterAWhile } from './middleware'
 
 import tileDataReducer from '@/state/pricing/reducers'
@@ -7,30 +7,29 @@ import connectionStatusReducer from '@/state/connectionStatus/reducers'
 import systemStatusReducer from '@/state/systemStatus/reducers'
 import referenceDataReducer from '../state/referenceData/reducers'
 import userReducer from '@/state/user/reducers'
+import { API } from '@/api'
 
-import { connectionStatusEpic } from '@/state/connectionStatus'
-import { systemStatusEpic } from '@/state/systemStatus'
-import { referenceDataEpic } from '@/state/referenceData/epics'
-import { pricingServiceEpic } from '@/state/pricing/epics'
-
-export const epicMiddleware = createEpicMiddleware()
-
-export const rootEpic = combineEpics(
-    connectionStatusEpic,
-    systemStatusEpic,
-    referenceDataEpic,
-    pricingServiceEpic
-)
-
-export const store = configureStore({
-    reducer: {
-        tiles: tileDataReducer,
-        connectionStatus: connectionStatusReducer,
-        systemStatus: systemStatusReducer,
-        referenceData: referenceDataReducer,
-        user: userReducer,
-    },
-    middleware: [epicMiddleware, disconnectAfterAWhile],
+const reducer = combineReducers({
+    tiles: tileDataReducer,
+    connectionStatus: connectionStatusReducer,
+    systemStatus: systemStatusReducer,
+    referenceData: referenceDataReducer,
+    user: userReducer,
 })
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof reducer>
+
+export type RootEpic = Epic<AnyAction, AnyAction, RootState>
+
+export const epicMiddleware = createEpicMiddleware<
+    AnyAction,
+    AnyAction,
+    RootState
+>({
+    dependencies: { api: API },
+})
+
+export const store = configureStore({
+    reducer,
+    middleware: [epicMiddleware, disconnectAfterAWhile],
+})

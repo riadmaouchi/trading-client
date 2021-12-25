@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import './assets/css/tailwind.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
-import { epicMiddleware, rootEpic, store } from '@/state/store'
+import { epicMiddleware, store } from '@/state/store'
 import StyledLayout from '@/pages/layout'
 import LoginContainer from '@/pages/user/login'
 import LoginMobileContainer from '@/pages/user/login-mobile'
@@ -16,11 +16,23 @@ import { createGlobalStyle } from 'styled-components'
 import { connect } from './state/connectionStatus/reducers'
 import { userSelected } from './state/user/reducers'
 import { API, client } from './api'
+import { combineEpics } from 'redux-observable'
+
+import { connectionStatusEpic } from '@/state/connectionStatus'
+import { systemStatusEpic } from '@/state/systemStatus'
+import { referenceDataEpic } from '@/state/referenceData/epics'
+import { pricingEpic } from '@/state/pricing/epics'
 
 const RatesRouter = lazy(() => import('./pages/rates'))
 
 async function init() {
     client.connect().then(() => {
+        const rootEpic = combineEpics(
+            connectionStatusEpic,
+            systemStatusEpic,
+            referenceDataEpic,
+            pricingEpic
+        )
         epicMiddleware.run(rootEpic)
         store.dispatch(connect())
         store.dispatch(userSelected(API.login()))

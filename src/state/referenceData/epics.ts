@@ -4,15 +4,21 @@ import { map, switchMapTo, takeUntil } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 import { connect, disconnect } from '../connectionStatus/reducers'
 import { updateReferenceData } from './reducers'
-import { API } from '@/api'
+import { RootEpic } from '../store'
 
-export const referenceDataEpic = (action$: Observable<Action>) =>
+export const referenceDataEpic: RootEpic = (
+    action$: Observable<Action>,
+    state$,
+    { api }
+) =>
     action$.pipe(
         ofType(connect.type),
         switchMapTo(
-            API.subscribeReferenceData().pipe(
-                map(updateReferenceData),
-                takeUntil(action$.pipe(ofType(disconnect.type)))
-            )
+            api
+                .subscribeReferenceData()
+                .pipe(
+                    map(updateReferenceData),
+                    takeUntil(action$.pipe(ofType(disconnect.type)))
+                )
         )
     )

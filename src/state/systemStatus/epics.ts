@@ -4,13 +4,18 @@ import { Action } from '@reduxjs/toolkit'
 import { ofType } from 'redux-observable'
 import { connect, disconnect } from '../connectionStatus/reducers'
 import { updateServiceStatus } from './reducers'
-import { API } from '@/api'
+import { RootEpic } from '../store'
 
-export const systemStatusEpic = (action$: Observable<Action>) => {
+export const systemStatusEpic: RootEpic = (
+    action$: Observable<Action>,
+    state$,
+    { api }
+) => {
     return action$.pipe(
         ofType(connect.type),
         switchMapTo(
-            API.subscribeSystemStatus()
+            api
+                .subscribeSystemStatus()
                 .pipe(map((service) => service.status()))
                 .pipe(
                     map(updateServiceStatus),

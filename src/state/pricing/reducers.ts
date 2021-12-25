@@ -1,8 +1,7 @@
 import { disconnect } from '../connectionStatus/reducers'
 import { createSlice } from '@reduxjs/toolkit'
 import { TileData } from './tile'
-import { format } from 'date-fns'
-import addDays from 'date-fns/addDays'
+import { addDays, format } from 'date-fns'
 
 export type TileState = Record<string, TileData | undefined>
 
@@ -78,7 +77,7 @@ export const tileDataReducer = createSlice({
     },
 })
 
-const update = (state, tile: TileData) => {
+const update = (state: any, tile: TileData) => {
     if (state.priceHistory.length >= priceHistorySize) {
         return {
             ...state,
