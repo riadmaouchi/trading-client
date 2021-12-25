@@ -6,13 +6,13 @@ jest.mock('../../lib/transport')
 
 test('Updates connection status', () => {
     let state = store.getState().connectionStatus
-    expect(state?.status).toBe(ConnectionStatus.Disconnected)
-    expect(state?.url).toBe('')
+    expect(state.status).toBe(ConnectionStatus.Disconnected)
+    expect(state.url).toBe('')
 
     store.dispatch(connect())
     state = store.getState().connectionStatus
-    expect(state?.status).toBe(ConnectionStatus.Disconnected)
-    expect(state?.url).toBe('')
+    expect(state.status).toBe(ConnectionStatus.Disconnected)
+    expect(state.url).toBe('')
 
     store.dispatch(
         updateStatus({
@@ -21,6 +21,6 @@ test('Updates connection status', () => {
         })
     )
     state = store.getState().connectionStatus
-    expect(state?.status).toBe(ConnectionStatus.Connected)
-    expect(state?.url).toBe('url')
+    expect(state.status).toBe(ConnectionStatus.Connected)
+    expect(state.url).toBe('url')
 })
