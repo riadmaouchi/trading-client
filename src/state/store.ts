@@ -5,7 +5,7 @@ import { disconnectAfterAWhile } from './middleware'
 import tileDataReducer from '@/state/pricing/reducers'
 import connectionStatusReducer from '@/state/connectionStatus/reducers'
 import systemStatusReducer from '@/state/systemStatus/reducers'
-import referenceDataReducer from '../state/referenceData/reducers'
+import referenceDataReducer from '@/state/referenceData/reducers'
 import userReducer from '@/state/user/reducers'
 import { API } from '@/api'
 
