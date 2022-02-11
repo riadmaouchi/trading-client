@@ -4,12 +4,11 @@ import { map, switchMapTo, takeUntil } from 'rxjs/operators'
 import { Observable } from 'rxjs'
 import { connect, disconnect } from '../connectionStatus/reducers'
 import { updateReferenceData } from './reducers'
-import { RootEpic } from '../store'
 
-export const referenceDataEpic: RootEpic = (
+export const referenceDataEpic = (
     action$: Observable<Action>,
-    state$,
-    { api }
+    state$: any,
+    { api }: any
 ) =>
     action$.pipe(
         ofType(connect.type),
