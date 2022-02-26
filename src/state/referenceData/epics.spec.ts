@@ -2,26 +2,9 @@ import { referenceDataEpic } from './epics'
 import { updateReferenceData } from './reducers'
 import { TestScheduler } from 'rxjs/testing'
 import { connect, disconnect } from '../connectionStatus/reducers'
-import { Service, Services, ServiceTypes } from '@/api'
-import { subscribe } from '@/state/pricing/reducers'
 
 jest.mock('../../lib/transport')
 jest.mock('../../api/api')
-
-const referenceData: Service[] = [
-    {
-        type: 'reference',
-        id: '1',
-        timestamp: 1,
-        isConnected: true,
-    },
-    {
-        type: 'pricing',
-        id: '1',
-        timestamp: 1,
-        isConnected: true,
-    },
-]
 
 const testScheduler = new TestScheduler((actual, expected) => {
     return expect(actual).toEqual(expected)

@@ -1,15 +1,14 @@
 const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
-    darkMode: false, // or 'media' or 'class',
-    plugins: [],
-
-    purge: {
-        content: ['./src/**/*.{ts,tsx}', './index.html'],
-        enabled: process.env.NODE_ENV === 'production',
-    },
+    plugins: [require('@tailwindcss/typography')],
+    content: ['./src/**/*.{ts,tsx}', './index.html'],
     theme: {
         extend: {
+            fontFamily: {
+                sans: ['Inter var', ...defaultTheme.fontFamily.sans],
+            },
             colors: {
                 accent: 'var(--color-accent)',
                 primary: 'var(--color-primary)',
@@ -19,17 +18,12 @@ module.exports = {
                 neutralAlt: 'var(--color-neutral-alt)',
                 primaryDark: 'var(--color-primarydark)',
                 primarySofter: 'var(--color-primarysofter)',
-
+                gray: colors.neutral,
                 cyan: colors.cyan,
+                green: colors.emerald,
+                yellow: colors.amber,
+                purple: colors.violet,
             },
         },
-    },
-    variants: {
-        extend: {
-            backgroundColor: ['checked', 'disabled'],
-            opacity: ['dark'],
-            overflow: ['hover'],
-        },
-        textColor: ['responsive', 'hover', 'focus', 'group-hover'],
     },
 }
