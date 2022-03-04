@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { StatusButton } from './StatusButton'
 import { selectSystemStatus } from './selectors'
-import { RootState } from '@/state/store'
+import { RootState } from '@/store/store'
 
 const mapStateToProps = (state: RootState) => {
     return {

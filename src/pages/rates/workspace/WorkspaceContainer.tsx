@@ -1,5 +1,5 @@
 import Loader from '@/components/loader/Loader'
-import { RootState } from '@/state/store'
+import { RootState } from '@/store/store'
 import { connect } from 'react-redux'
 import { selectPricingStatus, selectTiles } from './selector'
 import Workspace from './Workspace'

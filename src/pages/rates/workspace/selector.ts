@@ -1,4 +1,4 @@
-import { RootState } from '@/state/store'
+import { RootState } from '@/store/store'
 import { createSelector } from 'reselect'
 
 const getTiles = (state: RootState) => state.referenceData?.pairs || []

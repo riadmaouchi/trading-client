@@ -1,4 +1,4 @@
-import { CurrencyPair } from '@/state/referenceData/pairs'
+import { CurrencyPair } from '@/store/referenceData/pairs'
 
 export const fakeReferenceData: Record<string, CurrencyPair> = {
     EURUSD: {

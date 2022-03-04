@@ -1,4 +1,4 @@
-import { disconnect } from '@/state/connectionStatus/reducers'
+import { disconnect } from '@/store/connectionStatus/reducers'
 import { AnyAction, Dispatch, MiddlewareAPI } from 'redux'
 import { timer } from 'rxjs'
 

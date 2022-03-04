@@ -6,7 +6,7 @@ import StatusContainer from '../footer/status/StatusContainer'
 import { useEffect } from 'react'
 
 import { useDispatch } from 'react-redux'
-import { subscribe } from '@/state/pricing/reducers'
+import { subscribe } from '@/store/pricing/reducers'
 
 interface Props {
     header?: React.ReactChild

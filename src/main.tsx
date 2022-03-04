@@ -7,21 +7,21 @@ import { Provider } from 'react-redux'
 import './assets/css/tailwind.css'
 import { ThemeProvider } from '@/components/theme-provider'
 
-import { epicMiddleware, store } from '@/state/store'
+import { epicMiddleware, store } from '@/store/store'
 import StyledLayout from '@/pages/layout'
 import LoginContainer from '@/pages/user/login'
 import LoginMobileContainer from '@/pages/user/login-mobile'
 import { createGlobalStyle } from 'styled-components'
 
-import { connect } from './state/connectionStatus/reducers'
-import { userSelected } from './state/user/reducers'
+import { connect } from './store/connectionStatus/reducers'
+import { userSelected } from './store/user/reducers'
 import { API, client } from './api'
 import { combineEpics } from 'redux-observable'
 
-import { connectionStatusEpic } from '@/state/connectionStatus'
-import { systemStatusEpic } from '@/state/systemStatus'
-import { referenceDataEpic } from '@/state/referenceData/epics'
-import { pricingEpic } from '@/state/pricing/epics'
+import { connectionStatusEpic } from '@/store/connectionStatus'
+import { systemStatusEpic } from '@/store/systemStatus'
+import { referenceDataEpic } from '@/store/referenceData/epics'
+import { pricingEpic } from '@/store/pricing/epics'
 
 const RatesRouter = lazy(() => import('./pages/rates'))
 

@@ -1,7 +1,7 @@
 import { CurrencyPairNotional } from '@/api'
-import { TileData } from '@/state/pricing'
-import { Direction } from '@/state/pricing/tile'
-import { CurrencyPair } from '@/state/referenceData/pairs'
+import { TileData } from '@/store/pricing'
+import { Direction } from '@/store/pricing/tile'
+import { CurrencyPair } from '@/store/referenceData/pairs'
 import { Menu, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
@@ -104,7 +104,7 @@ const tileView = (
     updateNotional: (notional: CurrencyPairNotional) => void
 ) => (
     <div>
-        <div className="max-w-sm overflow-hidden flex items-center justify-between p-4">
+        <div className="max-w-sm overflow-hidden flex items-center justify-between p-2">
             <div className="relative grid grid-col-2 grid-flow-col gap-2">
                 <HistoryChart
                     id={pair.symbol}
@@ -112,7 +112,7 @@ const tileView = (
                 />
                 <div>
                     <ul>
-                        <li className="text-left">
+                        <li className="text-sm text-left text-gray-400">
                             <span>
                                 H{' '}
                                 {tileData.price.high.toFixed(
@@ -120,13 +120,13 @@ const tileView = (
                                 )}
                             </span>
                         </li>
-                        <li className="text-left">
+                        <li className="text-sm text-left text-gray-400">
                             <span>
                                 M{' '}
                                 {tileData.price.mid.toFixed(pair.ratePrecision)}
                             </span>
                         </li>
-                        <li>
+                        <li className="text-sm text-left text-gray-400">
                             L {tileData.price.low.toFixed(pair.ratePrecision)}
                         </li>
                     </ul>

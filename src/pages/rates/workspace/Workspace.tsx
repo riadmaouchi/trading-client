@@ -5,6 +5,7 @@ import 'gridstack/dist/gridstack-extra.min.css'
 import 'gridstack/dist/h5/gridstack-dd-native'
 import 'gridstack/dist/jq/gridstack-dd-jqueryui'
 import TileContainer from '../tile/TileContainer'
+import { StyledGridElement } from './styled'
 
 interface Tile {
     id: string
@@ -16,7 +17,7 @@ interface Props {
 
 const Card = (id: string) => {
     return (
-        <div className="grid-stack-item-content md:w-1/2 lg:w-1/4 items-center justify-center text-center">
+        <div className="grid-stack-item-content md:w-1/2 lg:w-1/4 items-center justify-center text-center bg-secondary rounded-md mx-auto flex-shrink md:flex-shrink-0">
             <TileContainer id={id} />
         </div>
     )
@@ -41,8 +42,12 @@ const ControlledStack = ({ items }: { items: Tile[] }) => {
                 {
                     float: false,
                     column: 4,
+                    maxRow: 0,
+                    minRow: 0,
+
                     animate: true,
                     disableResize: true,
+                    disableOneColumnMode: false,
                 },
                 '.controlled'
             )
@@ -69,20 +74,22 @@ const ControlledStack = ({ items }: { items: Tile[] }) => {
 
 const Workspace: React.FC<Props> = ({ tiles = [] }) => {
     return (
-        <div>
-            <div className="col-span-2 rounded-md bg-neutralBg">
-                <div className="flex items-center justify-between p-4 border-b border-primary">
-                    <h4 className="text-lg font-semibold text-neutralSoft"></h4>
-                    <div className="flex items-center space-x-2">
-                        <span className="text-sm text-neutralSoft"></span>
+        <StyledGridElement>
+            <div>
+                <div className="col-span-2 rounded-md bg-neutralBg">
+                    <div className="flex items-center justify-between p-4 border-b border-primary">
+                        <h4 className="text-lg font-semibold text-neutralSoft"></h4>
+                        <div className="flex items-center space-x-2">
+                            <span className="text-sm text-neutralSoft"></span>
+                        </div>
+                    </div>
+
+                    <div className="relative p-4">
+                        <ControlledStack items={tiles} />
                     </div>
                 </div>
-
-                <div className="relative p-4">
-                    <ControlledStack items={tiles} />
-                </div>
             </div>
-        </div>
+        </StyledGridElement>
     )
 }
 

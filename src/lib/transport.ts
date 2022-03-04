@@ -142,7 +142,7 @@ export class SseTransport implements Transport {
         this.changeState(ConnectionState.Connecting)
 
         if (import.meta.env.MODE === 'staging') {
-            await import('../mocks/sseMock')
+            await import('../__mocks__/sse')
                 .then((module) => {
                     this.eventSource = new module.FakeEventSource(module.url)
 

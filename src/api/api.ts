@@ -16,7 +16,7 @@ import {
     timer,
 } from 'rxjs'
 import { ConnectionState } from '@/lib'
-import { CurrencyPairs } from '@/state/referenceData/pairs'
+import { CurrencyPairs } from '@/store/referenceData/pairs'
 import {
     Service,
     Services,

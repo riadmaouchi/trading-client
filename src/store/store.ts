@@ -2,11 +2,11 @@ import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createEpicMiddleware, Epic } from 'redux-observable'
 import { disconnectAfterAWhile } from './middleware'
 
-import tileDataReducer from '@/state/pricing/reducers'
-import connectionStatusReducer from '@/state/connectionStatus/reducers'
-import systemStatusReducer from '@/state/systemStatus/reducers'
-import referenceDataReducer from '@/state/referenceData/reducers'
-import userReducer from '@/state/user/reducers'
+import tileDataReducer from '@/store/pricing/reducers'
+import connectionStatusReducer from '@/store/connectionStatus/reducers'
+import systemStatusReducer from '@/store/systemStatus/reducers'
+import referenceDataReducer from '@/store/referenceData/reducers'
+import userReducer from '@/store/user/reducers'
 import { API } from '@/api'
 
 const reducer = combineReducers({

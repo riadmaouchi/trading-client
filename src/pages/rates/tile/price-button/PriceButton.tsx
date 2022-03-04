@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Direction } from '@/state/pricing/tile'
+import { Direction } from '@/store/pricing/tile'
 import styled from 'styled-components'
 
 interface Props {

@@ -2,9 +2,9 @@ import size from 'lodash-es/size'
 import { StyledLadder } from './styled'
 import PriceButton from '../price-button'
 import { toRate } from '../priceFormat'
-import { CurrencyPair } from '@/state/referenceData/pairs'
+import { CurrencyPair } from '@/store/referenceData/pairs'
 import { Level } from '@/api'
-import { Direction } from '@/state/pricing/tile'
+import { Direction } from '@/store/pricing/tile'
 
 interface Props {
     bids: Level[]

@@ -1,12 +1,12 @@
 import { CurrencyPairNotional } from '@/api'
 import Loader from '@/components/loader/Loader'
-import { subscribe, updateNotional } from '@/state/pricing/reducers'
+import { subscribe, updateNotional } from '@/store/pricing/reducers'
 import {
     selectCurrencyPair,
     selectPricingStatus,
     selectTileData,
-} from '@/state/pricing/selectors'
-import { RootState } from '@/state/store'
+} from '@/store/pricing/selectors'
+import { RootState } from '@/store/store'
 import memoize from 'lodash-es/memoize'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
@@ -64,13 +64,11 @@ const TileContainer: React.FC<ContainerProps> = ({
     }, [id, onCurrencyPairChanged, onUnmount])
 
     return (
-        <div className="bg-secondary h-full w-full rounded-md mx-auto flex-shrink md:flex-shrink-0">
-            <Loader
-                status={pricingStatus}
-                render={() => <Tile {...props} />}
-                message={`${id} Disconnected`}
-            />
-        </div>
+        <Loader
+            status={pricingStatus}
+            render={() => <Tile {...props} />}
+            message={`${id} Disconnected`}
+        />
     )
 }
 
