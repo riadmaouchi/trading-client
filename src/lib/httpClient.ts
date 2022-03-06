@@ -1,4 +1,5 @@
-import axios, { AxiosInstance } from 'axios'
+import axios, { AxiosInstance, AxiosResponse, Method } from 'axios'
+import { METHODS } from 'http'
 
 export interface HttpClient {
     url?: string
@@ -16,6 +17,36 @@ export interface HttpClient {
     put<T>(url: string, data?: HttpPostBody): Promise<T>
 
     patch<T>(url: string, data?: HttpPostBody): Promise<T>
+
+    send(request: HttpRequest): Promise<HttpResponse>
+}
+
+export interface HttpHeaders {
+    [key: string]: string
+}
+
+export interface Request {
+    content?: string
+}
+
+export interface Response {
+    content?: string
+}
+
+export interface HttpRequest extends Request {
+    method?: string
+
+    url?: string
+
+    headers?: HttpHeaders
+}
+
+export class HttpResponse implements Response {
+    constructor(
+        public readonly statusCode: number,
+        public readonly statusText?: string,
+        public readonly content?: string
+    ) {}
 }
 
 export type HttpGetParams = Record<string, any>
@@ -32,6 +63,27 @@ export class AxiosHttpClient implements HttpClient {
             })
         }
         this.instance = instance
+    }
+
+    async send(request: HttpRequest): Promise<HttpResponse> {
+        if (!request.method) {
+            throw new Error('No method defined.')
+        }
+        if (!request.url) {
+            throw new Error('No url defined.')
+        }
+
+        const response: AxiosResponse<string> = await this.instance.request({
+            method: request.method as Method,
+            url: request.url,
+            headers: { ...request.headers },
+        })
+
+        return new HttpResponse(
+            response.status,
+            response.statusText,
+            response.data
+        )
     }
 
     set url(baseUrl: string) {

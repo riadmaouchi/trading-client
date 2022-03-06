@@ -1,2 +1,2 @@
-export { userReducer } from './reducers'
-export type { UserState } from './reducers'
+export { userSlice as userReducer } from '../../slices/userSlice'
+export type { UserState } from '../../slices/userSlice'

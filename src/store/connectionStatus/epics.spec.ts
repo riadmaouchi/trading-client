@@ -3,7 +3,6 @@ import { connect, disconnect, updateStatus } from './reducers'
 import { TestScheduler } from 'rxjs/testing'
 
 jest.mock('../../lib/transport')
-jest.mock('../../api/api')
 
 const testScheduler = new TestScheduler((actual, expected) => {
     return expect(actual).toEqual(expected)

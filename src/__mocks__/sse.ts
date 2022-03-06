@@ -1,9 +1,9 @@
 import { map } from 'rxjs/operators'
 
 import { MockEvent, EventSource } from 'mocksse'
-import { fakeReferenceData } from '@/api/mock/referenceData'
-import { fakeSystemStatusData } from '@/api/mock/systemStatus'
-import { getPrice } from '@/api/mock'
+import { fakeReferenceData } from '@/api/fakedata/referenceData'
+import { fakeSystemStatusData } from '@/api/fakedata/systemStatus'
+import { getPrice } from '@/api/fakedata'
 
 const port =
     window.location.protocol === 'https:' && !window.location.port ? 443 : 8080

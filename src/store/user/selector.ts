@@ -5,9 +5,9 @@ const selectState = (state: RootState) => state.user
 
 const selectUser = createSelector([selectState], (state) => state.user)
 
-const selectSelectingUser = createSelector(
+const selectLoadingStatus = createSelector(
     [selectState],
-    (state) => state.selectingUser
+    (state) => state.loading
 )
 
-export { selectUser, selectSelectingUser }
+export { selectUser, selectLoadingStatus }

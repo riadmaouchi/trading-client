@@ -1,12 +1,13 @@
 import { BehaviorSubject, Observable, Observer, Subscription } from 'rxjs'
 import { filter, map, share } from 'rxjs/operators'
-import { HttpClient } from './httpClient'
+import { HttpClient, Response, Request } from './httpClient'
 import { ReconnectPolicy, RetryPolicy } from './retryPolicy'
 
 export interface Transport {
     connect(): Promise<void>
     stop(): Promise<void>
-    send(url: string, data: any): Promise<void>
+    send(data: any): Promise<void>
+    request(data: Request): Promise<Response>
     onreceive<Event>(eventType: string): Observable<Event>
     onclose: ((error?: Error) => void) | null
     connectionState: BehaviorSubject<ConnectionInfo>
@@ -63,8 +64,13 @@ export class SseTransport implements Transport {
         this.onclose = null
     }
 
-    public async send<T>(url: string, data: any): Promise<T> {
-        return this.httpClient.post(url, data)
+    public async request(data: Request): Promise<Response> {
+        return await this.httpClient.send(data)
+    }
+
+    public async send(data: any): Promise<void> {
+        // return this.httpClient.post(this.httpClient.url!, data)
+        this.httpClient.send(data)
     }
 
     public onreceive<Event>(eventType: string): Observable<Event> {

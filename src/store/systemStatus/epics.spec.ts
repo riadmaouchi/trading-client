@@ -5,7 +5,6 @@ import { connect, disconnect } from '../connectionStatus/reducers'
 import { Service, Services, ServiceTypes } from '@/api'
 
 jest.mock('../../lib/transport')
-jest.mock('../../api/api')
 
 const systemStatusData: Service[] = [
     {

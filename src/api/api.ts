@@ -17,6 +17,7 @@ import {
 } from 'rxjs'
 import { ConnectionState } from '@/lib'
 import { CurrencyPairs } from '@/store/referenceData/pairs'
+import { HttpRequest, HttpResponse } from '../lib/httpClient'
 import {
     Service,
     Services,
@@ -30,13 +31,14 @@ import {
 const HEARTBEAT_TIMEOUT = 3000
 
 export const API = {
-    login: () => {
-        return {
-            firstName: 'Arvel',
-            lastName: 'Crynyd',
-            code: 'ACR',
-            avatar: `${window.location.origin}/five.png`,
+    login: async (userId: string) => {
+        console.log('fgjmldfhjmldgjhmlfjh')
+        const request: HttpRequest = {
+            url: `http://localhost:8080/api/v1/users/${userId}`,
+            method: 'GET',
         }
+        const res = await client.request(request)
+        return res.content
     },
     subcribeConnectionStatus: () =>
         client.connectionState.pipe(

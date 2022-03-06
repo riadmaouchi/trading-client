@@ -14,8 +14,8 @@ import LoginMobileContainer from '@/pages/user/login-mobile'
 import { createGlobalStyle } from 'styled-components'
 
 import { connect } from './store/connectionStatus/reducers'
-import { userSelected } from './store/user/reducers'
-import { API, client } from './api'
+import { login } from './slices/userSlice'
+import { client } from './api'
 import { combineEpics } from 'redux-observable'
 
 import { connectionStatusEpic } from '@/store/connectionStatus'
@@ -35,7 +35,7 @@ async function init() {
         )
         epicMiddleware.run(rootEpic)
         store.dispatch(connect())
-        store.dispatch(userSelected(API.login()))
+        store.dispatch(login('2'))
         ReactDOM.render(renderApp(), document.getElementById('root'))
     })
 }

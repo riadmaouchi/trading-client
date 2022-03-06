@@ -1,7 +1,14 @@
+import { Request, Response } from '@/lib/httpClient'
 import { Observable, BehaviorSubject } from 'rxjs'
 import transport, { ConnectionInfo, Transport } from '../transport'
 
 export class SseTransport implements Transport {
+    request(data: Request): Promise<Response> {
+        throw new Error('Method not implemented.')
+    }
+    send(data: any): Promise<void> {
+        throw new Error('Method not implemented.')
+    }
     public connectionState!: BehaviorSubject<ConnectionInfo>
 
     config!: transport
@@ -12,9 +19,7 @@ export class SseTransport implements Transport {
     stop(): Promise<void> {
         throw new Error('Method not implemented.')
     }
-    send(url: string, data: any): Promise<void> {
-        throw new Error('Method not implemented.')
-    }
+
     onreceive<Event>(eventType: string): Observable<Event> {
         throw new Error('Method not implemented.')
     }

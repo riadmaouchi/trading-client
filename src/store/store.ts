@@ -1,4 +1,5 @@
 import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
+import { useDispatch } from 'react-redux'
 import { createEpicMiddleware, Epic } from 'redux-observable'
 import { disconnectAfterAWhile } from './middleware'
 
@@ -6,7 +7,7 @@ import tileDataReducer from '@/store/pricing/reducers'
 import connectionStatusReducer from '@/store/connectionStatus/reducers'
 import systemStatusReducer from '@/store/systemStatus/reducers'
 import referenceDataReducer from '@/store/referenceData/reducers'
-import userReducer from '@/store/user/reducers'
+import userSlice from '@/slices/userSlice'
 import { API } from '@/api'
 
 const reducer = combineReducers({
@@ -14,7 +15,7 @@ const reducer = combineReducers({
     connectionStatus: connectionStatusReducer,
     systemStatus: systemStatusReducer,
     referenceData: referenceDataReducer,
-    user: userReducer,
+    user: userSlice,
 })
 
 export type RootState = ReturnType<typeof reducer>
@@ -31,5 +32,6 @@ export const epicMiddleware = createEpicMiddleware<
 
 export const store = configureStore({
     reducer,
-    middleware: [epicMiddleware, disconnectAfterAWhile],
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware().prepend(epicMiddleware, disconnectAfterAWhile),
 })
