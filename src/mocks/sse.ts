@@ -15,8 +15,6 @@ export const url =
     port +
     '/v1/sse'
 
-console.log('mock defaultUrl', url)
-
 new MockEvent({
     url,
     responses: [

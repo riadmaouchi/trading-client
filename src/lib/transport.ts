@@ -148,19 +148,17 @@ export class SseTransport implements Transport {
         this.changeState(ConnectionState.Connecting)
 
         if (import.meta.env.MODE === 'staging') {
-            await import('../__mocks__/sse')
+            await import('../mocks/sse')
                 .then((module) => {
                     this.eventSource = new module.FakeEventSource(module.url)
 
                     this.eventSource.onopen = () => {
-                        console.debug('onopen:')
                         this.connectedAt = new Date()
                         this.updateLastConnectionTime()
                         this.changeState(ConnectionState.Open)
                     }
 
-                    this.eventSource.onerror = (evt: any) => {
-                        console.debug('Error:', evt)
+                    this.eventSource.onerror = () => {
                         this.close()
                         this.changeState(ConnectionState.Closed)
                     }
