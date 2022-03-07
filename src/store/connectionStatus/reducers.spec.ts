@@ -2,7 +2,7 @@ import { store } from '../store'
 import { ConnectionStatus } from '../../api/types'
 import { connect, updateStatus } from './reducers'
 
-jest.mock('../../lib/transport')
+jest.mock('../../api/transport')
 
 test('Updates connection status', () => {
     let state = store.getState().connectionStatus

@@ -27,7 +27,6 @@ const RatesRouter = lazy(() => import('./pages/rates'))
 
 async function init() {
     if (import.meta.env.MODE === 'staging') {
-        console.log('starting worker')
         await import('./mocks/browser').then((module) => module.worker.start())
     }
     await client.connect().then(() => {

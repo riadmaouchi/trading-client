@@ -11,7 +11,7 @@ const userResponse: User = {
 
 const userId = 'test123'
 
-jest.mock('../lib/transport')
+jest.mock('../api/transport')
 jest.mock('../api/api')
 
 describe('User state tests', () => {

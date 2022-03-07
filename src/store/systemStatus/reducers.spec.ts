@@ -1,7 +1,7 @@
 import { store } from '../store'
 import { updateServiceStatus } from './reducers'
 
-jest.mock('../../lib/transport')
+jest.mock('../../api/transport')
 
 test('Updates system status', () => {
     let state = store.getState().systemStatus

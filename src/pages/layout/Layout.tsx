@@ -18,7 +18,6 @@ interface Props {
 const StyledLayout: React.FC<Props> = ({ body, header, mobile }) => {
     const dispatch = useDispatch()
     useEffect(() => {
-        // console.log('dispatch')
         dispatch(subscribe('EURUSD'))
     })
 

@@ -1,7 +1,7 @@
 import { store } from '../store'
 import { updateReferenceData } from './reducers'
 
-jest.mock('../../lib/transport')
+jest.mock('../../api/transport')
 
 test('Updates reference data', () => {
     let state = store.getState().referenceData

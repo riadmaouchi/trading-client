@@ -15,9 +15,9 @@ import {
     switchMap,
     timer,
 } from 'rxjs'
-import { ConnectionState } from '@/lib'
+import { ConnectionState } from '.'
 import { CurrencyPairs } from '@/store/referenceData/pairs'
-import { HttpRequest, HttpResponse } from '../lib/httpClient'
+import { HttpRequest } from './httpClient'
 import {
     Service,
     Services,
@@ -32,7 +32,6 @@ const HEARTBEAT_TIMEOUT = 3000
 
 export const API = {
     login: async (userId: string) => {
-        console.log('fgjmldfhjmldgjhmlfjh')
         const request: HttpRequest = {
             url: `http://localhost:8080/api/v1/users/${userId}`,
             method: 'GET',

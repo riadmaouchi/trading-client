@@ -14,7 +14,7 @@ import {
 } from 'rxjs'
 import { Level, Price, PriceMovements, ConnectionStatus } from './types'
 import { Service, Services, ServiceTypes } from '@/api'
-import { fakeReferenceData, fakeSystemStatusData, getPrice } from './fakedata'
+import { fakeReferenceData, fakeSystemStatusData, getPrice } from '../mocks/fakedata'
 
 export const API = {
     login: () => {

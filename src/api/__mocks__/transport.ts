@@ -1,4 +1,4 @@
-import { Request, Response } from '@/lib/httpClient'
+import { Request, Response } from '@/api/httpClient'
 import { Observable, BehaviorSubject } from 'rxjs'
 import transport, { ConnectionInfo, Transport } from '../transport'
 
