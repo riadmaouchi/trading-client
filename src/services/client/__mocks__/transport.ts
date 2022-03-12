@@ -1,5 +1,5 @@
 import { Request, Response } from '@/services/client/httpClient'
-import { Observable, BehaviorSubject } from 'rxjs'
+import { BehaviorSubject, Observable } from 'rxjs'
 import transport, { ConnectionInfo, Transport } from '../transport'
 
 export class SseTransport implements Transport {

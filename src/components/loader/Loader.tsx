@@ -1,8 +1,8 @@
 import { ServiceStates } from '@/services/types'
 import { StatusOfflineIcon } from '@heroicons/react/solid'
 import { Fragment, useEffect } from 'react'
-import styled from 'styled-components/macro'
 import { default as UILoader } from 'react-loader-spinner'
+import styled from 'styled-components/macro'
 
 const LoadableStyle = styled.div<{ minWidth?: string; minHeight?: string }>`
     width: 100%;

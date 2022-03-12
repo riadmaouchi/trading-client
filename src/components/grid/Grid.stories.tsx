@@ -1,6 +1,6 @@
+import { Meta, Story } from '@storybook/react'
 import Workspace from './Grid'
 
-import { Meta, Story } from '@storybook/react'
 
 export default {
     component: Workspace,

@@ -1,8 +1,8 @@
-import { map, switchMapTo, takeUntil } from 'rxjs/operators'
+import { Action } from '@reduxjs/toolkit'
 import { ofType } from 'redux-observable'
 import { Observable } from 'rxjs'
-import { Action } from '@reduxjs/toolkit'
-import { updateStatus, connect, disconnect } from './connectionSlice'
+import { map, switchMapTo, takeUntil } from 'rxjs/operators'
+import { connect, disconnect, updateStatus } from './connectionSlice'
 
 export const connectionStatusEpic = (
     action$: Observable<Action>,

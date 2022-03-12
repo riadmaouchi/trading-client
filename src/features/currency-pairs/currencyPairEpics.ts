@@ -1,7 +1,7 @@
 import { Action } from '@reduxjs/toolkit'
 import { ofType } from 'redux-observable'
-import { map, switchMapTo, takeUntil } from 'rxjs/operators'
 import { Observable } from 'rxjs'
+import { map, switchMapTo, takeUntil } from 'rxjs/operators'
 import { connect, disconnect } from '../connection-status/connectionSlice'
 import { updateCurrencyPairs } from './currencyPairSlice'
 

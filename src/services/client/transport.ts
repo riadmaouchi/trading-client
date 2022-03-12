@@ -1,6 +1,6 @@
 import { BehaviorSubject, Observable, Observer, Subscription } from 'rxjs'
 import { filter, map, share } from 'rxjs/operators'
-import { HttpClient, Response, Request } from './httpClient'
+import { HttpClient, Request, Response } from './httpClient'
 import { ReconnectPolicy, RetryPolicy } from './retryPolicy'
 
 export interface Transport {

@@ -1,12 +1,8 @@
 import { Breadcrumb } from '@/components'
-import Header from '../header/Header'
 import { useTheme } from '@/components/theme-provider'
-import Footer from '../footer/Footer'
 import StatusContainer from '../../features/system-status/SystemStatusContainer'
-import { useEffect } from 'react'
-
-import { useDispatch } from 'react-redux'
-import { subscribe } from '@/features/rates/tile/tileSlice'
+import Footer from '../footer/Footer'
+import Header from '../header/Header'
 
 interface Props {
     header?: React.ReactChild
@@ -16,11 +12,6 @@ interface Props {
 }
 
 const StyledLayout: React.FC<Props> = ({ body, header, mobile }) => {
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(subscribe('EURUSD'))
-    })
-
     const { themeName } = useTheme()
     const version = [
         import.meta.env.PACKAGE_VERSION,

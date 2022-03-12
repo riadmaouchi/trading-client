@@ -1,8 +1,8 @@
-import { systemStatusEpic } from './systemStatusEpics'
-import { updateServiceStatus } from './systemStatusSlice'
+import { Service, Services, ServiceTypes } from '@/services'
 import { TestScheduler } from 'rxjs/testing'
 import { connect, disconnect } from '../connection-status/connectionSlice'
-import { Service, Services, ServiceTypes } from '@/services'
+import { systemStatusEpic } from './systemStatusEpics'
+import { updateServiceStatus } from './systemStatusSlice'
 
 jest.mock('../../services/client/transport')
 

@@ -1,6 +1,6 @@
+import Switcher from '@/components/switcher/Switcher'
 import { ThemeName, useTheme } from '@/components/theme-provider'
 import { MoonIcon, SunIcon } from '@heroicons/react/solid'
-import Switcher from '@/components/switcher/Switcher'
 
 const ThemeSwitcher: React.FC = () => {
     const { toggleTheme, themeName } = useTheme()

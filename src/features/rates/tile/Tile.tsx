@@ -1,10 +1,8 @@
-import { CurrencyPairNotional, CurrencyPair } from '@/services'
 import { TileData } from '@/features/rates/tile'
-
+import { CurrencyPair, CurrencyPairNotional } from '@/services'
 import { Menu, Transition } from '@headlessui/react'
 import { MenuIcon } from '@heroicons/react/solid'
 import { useState } from 'react'
-
 import { HistoryChart } from './history'
 import { Ladder } from './ladder'
 import Notional from './notional'

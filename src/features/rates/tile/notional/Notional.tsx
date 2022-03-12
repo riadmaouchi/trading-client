@@ -1,12 +1,12 @@
+import { CurrencyPairNotional } from '@/services'
+import numeral from 'numeral'
 import React, {
     ChangeEventHandler,
     FocusEventHandler,
     useEffect,
     useMemo,
-    useState,
+    useState
 } from 'react'
-import { CurrencyPairNotional } from '@/services'
-import numeral from 'numeral'
 
 interface Props {
     currencyPairBase: string

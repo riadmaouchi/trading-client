@@ -1,7 +1,7 @@
-import { disconnect } from '../../connection-status/connectionSlice'
 import { createSlice } from '@reduxjs/toolkit'
-import { TileData } from './tileData'
 import { addDays, format } from 'date-fns'
+import { disconnect } from '../../connection-status/connectionSlice'
+import { TileData } from './tileData'
 
 export type TileState = Record<string, TileData | undefined>
 

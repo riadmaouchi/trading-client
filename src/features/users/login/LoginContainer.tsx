@@ -1,8 +1,7 @@
-import { connect } from 'react-redux'
-import Login from './Login'
-
-import { selectUser, selectLoadingStatus } from '../selectors'
 import { RootState } from '@/app/store'
+import { connect } from 'react-redux'
+import { selectLoadingStatus, selectUser } from '../selectors'
+import Login from './Login'
 
 const mapStateToProps = (state: RootState) => ({
     user: selectUser(state),

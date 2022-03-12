@@ -1,7 +1,7 @@
-import { currencyPairEpic } from './currencyPairEpics'
-import { updateCurrencyPairs } from './currencyPairSlice'
 import { TestScheduler } from 'rxjs/testing'
 import { connect, disconnect } from '../connection-status/connectionSlice'
+import { currencyPairEpic } from './currencyPairEpics'
+import { updateCurrencyPairs } from './currencyPairSlice'
 
 jest.mock('../../services/client/transport')
 

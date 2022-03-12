@@ -1,3 +1,13 @@
+import {
+    ConnectionStatus,
+    CurrencyPairs,
+    Level,
+    Price,
+    PriceMovements,
+    Service,
+    Services,
+    ServiceTypes,
+} from '@/services'
 import { client } from '@/services/client'
 import {
     distinctUntilChanged,
@@ -15,18 +25,8 @@ import {
     switchMap,
     timer,
 } from 'rxjs'
-import { CurrencyPairs } from '@/services'
-import { HttpRequest } from './client/httpClient'
-import {
-    Service,
-    Services,
-    ServiceTypes,
-    ConnectionStatus,
-    Level,
-    Price,
-    PriceMovements,
-} from '@/services'
 import { ConnectionState } from './client'
+import { HttpRequest } from './client/httpClient'
 
 const HEARTBEAT_TIMEOUT = 3000
 

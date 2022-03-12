@@ -1,9 +1,9 @@
 import { GridStack } from 'gridstack'
-import { createRef, useEffect, useRef } from 'react'
-import 'gridstack/dist/gridstack.min.css'
 import 'gridstack/dist/gridstack-extra.min.css'
+import 'gridstack/dist/gridstack.min.css'
 import 'gridstack/dist/h5/gridstack-dd-native'
 import 'gridstack/dist/jq/gridstack-dd-jqueryui'
+import { createRef, useEffect, useRef } from 'react'
 import TileContainer from '../tile/TileContainer'
 import { StyledGridElement } from './styled'
 

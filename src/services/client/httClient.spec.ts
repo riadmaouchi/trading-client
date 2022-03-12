@@ -1,5 +1,5 @@
-import { AxiosHttpClient, HttpClient } from './httpClient'
 import axios, { AxiosResponse } from 'axios'
+import { AxiosHttpClient, HttpClient } from './httpClient'
 
 jest.mock('axios')
 

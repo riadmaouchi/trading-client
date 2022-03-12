@@ -1,5 +1,5 @@
-import Footer, { Props } from './Footer'
 import { Meta, Story } from '@storybook/react'
+import Footer, { Props } from './Footer'
 
 export default {
     component: Footer,

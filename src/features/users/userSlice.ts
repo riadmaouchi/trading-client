@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { User } from '@/services'
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { apiClient } from '../../services/apiClient'
 
 export interface UserState {

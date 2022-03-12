@@ -1,8 +1,8 @@
 import { GridStack } from 'gridstack'
+import 'gridstack/dist/gridstack-extra.min.css'
+import 'gridstack/dist/gridstack.min.css'
 import 'gridstack/dist/h5/gridstack-dd-native'
 import React, { createRef, useEffect, useRef } from 'react'
-import 'gridstack/dist/gridstack.min.css'
-import 'gridstack/dist/gridstack-extra.min.css'
 
 interface Tile {
     id: string

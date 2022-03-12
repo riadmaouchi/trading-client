@@ -1,4 +1,13 @@
-import { CurrencyPairs } from '@/services'
+import {
+    ConnectionStatus,
+    CurrencyPairs,
+    Level,
+    Price,
+    PriceMovements,
+    Service,
+    Services,
+    ServiceTypes,
+} from '@/services'
 import {
     distinctUntilChanged,
     filter,
@@ -16,16 +25,6 @@ import {
     switchMap,
     timer,
 } from 'rxjs'
-
-import {
-    Service,
-    Services,
-    ServiceTypes,
-    ConnectionStatus,
-    Level,
-    Price,
-    PriceMovements,
-} from '@/services'
 import { client } from '../client'
 
 const HEARTBEAT_TIMEOUT = 3000

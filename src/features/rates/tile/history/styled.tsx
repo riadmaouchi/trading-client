@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const StyledHistory = styled.div`
     .legend {
@@ -14,4 +14,4 @@ export const StyledHistory = styled.div`
     .tv-lightweight-charts {
         background-color: ${({ theme }) => theme.colors.primarySoft};
     }
-`;
+`

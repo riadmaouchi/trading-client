@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosResponse, Method } from 'axios'
-import { METHODS } from 'http'
 
 export interface HttpClient {
     url?: string

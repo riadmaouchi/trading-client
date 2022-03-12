@@ -1,9 +1,9 @@
+import { CurrencyPair, Level } from '@/services'
 import size from 'lodash-es/size'
-import { StyledLadder } from './styled'
 import PriceButton from '../price-button'
 import { toRate } from '../priceFormat'
-import { Level, CurrencyPair } from '@/services'
 import { Direction } from '../tileData'
+import { StyledLadder } from './styled'
 
 interface Props {
     bids: Level[]

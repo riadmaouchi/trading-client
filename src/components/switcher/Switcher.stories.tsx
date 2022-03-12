@@ -1,7 +1,6 @@
-import Switcher, { Props } from './Switcher'
-
-import { Meta, Story } from '@storybook/react'
 import { MoonIcon, SunIcon } from '@heroicons/react/solid'
+import { Meta, Story } from '@storybook/react'
+import Switcher, { Props } from './Switcher'
 
 export default {
     component: Switcher,

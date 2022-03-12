@@ -1,6 +1,6 @@
 import { store } from '../../app/store'
-import { login } from './userSlice'
 import { User } from '../../services/types'
+import { login } from './userSlice'
 
 const userResponse: User = {
     firstName: 'Arvel',

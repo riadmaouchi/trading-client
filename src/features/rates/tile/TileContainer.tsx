@@ -1,17 +1,16 @@
-import { CurrencyPairNotional } from '@/services'
+import { RootState } from '@/app/store'
 import Loader from '@/components/loader/Loader'
-import { subscribe, updateNotional } from '@/features/rates/tile/tileSlice'
 import {
     selectCurrencyPair,
     selectPricingStatus,
     selectTileData,
 } from '@/features/rates/tile/selectors'
-import { RootState } from '@/app/store'
+import { subscribe, updateNotional } from '@/features/rates/tile/tileSlice'
+import { CurrencyPairNotional } from '@/services'
 import memoize from 'lodash-es/memoize'
 import { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { Dispatch, compose } from 'redux'
-
+import { compose, Dispatch } from 'redux'
 import Tile from './Tile'
 
 interface TileContainerProps {

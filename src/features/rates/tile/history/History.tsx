@@ -1,8 +1,7 @@
-import { useContext, useEffect, useRef } from 'react'
-import last from 'lodash-es/last'
 import { Price } from '@/services'
 import { createChart } from 'lightweight-charts'
-
+import last from 'lodash-es/last'
+import { useContext, useEffect, useRef } from 'react'
 import { ThemeContext } from 'styled-components'
 import { StyledHistory } from './styled'
 

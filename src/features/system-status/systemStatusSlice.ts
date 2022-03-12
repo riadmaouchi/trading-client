@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { ServiceGroup, ServiceStates } from '@/services'
+import { createSlice } from '@reduxjs/toolkit'
 import { disconnect } from '../connection-status/connectionSlice'
 
 export interface ServiceState {

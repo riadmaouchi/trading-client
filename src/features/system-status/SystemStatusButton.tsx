@@ -1,3 +1,4 @@
+import { Connection, ServiceGroup, ServiceStates } from '@/services'
 import { Popover } from '@headlessui/react'
 import {
     CheckCircleIcon,
@@ -7,7 +8,6 @@ import {
 } from '@heroicons/react/solid'
 import React, { useState } from 'react'
 import { usePopper } from 'react-popper'
-import { Connection, ServiceGroup, ServiceStates } from '@/services'
 
 interface Props {
     connectionStatus: Connection

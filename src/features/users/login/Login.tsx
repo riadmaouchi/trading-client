@@ -1,4 +1,5 @@
 import { User } from '@/services'
+import { Fragment } from 'react'
 
 interface Props {
     user?: User
@@ -6,7 +7,7 @@ interface Props {
 }
 
 const Login = ({ user, loading }: Props) => (
-    <React.Fragment>
+    <Fragment>
         {!user || loading ? (
             <div className="h-8 w-8 rounded-full bg-secondary">
                 <svg
@@ -28,7 +29,7 @@ const Login = ({ user, loading }: Props) => (
         ) : (
             <img className="h-8 w-8 rounded-full" src={user.avatar} alt="" />
         )}
-    </React.Fragment>
+    </Fragment>
 )
 
 export default Login

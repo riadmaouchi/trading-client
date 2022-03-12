@@ -1,6 +1,5 @@
-import { default as Switcher } from './ThemeSwitcher'
-
 import { Meta, Story } from '@storybook/react'
+import { default as Switcher } from './ThemeSwitcher'
 
 export default {
     component: Switcher,

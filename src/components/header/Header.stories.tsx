@@ -1,25 +1,5 @@
-import { storiesOf } from '@storybook/react'
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
-import Header, { Props } from './Header'
-
-/*const stories = storiesOf('Header', module)
-const store = createStore(() => ({
-    userStatus: {
-        code: 'LMO',
-        firstName: 'Lorretta',
-        lastName: 'Moe',
-        avatar: `${window.location.origin}/static/media/mockedAvatars/one.png`,
-    },
-}))
-
-stories.add('Header', () => (
-    <Provider store={store}>
-        <Header />
-    </Provider>
-))*/
-
 import { Meta, Story } from '@storybook/react'
+import Header, { Props } from './Header'
 
 export default {
     component: Header,

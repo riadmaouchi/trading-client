@@ -1,6 +1,6 @@
-import { createSelector } from 'reselect'
 import { CurrencyPair } from '@/services'
-import { RootState } from '../../../app/store'
+import { createSelector } from 'reselect'
+import { RootState } from '@/app/store'
 import { TileData } from './tileData'
 
 const DEFAULT_TILE_DATA: TileData = {

@@ -1,13 +1,12 @@
+import connectionSlice from '@/features/connection-status/connectionSlice'
+import currencyPairSlice from '@/features/currency-pairs/currencyPairSlice'
+import tileDataSlice from '@/features/rates/tile/tileSlice'
+import systemStatusSlice from '@/features/system-status/systemStatusSlice'
+import userSlice from '@/features/users/userSlice'
+import { apiClient } from '@/services'
 import { AnyAction, combineReducers, configureStore } from '@reduxjs/toolkit'
 import { createEpicMiddleware, Epic } from 'redux-observable'
 import { disconnectAfterAWhile } from './middleware'
-
-import tileDataSlice from '@/features/rates/tile/tileSlice'
-import connectionSlice from '@/features/connection-status/connectionSlice'
-import systemStatusSlice from '@/features/system-status/systemStatusSlice'
-import currencyPairSlice from '@/features/currency-pairs/currencyPairSlice'
-import userSlice from '@/features/users/userSlice'
-import { apiClient } from '@/services'
 
 const reducer = combineReducers({
     tiles: tileDataSlice,

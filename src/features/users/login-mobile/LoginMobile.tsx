@@ -1,4 +1,5 @@
 import { User } from '@/services'
+import { Fragment } from 'react'
 
 interface Props {
     user?: User
@@ -6,7 +7,7 @@ interface Props {
 }
 
 const LoginMobile = ({ user, loading }: Props) => (
-    <React.Fragment>
+    <Fragment>
         {!user || loading ? (
             <div className="flex items-center px-5">
                 <div className="h-8 w-8 rounded-full bg-secondary">
@@ -46,7 +47,7 @@ const LoginMobile = ({ user, loading }: Props) => (
                 </div>
             </div>
         )}
-    </React.Fragment>
+    </Fragment>
 )
 
 export default LoginMobile

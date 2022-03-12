@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Theme } from "themes";
+import styled from 'styled-components'
+import { Theme } from 'themes'
 
 export const StyledLadder = styled.div<{ theme: Theme }>`
     overflow: auto;
@@ -8,4 +8,4 @@ export const StyledLadder = styled.div<{ theme: Theme }>`
         width: 0em;
         height: 0em;
     }
-`;
+`

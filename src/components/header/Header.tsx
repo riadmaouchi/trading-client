@@ -1,9 +1,9 @@
-import ThemeSwitcher from '../theme-switcher'
+import Logo from '@/components/logo/Logo'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { Fragment } from 'react'
 import { NavLink } from 'react-router-dom'
-import Logo from '@/components/logo/Logo'
+import ThemeSwitcher from '../theme-switcher'
 
 const navigation = [
     { name: 'Rates', url: '/' },

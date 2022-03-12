@@ -1,9 +1,9 @@
+import { PayloadAction } from '@reduxjs/toolkit'
 import { ofType } from 'redux-observable'
-import { MonoTypeOperatorFunction, merge, Observable } from 'rxjs'
+import { merge, MonoTypeOperatorFunction, Observable } from 'rxjs'
 import { filter, map, mergeMap, takeUntil } from 'rxjs/operators'
 import { disconnect } from '../../connection-status/connectionSlice'
-import { unsubscribe, subscribe, updatePrice } from './tileSlice'
-import { PayloadAction } from '@reduxjs/toolkit'
+import { subscribe, unsubscribe, updatePrice } from './tileSlice'
 
 export const tileEpic = (
     action$: Observable<PayloadAction<string>>,

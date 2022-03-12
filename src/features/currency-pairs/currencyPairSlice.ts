@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit'
 import { CurrencyPair } from '@/services'
+import { createSlice } from '@reduxjs/toolkit'
 import { disconnect } from '../connection-status/connectionSlice'
 
 export interface CurrencyPairState {
