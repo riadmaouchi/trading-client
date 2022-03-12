@@ -4,7 +4,7 @@ import { connect, disconnect } from '../connection-status/connectionSlice'
 import { systemStatusEpic } from './systemStatusEpics'
 import { updateServiceStatus } from './systemStatusSlice'
 
-jest.mock('../../services/client/transport')
+jest.mock('../../services/client/connection')
 
 const systemStatusData: Service[] = [
     {

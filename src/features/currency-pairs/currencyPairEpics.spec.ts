@@ -3,7 +3,7 @@ import { connect, disconnect } from '../connection-status/connectionSlice'
 import { currencyPairEpic } from './currencyPairEpics'
 import { updateCurrencyPairs } from './currencyPairSlice'
 
-jest.mock('../../services/client/transport')
+jest.mock('../../services/client/connection')
 
 const testScheduler = new TestScheduler((actual, expected) => {
     return expect(actual).toEqual(expected)

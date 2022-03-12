@@ -2,7 +2,7 @@ import { store } from '../../app/store'
 import { ConnectionStatus } from '../../services/types'
 import { connect, updateStatus } from './connectionSlice'
 
-jest.mock('../../services/client/transport')
+jest.mock('../../services/client/connection')
 
 test('Updates connection status', () => {
     let state = store.getState().connectionStatus

@@ -1,8 +1,8 @@
 import { Request, Response } from '@/services/client/httpClient'
 import { BehaviorSubject, Observable } from 'rxjs'
-import transport, { ConnectionInfo, Transport } from '../transport'
+import ConnectionConfig, { ConnectionInfo, Connection } from '../connection'
 
-export class SseTransport implements Transport {
+export class SseConnection implements Connection {
     request(data: Request): Promise<Response> {
         throw new Error('Method not implemented.')
     }
@@ -11,7 +11,7 @@ export class SseTransport implements Transport {
     }
     public connectionState!: BehaviorSubject<ConnectionInfo>
 
-    config!: transport
+    config!: ConnectionConfig
 
     connect(): Promise<void> {
         throw new Error('Method not implemented.')

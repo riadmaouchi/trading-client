@@ -3,7 +3,7 @@ import { filter, map, share } from 'rxjs/operators'
 import { HttpClient, Request, Response } from './httpClient'
 import { ReconnectPolicy, RetryPolicy } from './retryPolicy'
 
-export interface Transport {
+export interface Connection {
     connect(): Promise<void>
     stop(): Promise<void>
     send(data: any): Promise<void>
@@ -11,7 +11,7 @@ export interface Transport {
     onreceive<Event>(eventType: string): Observable<Event>
     onclose: ((error?: Error) => void) | null
     connectionState: BehaviorSubject<ConnectionInfo>
-    config: TransportConfig
+    config: ConnectionConfig
 }
 
 export enum ConnectionState {
@@ -25,7 +25,7 @@ export interface ConnectionInfo {
     connectedAt?: Date
 }
 
-export default class TransportConfig {
+export default class ConnectionConfig {
     public url: string
     public messageTimeout: number = 30 * 1000
     public maxDelay: number = 10 * 1000
@@ -42,10 +42,10 @@ export default class TransportConfig {
     }
 }
 
-export class SseTransport implements Transport {
+export class SseConnection implements Connection {
     public connectionState!: BehaviorSubject<ConnectionInfo>
     public connected!: Observable<ConnectionState>
-    public config: TransportConfig
+    public config: ConnectionConfig
     public onclose: ((error?: Error) => void) | null
     private readonly httpClient: HttpClient
     private readonly retryPolicy: RetryPolicy
@@ -57,7 +57,7 @@ export class SseTransport implements Transport {
     private reconnectionTimeout!: ReturnType<typeof setTimeout>
 
     constructor(httpClient: HttpClient, url: string, port?: number) {
-        this.config = new TransportConfig(url, port)
+        this.config = new ConnectionConfig(url, port)
         this.retryPolicy = new ReconnectPolicy(this.config.maxDelay)
         this.httpClient = httpClient
         this.httpClient.url = this.config.url
@@ -109,7 +109,7 @@ export class SseTransport implements Transport {
             )
         )
 
-        await this.init()
+        await this.initConnection()
         this.setupConnection()
         return Promise.resolve()
     }
@@ -144,7 +144,7 @@ export class SseTransport implements Transport {
         }
     }
 
-    private async init(): Promise<void> {
+    private async initConnection(): Promise<void> {
         this.changeState(ConnectionState.Connecting)
 
         if (import.meta.env.MODE === 'staging') {
@@ -208,7 +208,7 @@ export class SseTransport implements Transport {
                     `Connection is expired. Will reconnect in ${randomReconnectionInterval}ms`
                 )
                 this.reconnectionTimeout = setTimeout(() => {
-                    this.init()
+                    this.initConnection()
                     this.setupConnection()
                 }, randomReconnectionInterval)
             }

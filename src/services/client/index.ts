@@ -1,6 +1,6 @@
 import { AxiosHttpClient } from './httpClient'
-import { SseTransport } from './transport'
+import { SseConnection } from './connection'
 
-export type { ConnectionInfo, Transport } from './transport'
-export { ConnectionState, SseTransport } from './transport'
-export const client = new SseTransport(new AxiosHttpClient(), 'localhost')
+export type { ConnectionInfo, Connection } from './connection'
+export { ConnectionState, SseConnection } from './connection'
+export const client = new SseConnection(new AxiosHttpClient(), 'localhost')
