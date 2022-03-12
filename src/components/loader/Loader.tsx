@@ -1,4 +1,4 @@
-import { ServiceStates } from '@/api/types'
+import { ServiceStates } from '@/services/types'
 import { StatusOfflineIcon } from '@heroicons/react/solid'
 import { useEffect } from 'react'
 import styled from 'styled-components/macro'

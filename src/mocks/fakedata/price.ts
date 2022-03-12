@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs'
-import { Price, Level } from '../../api/types'
+import { Price, Level } from '../../services/types'
 
 const fakePriceData: Record<string, number> = {
     EURUSD: 1.1282,

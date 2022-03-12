@@ -1,4 +1,4 @@
-import { Service } from '@/api'
+import { Service } from '@/services'
 
 export const fakeSystemStatusData: Service[] = [
     {

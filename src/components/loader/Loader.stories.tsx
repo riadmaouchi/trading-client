@@ -1,7 +1,7 @@
 import Loader from './Loader'
 
 import { Meta, Story } from '@storybook/react'
-import { ServiceStates } from '@/api/types'
+import { ServiceStates } from '@/services/types'
 
 export default {
     component: Loader,

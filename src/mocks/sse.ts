@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators'
 
 import { MockEvent, EventSource } from 'mocksse'
-import { fakeReferenceData } from '@/mocks/fakedata/referenceData'
+import { fakeCurrencyPairsData } from '@/mocks/fakedata/curencyPairs'
 import { fakeSystemStatusData } from '@/mocks/fakedata/systemStatus'
 import { getPrice } from '@/mocks/fakedata'
 
@@ -22,7 +22,7 @@ new MockEvent({
             id: Date.now(),
             type: 'assets',
             data: JSON.stringify({
-                currencyPairs: Object.values(fakeReferenceData).map(
+                currencyPairs: Object.values(fakeCurrencyPairsData).map(
                     (currencyPair) => {
                         return {
                             isStale: false,
@@ -61,7 +61,7 @@ new MockEvent({
     url,
     setInterval: Math.random() * 1000,
     response: (mockEvent: any) => {
-        Object.keys(fakeReferenceData).forEach((symbol) => {
+        Object.keys(fakeCurrencyPairsData).forEach((symbol) => {
             getPrice(symbol)
                 .pipe(
                     map((price) => {
