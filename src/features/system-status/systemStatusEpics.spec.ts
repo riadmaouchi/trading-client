@@ -4,7 +4,7 @@ import { TestScheduler } from 'rxjs/testing'
 import { connect, disconnect } from '../connection-status/connectionSlice'
 import { Service, Services, ServiceTypes } from '@/services'
 
-jest.mock('../../api/transport')
+jest.mock('../../services/client/transport')
 
 const systemStatusData: Service[] = [
     {

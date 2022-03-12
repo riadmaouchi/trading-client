@@ -11,8 +11,8 @@ const userResponse: User = {
 
 const userId = 'test123'
 
-jest.mock('../../api/transport')
-jest.mock('../../api/api')
+jest.mock('../../services/client/transport')
+jest.mock('../../services/apiClient')
 
 describe('User state tests', () => {
     it('Should be able to fetch user data', async () => {

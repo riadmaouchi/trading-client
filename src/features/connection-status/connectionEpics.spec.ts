@@ -2,7 +2,7 @@ import { connectionStatusEpic } from './connectionEpics'
 import { connect, disconnect, updateStatus } from './connectionSlice'
 import { TestScheduler } from 'rxjs/testing'
 
-jest.mock('../../api/transport')
+jest.mock('../../services/client/transport')
 
 const testScheduler = new TestScheduler((actual, expected) => {
     return expect(actual).toEqual(expected)

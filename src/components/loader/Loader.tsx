@@ -1,6 +1,6 @@
 import { ServiceStates } from '@/services/types'
 import { StatusOfflineIcon } from '@heroicons/react/solid'
-import { useEffect } from 'react'
+import { Fragment, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { default as UILoader } from 'react-loader-spinner'
 
@@ -54,10 +54,10 @@ const Loader: React.FC<Props> = ({
                     color="#22d3ee"
                 />
             ) : (
-                <React.Fragment>
+                <Fragment>
                     <StatusOfflineIcon className="h-10 w-10" />
                     <div>{message}</div>
-                </React.Fragment>
+                </Fragment>
             )}
         </LoadableStyle>
     )

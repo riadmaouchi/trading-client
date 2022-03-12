@@ -1,5 +1,5 @@
-import '../src/assets/css/tailwind.css'
-import GlobalStyle from '../src/pages/app/styles'
+import '../src/index.css'
+import GlobalStyle from '../src/app/styles'
 import { addDecorator } from '@storybook/react'
 import { ThemeProvider } from '@/components/theme-provider'
 import { MemoryRouter } from 'react-router-dom'

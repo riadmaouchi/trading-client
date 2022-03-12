@@ -3,7 +3,7 @@ import { updateCurrencyPairs } from './currencyPairSlice'
 import { TestScheduler } from 'rxjs/testing'
 import { connect, disconnect } from '../connection-status/connectionSlice'
 
-jest.mock('../../api/transport')
+jest.mock('../../services/client/transport')
 
 const testScheduler = new TestScheduler((actual, expected) => {
     return expect(actual).toEqual(expected)

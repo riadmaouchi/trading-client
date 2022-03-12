@@ -1,7 +1,7 @@
 import { store } from '@/app/store'
 import { updateCurrencyPairs } from './currencyPairSlice'
 
-jest.mock('../../api/transport')
+jest.mock('../../services/client/transport')
 
 test('Updates Currency Pairs', () => {
     let state = store.getState().currencyPairs
