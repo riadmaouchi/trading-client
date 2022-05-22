@@ -2,7 +2,7 @@ name: "Chromatic"
 
 on:
   push:
-    branches: [NewClient]
+    branches: [React18]
 
 jobs:
   chromatic-deployment:
